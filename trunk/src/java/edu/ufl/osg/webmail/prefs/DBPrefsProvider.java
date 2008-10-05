@@ -205,8 +205,10 @@ public class DBPrefsProvider implements PreferencesProvider {
             // TODO Fetch properties
             Connection connection = null;
             try {
+            	logger.warn("Do we get here?");
                 connection = connectionProvider.getConnection();
-
+                logger.warn("How about here?");
+                
                 PreparedStatement ps = null;
                 try {
                     if (connection.getMetaData().getDatabaseProductName().equals("MySQL")) { // Because MySQL doesn't like the key column name.

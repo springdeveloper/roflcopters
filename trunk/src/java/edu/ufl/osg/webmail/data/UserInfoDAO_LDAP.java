@@ -198,8 +198,8 @@ public class UserInfoDAO_LDAP implements UserInfoDAO {
     }
 
     // Tries to fetch the user data out of LDAP and sets it in the User Object.
-    private void doSetUserInfo(final User user) throws NamingException, UserInfoDAOException {
-        final Properties props = fetchInfo(allInfoArray, user.getUsername(), user.getPassword());
+    private void doSetUserInfo(final User user) throws NamingException, UserInfoDAOException {	
+	final Properties props = fetchInfo(allInfoArray, user.getUsername(), user.getPassword());
         final String permId = props.getProperty(attr_permId);
         // should never be a null value
         if (permId == null) {
@@ -233,7 +233,8 @@ public class UserInfoDAO_LDAP implements UserInfoDAO {
      * @return a Properties of the found values
      */
     private Properties fetchInfo(final String[] attrIDs, final String username, final String password) throws NamingException {
-        // set initial context
+	// !!!!!!!!!!!!IMPORTANT CHRISG - TROUBLE AREA !!!!!!!!!!!!!!!!!!!        
+	// set initial context
         logger.debug("setting InitialDirContext...");
         final Properties props;
         DirContext ctx = null;
@@ -246,6 +247,7 @@ public class UserInfoDAO_LDAP implements UserInfoDAO {
                 ctx = new InitialDirContext(getEnv(username, password));
             }
 
+            logger.warn("fetchInfo for user: " + username);	
             logger.info("fetchInfo for user: " + username);
             props = new Properties();
 

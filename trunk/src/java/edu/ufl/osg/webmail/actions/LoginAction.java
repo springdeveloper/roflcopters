@@ -140,13 +140,11 @@ public class LoginAction extends Action {
                 errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.login.mailhost.default", e.getMessage()));
             }
         }
-
         // Back to login if errors
         if (!errors.isEmpty()) {
             saveErrors(request, errors);
             return mapping.getInputForward();
         }
-
         // check for presence of INBOX
         Folder inbox = null;
         try {
@@ -225,7 +223,8 @@ public class LoginAction extends Action {
      * an ActionErrors object containing any errors caught in the process.
      */
     private static ActionErrors initializeObjects(final User user, final ActionErrors errors, final HttpSession session) {
-        // if any of these fail, log user out & ask him to try again
+	System.out.println("HELLO TO THE WORLD!!!! FROM CHRISG");        
+	// if any of these fail, log user out & ask him to try again
         try {
             // initialize the user object
             setUserInfo(user);

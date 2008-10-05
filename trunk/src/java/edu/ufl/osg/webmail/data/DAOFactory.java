@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
  *
  * @author drakee
  * @version $Revision: 1.4 $
- * @deprecated Try to start using {@link org.apache.struts.action.PlugIn Struts PlugIns} and putting providers in the {@link javax.servlet.ServletContext application context}.
+ * ChrisG edit(removed deprecated tag to get rid of warnings) Try to start using {@link org.apache.struts.action.PlugIn Struts PlugIns} and putting providers in the {@link javax.servlet.ServletContext application context}.
  */
 public class DAOFactory {
     private static final Logger logger = Logger.getLogger(DAOFactory.class.getName());
@@ -94,7 +94,7 @@ public class DAOFactory {
      */
     public UserInfoDAO getUserInfoDAO() throws UserInfoDAOException {
         if (userInfoDAO == null)
-            userInfoDAO = new UserInfoDAO_LDAP();
+            userInfoDAO = new UserInfoDAO_DB();// ChrisG edit - switch from LDAP to DB module
         return userInfoDAO;
     }
 

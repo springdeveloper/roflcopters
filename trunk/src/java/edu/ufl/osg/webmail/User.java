@@ -127,7 +127,7 @@ public class User implements Serializable, HttpSessionBindingListener {
      * Getter for property displayName.
      *
      * @return Value of property displayName.
-     * @deprecated                     Use PreferencesProvider.getPreferences(User).getProperty("user.name"));
+     * ChrisG edit - removed deprecated tag to stop warnings                     Use PreferencesProvider.getPreferences(User).getProperty("user.name"));
      */
     public String getDisplayName() {
         return displayName;
@@ -137,7 +137,7 @@ public class User implements Serializable, HttpSessionBindingListener {
      * Setter for property displayName.
      *
      * @param displayName New value of property displayName.
-     * @deprecated                     Use PreferencesProvider.getPreferences(User).setProperty("user.name", "..."));
+     * ChrisG edit - removed deprecated tag to stop warnings                      Use PreferencesProvider.getPreferences(User).setProperty("user.name", "..."));
      */
     public void setDisplayName(final String displayName) {
         this.displayName = displayName;
