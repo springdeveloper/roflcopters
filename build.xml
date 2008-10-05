@@ -10,15 +10,17 @@
 
         <!-- Defaults for build, put local values for these in one of the files -->
         <!-- above to override them. -->
-        <property name="gatormail.db.user" value="" description="The user for the database"/>
-        <property name="gatormail.db.creds" value="" description="The password for the database"/>
-        <property name="gatormail.ldap.principal" value="" description="The LDAP principal"/>
-        <property name="gatormail.ldap.creds" value="" description="The LDAP password"/>
-        <property name="gatormail.use.data.source" value="true"/>
-        <property name="gatormail.jdbc.driver" value="" description="depricated"/>
-        <property name="gatormail.jdbc.url" value="" description="depricated"/>
+	<!-- ChrisG edit - setting up DB vars properly, switching back to local DB for time being -->
+        <property name="gatormail.db.user" value="root" description="The user for the database"/> <!-- ChrisG - TODO change so that not logging on as root -->
+        <property name="gatormail.db.creds" value="roflcopters" description="The password for the database"/>
+        <property name="gatormail.ldap.principal" value="gatormail" description="The LDAP principal"/>
+        <property name="gatormail.ldap.creds" value="roflcopters" description="The LDAP password"/>
+        <property name="gatormail.use.data.source" value="false"/>
+        <property name="gatormail.jdbc.driver" value="com.mysql.jdbc.Driver" description="deprecated"/>
+        <property name="gatormail.jdbc.url" value="jdbc:mysql://localhost/public" description="deprecated"/>
         <property name="gatormail.attachment.path" value="" description="Local path to hold attachments until they are sent."/>
-
+	<!-- end ChrisG edit -->
+	
         <property name="VERSION" value="1.0.24"/>
 
         <tstamp/>
@@ -263,6 +265,9 @@
 
         <mkdir dir="${build.webinf.dir}/classes"/>
         <copy todir="${build.webinf.dir}/classes" overwrite="true">
+            <fileset dir="${src.dir}"><!-- ChrisG addition - log4j.properties definitely needs to be here for proper logging -->
+                <include name="log4j.properties"/>
+            </fileset>
             <fileset dir="${src.java.dir}">
                 <include name="**/*.properties"/>
             </fileset>
