@@ -64,6 +64,7 @@
         <property name="build.props.dir" value="${build.dir}/props"/>
         <property name="build.jar.dir" value="${build.dir}/jar"/>
         <property name="build.jsp.dir" value="${build.dir}/jsp"/>
+        <property name="build.metainf.dir" value="${build.dir}/metainf"/>
         <property name="build.webinf.dir" value="${build.dir}/webinf"/>
         <property name="build.war.dir" value="${build.dir}/war"/>
         <property name="build.ear.dir" value="${build.dir}/ear"/>
@@ -274,7 +275,18 @@
         </copy>
     </target>
 
-    <target name="build.war" depends="init,build.jar,build.jsp,build.webinf" description="Generate a war">
+    <target name="build.metainf" depends="init">
+        <description>Preps the config files in META-INF</description>
+
+        <mkdir dir="${build.metainf.dir}"/>
+        <copy todir="${build.metainf.dir}" overwrite="true">
+            <fileset dir="${src.webapp.dir}/META-INF">
+                <include name="**/context.xml"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="build.war" depends="init,build.jar,build.jsp,build.webinf,build.metainf" description="Generate a war">
         <mkdir dir="${build.war.dir}"/>
         <war destfile="${build.war.dir}/GatorMail.war" webxml="${build.webinf.dir}/web.xml" compress="true">
             <!-- / -->
@@ -283,6 +295,10 @@
             <fileset dir="${src.webapp.dir}" includes="alertMessage.js"/>
 
             <fileset refid="fileset.gatormail.images"/>
+
+            <!-- /META-INF -->
+            <metainf dir="${build.metainf.dir}">
+            </metainf>
 
             <!-- /WEB-INF -->
             <webinf dir="${build.webinf.dir}">
