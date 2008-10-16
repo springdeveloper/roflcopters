@@ -21,3 +21,7 @@ CREATE TABLE users(permId CHAR(8) NOT NULL PRIMARY KEY, displayName VARCHAR(50),
 # note: the code has been modified not to check that the password
 #       in the DB is correct. Just put whatever. -jli
 INSERT INTO users SET permId="00000001", displayName="Your Name", gatorlinkId="yourId", gatorlinkPassword="yourPassword";
+
+# after a "use public", run this to grant permissions on all
+# tables to the "gatormail" user with the password "omfgbomb". -jli
+GRANT ALL ON * TO gatormail@localhost IDENTIFIED BY 'omfgbomb';
