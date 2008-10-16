@@ -18,4 +18,6 @@ CREATE TABLE preferences(userid char(8) NOT NULL, preferences.key text NOT NULL,
 CREATE TABLE users(permId CHAR(8) NOT NULL PRIMARY KEY, displayName VARCHAR(50), gatorlinkId VARCHAR(50) NOT NULL UNIQUE, gatorlinkPassword VARCHAR(50) NOT NULL);
 
 # added by ChrisG - FOR DEVELOPMENT ONLY - REMOVE FOR PRODUCTION
+# note: the code has been modified not to check that the password
+#       in the DB is correct. Just put whatever. -jli
 INSERT INTO users SET permId="00000001", displayName="Your Name", gatorlinkId="yourId", gatorlinkPassword="yourPassword";
