@@ -49,7 +49,7 @@ public class UserInfoDAO_DB implements UserInfoDAO {
     private DataSource dataSource;
     // used only by DriverManager DB connection
     private String jdbcUrl;
-    
+
     private String[] allInfoArray;
 
     protected UserInfoDAO_DB() throws UserInfoDAOException {
@@ -114,34 +114,32 @@ public class UserInfoDAO_DB implements UserInfoDAO {
     }
 
     public String getDisplayName(String username) throws UserInfoDAOException {
-    	return getField("displayName", username, null);
+	return getField("displayName", username, null);
     }
-    
+
     public String getDisplayName(String username, String password) throws UserInfoDAOException {
-    	return getField("displayName", username, password);
+	return getField("displayName", username, password);
     }
-    
+
     public String getPermId(String username) throws UserInfoDAOException {
-    	return getField("permId", username, null);
+	return getField("permId", username, null);
     }
 
     public String getPermId(String username, String password) throws UserInfoDAOException {
-    	return getField("permId", username, password);
+	return getField("permId", username, password);
     }
-    
+
     private String getField(String fieldName, String username, String password) throws UserInfoDAOException {
-    	Connection con = null;
+	Connection con = null;
         PreparedStatement ps = null;
         final Collection coll = new ArrayList();
         try {
             con = getConnection();
-            
-            if(password == null)
-            	ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE gatorlinkId = \"" + username + "\"");
-            else
-            	ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE (gatorlinkId = \"" + username + "\") AND (gatorlinkPassword = \"" + password + "\")");
-            
-            
+
+            /* do NOT require us to stick our password in plaintext in mysql -jli */
+            //ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE (gatorlinkId = \"" + username + "\") AND (gatorlinkPassword = \"" + password + "\")");
+            ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE gatorlinkId = \"" + username + "\"");
+
             final ResultSet rs = ps.executeQuery();
             rs.first();
             if (rs.getString(1) != null)
@@ -152,15 +150,15 @@ public class UserInfoDAO_DB implements UserInfoDAO {
             {
                 throw new UserInfoDAOException("User does not exist");
             }
-            
+
         } catch (SQLException e) {
             logger.error("Problem in getField with retrieving: " + fieldName, e);
             throw new UserInfoDAOException(e.getMessage());
         }
     }
 
- 
-	
+
+
     /**
      * Initializes all the user info in a User object at once -
      */
@@ -182,7 +180,7 @@ public class UserInfoDAO_DB implements UserInfoDAO {
     }
 
     // Tries to fetch the user data out of DB and sets it in the User Object.
-    private void doSetUserInfo(final User user) throws UserInfoDAOException {	
+    private void doSetUserInfo(final User user) throws UserInfoDAOException {
         final String permId = getPermId(user.getUsername(), user.getPassword());
         final String displayName = getDisplayName(user.getUsername(), user.getPassword());
 
