@@ -8,7 +8,7 @@
     <Resource name="jdbc/osg_public" auth="Container"
               type="javax.sql.DataSource"
               maxActive="15" maxIdle="5" maxWait="10000"
-              username="root" password="roflcopters"
+              username="gatormail" password="omfgbomb"
               driverClassName="com.mysql.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/public?autoReconnect=true"/>
 
