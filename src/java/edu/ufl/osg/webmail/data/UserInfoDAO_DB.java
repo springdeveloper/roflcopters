@@ -25,129 +25,68 @@ import org.apache.log4j.Logger;
 import javax.naming.*;
 import javax.sql.DataSource;
 import java.sql.*;
-import java.io.*;
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
 
 /**
  * Interface for obtaining and setting user information.
  *
- * @author drakee
- * @version $Revision: 1.2 $
+ * @author ChrisG
+ * @version $Revision: 1.1 $
  */
 public class UserInfoDAO_DB implements UserInfoDAO {
-    private static final Logger logger = Logger.getLogger(UserInfoDAO_DB.class.getName());
-    // use DataSource for DB connections? If not, defaults to DriverManager
-    private boolean useDataSource;
-    // connect with DriverManager using name + password?
-    // determined by presence or absence of these values in config properties
-    private boolean useDMCredentials = true;
-    private String dbUser;
-    private String dbCredentials;
-    // used only by DataSource connection method
-    private DataSource dataSource;
-    // used only by DriverManager DB connection
-    private String jdbcUrl;
-
-    private String[] allInfoArray;
+    private static final Logger logger = Logger.getLogger(UserInfoDAO_DB.class.getName()); // log4j logger
+    private DataSource dataSource; // used by DataSource connection method
 
     protected UserInfoDAO_DB() throws UserInfoDAOException {
         final ConfigDAO configDAO;
         try {
             configDAO = DAOFactory.getInstance().getConfigDAO();
-            useDataSource = Boolean.valueOf(configDAO.getProperty("useDataSource")).booleanValue();
-            logger.debug("useDataSource set to " + useDataSource);
-            if (useDataSource) { // using DataSource
-                final String dsjn = configDAO.getProperty("dataSourceJndiName");
-                final Context ctx = new InitialContext();
-                logger.debug("dataSourceJndiName: " + dsjn);
-                dataSource = (DataSource)ctx.lookup(dsjn);
-            } else { // using DriverManager
-                final String dbDriverClassName = configDAO.getProperty("dbDriverClassName");
-                Class.forName(dbDriverClassName).newInstance();
-                jdbcUrl = configDAO.getProperty("jdbcUrl");
-            }
+            final String dsjn = configDAO.getProperty("dataSourceJndiName");
+            final Context ctx = new InitialContext();
+            logger.debug("dataSourceJndiName: " + dsjn);
+            dataSource = (DataSource)ctx.lookup(dsjn);
         } catch (Exception e) {
             throw new UserInfoDAOException(e.toString());
-        }
-        dbUser = configDAO.getProperty("dbUser");
-        dbCredentials = configDAO.getProperty("dbCredentials");
-        if ("true".equals(configDAO.getProperty("passwordsBase64Encoded")) && dbCredentials != null) {
-            try {
-                final InputStream in = MimeUtility.decode(new ByteArrayInputStream(dbCredentials.getBytes("US-ASCII")), "base64");
-                final BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                // XXX This assumes there is no new line in the password.
-                dbCredentials = br.readLine();
-                br.close();
-            } catch (MessagingException e) {
-                final UserInfoDAOException ae = new UserInfoDAOException("MessagingException: " + e.getMessage());
-                ae.initCause(e);
-                throw ae;
-
-            } catch (UnsupportedEncodingException e) {
-                final UserInfoDAOException ae = new UserInfoDAOException("UnsupportedEncodingException: " + e.getMessage());
-                ae.initCause(e);
-                throw ae;
-
-            } catch (IOException e) {
-                final UserInfoDAOException ae = new UserInfoDAOException("IOException: " + e.getMessage());
-                ae.initCause(e);
-                throw ae;
-            }
-        }
-        if (dbUser == null || dbCredentials == null || dbUser.trim().equals("") || dbCredentials.trim().equals(""))
-            useDMCredentials = false;
-    }
-
-    private Connection getConnection() throws SQLException {
-        if (useDataSource) {
-            //return dataSource.getConnection(dbUser, dbCredentials);
-            return dataSource.getConnection();
-        } else {
-            if (useDMCredentials) {
-                return DriverManager.getConnection(jdbcUrl, dbUser, dbCredentials);
-            } else {
-                return DriverManager.getConnection(jdbcUrl);
-            }
         }
     }
 
     public String getDisplayName(String username) throws UserInfoDAOException {
-	return getField("displayName", username, null);
+    	return getField("displayName", username);
     }
 
+    // password authentication by local DB not supported in current implementation
+    // authentication to be done by mail server
     public String getDisplayName(String username, String password) throws UserInfoDAOException {
-	return getField("displayName", username, password);
+    	return getField("displayName", username);
     }
 
     public String getPermId(String username) throws UserInfoDAOException {
-	return getField("permId", username, null);
+    	return getField("permId", username);
     }
 
+    // password authentication by local DB not supported in current implementation
+    // authentication to be done by mail server
     public String getPermId(String username, String password) throws UserInfoDAOException {
-	return getField("permId", username, password);
+    	return getField("permId", username);
     }
-
-    private String getField(String fieldName, String username, String password) throws UserInfoDAOException {
-	Connection con = null;
-        PreparedStatement ps = null;
-        final Collection coll = new ArrayList();
+    
+    /**
+     * Private general method for handling DB data requests from various query methods from interface
+     * @param fieldName name of DB column result to return
+     * @param username name of user for which to return results
+     * @return first result found
+     * @throws UserInfoDAOException problem encountered
+     */
+    private String getField(String fieldName, String username) throws UserInfoDAOException {
         try {
-            con = getConnection();
+            Connection connect = dataSource.getConnection();
+            PreparedStatement statement = connect.prepareStatement("SELECT " + fieldName + " FROM users WHERE gatorlinkId = '" + username + "'");
 
-            /* do NOT require us to stick our password in plaintext in mysql -jli */
-            //ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE (gatorlinkId = \"" + username + "\") AND (gatorlinkPassword = \"" + password + "\")");
-            ps = con.prepareStatement("SELECT " + fieldName + " FROM users WHERE gatorlinkId = \"" + username + "\"");
-
-            final ResultSet rs = ps.executeQuery();
-            rs.first();
-            if (rs.getString(1) != null)
-            {
-                return rs.getString(1);
+            final ResultSet results = statement.executeQuery();
+            results.first();
+            if (results.getString(1) != null) {
+                return results.getString(1);
             }
-            else
-            {
+            else {
                 throw new UserInfoDAOException("User does not exist");
             }
 
@@ -157,34 +96,36 @@ public class UserInfoDAO_DB implements UserInfoDAO {
         }
     }
 
-
-
     /**
-     * Initializes all the user info in a User object at once -
+     * Initializes all the user info in a User object at once
+     * @param user User object to hold information taken from DB
+     * @throws UserInfoDAOException problem encountered
      */
     public void setUserInfo(final User user) throws UserInfoDAOException {
-        try {
-            doSetUserInfo(user);
-        } catch (Exception e) {
-            try {
-                logger.warn("First DB attempt failed for " + user.getDisplayName() + ", trying again (" + e + ")");
-                Thread.sleep(1000);  // one second delay
-                doSetUserInfo(user); // try again
-            } catch (Exception e2) {
-                // second try failed, now throw error
-                final UserInfoDAOException userInfoDAOException = new UserInfoDAOException(e2.toString());
-                userInfoDAOException.initCause(e);
-                throw userInfoDAOException;
-            }
+        int numTries = 0, maxTries = 1;
+        	
+        while(numTries <= maxTries) {
+        	try {
+        		numTries++;
+        		final String permId = getPermId(user.getUsername());
+        		final String displayName = getDisplayName(user.getUsername());
+
+        		user.setPermId(permId);
+        		user.setDisplayName(displayName);
+    
+        	} catch(Exception e) {
+        		logger.warn("DB attempt #" + numTries + " failed for user " + user.getDisplayName() + ": " + e);
+        		if(numTries <= maxTries) {	
+        			try { Thread.sleep(1000); } catch(InterruptedException e2) { logger.warn("Current thread failed to sleep:" + e2); }
+        			logger.warn("Attempting to connect again for user " + user.getDisplayName() + ".");
+        		}
+        		else {
+        			// all connection attempts up to maxTries failed, now throw error
+        			final UserInfoDAOException userInfoDAOException = new UserInfoDAOException(e.toString());
+                    userInfoDAOException.initCause(e);
+                    throw userInfoDAOException;
+        		}
+        	}
         }
-    }
-
-    // Tries to fetch the user data out of DB and sets it in the User Object.
-    private void doSetUserInfo(final User user) throws UserInfoDAOException {
-        final String permId = getPermId(user.getUsername(), user.getPassword());
-        final String displayName = getDisplayName(user.getUsername(), user.getPassword());
-
-        user.setPermId(permId);
-        user.setDisplayName(displayName);
     }
 }
