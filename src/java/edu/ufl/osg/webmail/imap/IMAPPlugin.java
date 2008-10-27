@@ -81,6 +81,12 @@ public class IMAPPlugin implements PlugIn {
             props.setProperty("mail.imap.socketFactory.fallback", "false");
         }
 
+        // jli's copypasta to use authenticated, encrypted smtp submission
+        props.setProperty("mail.smtp.port", "587");
+        props.setProperty("mail.debug","true");
+        props.setProperty("mail.smtp.starttls.enable","true");
+        props.setProperty("mail.smtp.auth","true");
+
         final String nodeImapHost = servlet.getServletContext().getInitParameter(IMAP_HOST_KEY);
         if (nodeImapHost != null) {
             servlet.log("IMAP Host Override in effect. was: " + getIMAPHost() + ", now: " + nodeImapHost);
