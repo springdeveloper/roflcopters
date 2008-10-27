@@ -122,6 +122,8 @@ public final class PreferencesAction extends Action {
                 vacationMessageChanged = true;
             }
 
+            /* FIXME jli: managesieve is broken, so commenting this
+               Causes broken preferences page
             {
                 final Session sieveSession = getManageSieveSessionFor(user.getUsername());
                 try {
@@ -204,6 +206,7 @@ public final class PreferencesAction extends Action {
                     sieveSession.logout();
                 }
             }
+            */
 
             final Boolean autocomplete = prefsForm.getAutocomplete();
             prefs.setProperty("compose.recipients.autocomplete", autocomplete == null ? "false" : autocomplete.toString());
@@ -272,6 +275,7 @@ public final class PreferencesAction extends Action {
         if (prefs.getProperty("view.header.hide") != null) {
             prefsForm.setHideHeader(Boolean.valueOf(prefs.getProperty("view.header.hide")));
         }
+        /* FIXME jli: managesieve is broken
         {
             final Session sieveSession = getManageSieveSessionFor(user.getUsername());
             if (hasActiveGatorMailScript(sieveSession)) {
@@ -280,6 +284,7 @@ public final class PreferencesAction extends Action {
             }
             sieveSession.logout();
         }
+        */
     }
 
     private static Session getManageSieveSessionFor(final String username) throws Exception {
