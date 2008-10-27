@@ -21,7 +21,7 @@
  <tr>
   <td rowspan="2" valign="middle" align="right"><html:img page="/spacer.gif" width="3" height="16" border="0"/></td>
 
-  <td width="180" rowspan="2"><html:link forward="inbox"><html:img page="/webMail-logoSmall.jpg" width="180" height="91" border="0"/></html:link></td>
+  <td width="180" rowspan="2"><html:link forward="inbox"><html:img page="/roflchinook-180.png" width="180" height="80" border="0"/></html:link></td>
 
   <%-- Don't fotget to bump the version number in the feedback forward of struts-config.xml --%>
   <td height="75" valign="bottom" class="version">v@VERSION@</td>

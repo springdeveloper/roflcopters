@@ -10,6 +10,8 @@
    <html:link href="http://www.cns.ufl.edu/">Computing and Networking Services</html:link> |
    <html:link href="http://www.ufl.edu/">University of Florida</html:link> <br/>
    <br/>
+   Copyright &copy; 2008 <html:link href="http://www.cise.ufl.edu/~f63022bw/roflcopters/">CEN3031 ROFLCOPTERS</html:link> <br/>
+   <br/>
    Site maintained by <html:link href="http://open-systems.ufl.edu/">The Open Systems Group</html:link> /
    Last Modified: @DATE@
    <br/>
