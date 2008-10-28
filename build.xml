@@ -336,7 +336,8 @@
         </ear>
     </target>
 
-    <target name="dist" depends="build.ear" description="Use productions settings when building the project."/>
+    <!-- jli is tired of building ears that don't get used -->
+    <target name="dist" depends="build.war" description="Use productions settings when building the project."/>
 
     <target name="javadoc" depends="init" description="Generate JavaDocs">
         <mkdir dir="${doc.api.dir}"/>
