@@ -207,7 +207,6 @@ public class LoginAction extends Action {
             session.setAttribute("vacationEnabled", Boolean.TRUE);
         }
         */
-        session.setAttribute("vacationEnabled", Boolean.FALSE);
 
         // if user's session timed out while composing a message
         if (session.getAttribute(Constants.SAVED_COMPOSE_FORM) != null) {
