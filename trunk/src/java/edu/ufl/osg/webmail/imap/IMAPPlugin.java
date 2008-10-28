@@ -87,6 +87,10 @@ public class IMAPPlugin implements PlugIn {
         props.setProperty("mail.smtp.starttls.enable","true");
         props.setProperty("mail.smtp.auth","true");
 
+        // if no hostname, set something, because otherwise sending mail fails
+        if (props.getProperty("mail.smtp.localhost") == null)
+            props.setProperty("mail.smtp.localhost","roflcopterserver");
+
         final String nodeImapHost = servlet.getServletContext().getInitParameter(IMAP_HOST_KEY);
         if (nodeImapHost != null) {
             servlet.log("IMAP Host Override in effect. was: " + getIMAPHost() + ", now: " + nodeImapHost);
