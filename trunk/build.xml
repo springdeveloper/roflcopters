@@ -23,6 +23,12 @@
         <property name="gatormail.attachment.path" value="" description="Local path to hold attachments until they are sent."/>
         <property name="VERSION" value="1.0.26 ALPHA"/>
 
+        <!-- NOTE: For attachments to work, you MUST set the
+             "gatormail.attachment.path" variable in a file named
+             ".gatormail.properties" located in the same directory as this
+             build.xml file. There is a sample ".gatormail.properties-EXAMPLE"
+             file you can copy and modify.-->
+
         <tstamp/>
 
         <property name="javac.debug" value="true"/>
