@@ -47,6 +47,7 @@
         <property name="ver.oscache" value="2.2"/>
 
         <property name="src.dir" value="src"/>
+		<property name="src.lang.dir" value="${src.dir}/lang"/>
         <property name="src.images.dir" value="${src.dir}/images"/>
         <property name="src.java.dir" value="${src.dir}/java"/>
         <property name="src.webapp.dir" value="${src.dir}/webapp"/>
@@ -68,6 +69,7 @@
         <property name="build.dir" value="build"/>
         <property name="build.classes.dir" value="${build.dir}/classes"/>
         <property name="build.props.dir" value="${build.dir}/props"/>
+		<property name="build.props.lang.dir" value="${build.dir}/props/lang"/>
         <property name="build.jar.dir" value="${build.dir}/jar"/>
         <property name="build.jsp.dir" value="${build.dir}/jsp"/>
         <property name="build.metainf.dir" value="${build.dir}/metainf"/>
@@ -201,15 +203,19 @@
             <classpath refid="classpath.oscache"/>
         </javac>
     </target>
+	<!--Convert UTF8 encoded language files to escaped unicode-->
+	<!--NOTE: Find a way to get rid of the hard-coded directory locations.-->
+	<native2ascii encoding="UTF-8" src="src\lang\utf8" dest="src\lang" includes="**/*.utf8" ext=".properties"/>
 
     <target name="build.properties" depends="init">
         <mkdir dir="${build.props.dir}"/>
         <copy todir="${build.props.dir}">
             <fileset dir="${src.dir}">
-                <include name="Messages.properties"/>
-                <include name="log4j.properties"/>
                 <include name="gatormail.properties"/>
+				<include name="log4j.properties"/>
+				<include name="*.properties"/>
             </fileset>
+
             <filterset>
                 <filter token="DBUSER" value="${gatormail.db.user}"/>
                 <filter token="DBCREDS" value="${gatormail.db.creds}"/>
@@ -221,8 +227,16 @@
                 <filter token="ATTACHPATH" value="${gatormail.attachment.path}"/>
             </filterset>
         </copy>
+		
+		<mkdir dir="${build.props.lang.dir}"/>
+        <copy todir="${build.props.lang.dir}">
+            <fileset dir="${src.lang.dir}">
+				<include name="*.properties"/>
+            </fileset>
+		</copy>
+		
     </target>
-
+	
     <target name="build.jar" depends="init,build.classes,build.properties">
         <mkdir dir="${build.jar.dir}"/>
         <jar compress="true" destfile="${build.jar.dir}/GatorMail.jar">
