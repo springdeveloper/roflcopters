@@ -2,7 +2,7 @@
 <%@taglib uri="/tags/struts-html" prefix="html"%>
 <%@taglib uri="/tags/struts-bean" prefix="bean"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:if test="${empty(folderListFilterType) or folderListFilterType == 'none'}">
+<c:if test="${(empty folderListFilterType) or folderListFilterType == 'none'}">
     <p>
         <table border="0" width="100%">
             <tr>
