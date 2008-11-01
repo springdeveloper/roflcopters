@@ -60,6 +60,9 @@ public final class ComposeForm extends MessageForm {
     /** Holds value of composeKey. It is the unique key for this compose session for a user. */
     private String composeKey;
 
+    /** Has the attachment reminder already been displayed? */
+    private boolean attachRemindShown = false;
+
     /**
      * Resets the <code>FolderForm</code> and then resets TODO???.
      *
@@ -248,5 +251,23 @@ public final class ComposeForm extends MessageForm {
      */
     public void setComposeKey(final String composeKey) {
         this.composeKey = composeKey;
+    }
+
+    /**
+     * Getter for property attachRemindShown
+     *
+     * @return Value of property attachRemindShown.
+     */
+    public boolean isAttachRemindShown() {
+        return this.attachRemindShown;
+    }
+
+    /**
+     * Setter for property attachRemindShown.
+     *
+     * @param attachRemindShown New value of property attachRemindShown.
+     */
+    public void setAttachRemindShown(final boolean attachRemindShown) {
+        this.attachRemindShown = attachRemindShown;
     }
 }
