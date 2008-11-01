@@ -165,6 +165,14 @@ var preventSubmit = function (e) {
 }
 //-->
 </script>
+<bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
+<%
+    final List attachList = Util.getAttachList(composeKey, session);
+    final boolean attachExist = (attachList != null && attachList.size() > 0);
+    if (attachExist) {
+        pageContext.setAttribute("attachList", attachList);
+    }
+%>
 <table width="100%" cellpadding="2" cellspacing="0">
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
@@ -269,18 +277,20 @@ var preventSubmit = function (e) {
     <td width="15%" align="right" class="composeHeaderTitle"><bean:message key="compose.attachment.upload"/>:</td>
     <td colspan="3">
        <html:file property="attachment" accesskey="f"/>
-       <html:submit property="action" styleClass="button"><bean:message key="button.attachment.upload"/></html:submit>
+       <html:submit property="action" styleClass="button">
+       <% if (attachExist) { %>
+         <bean:message key="button.attachment.upload.more"/>
+       <% } else { %>
+         <bean:message key="button.attachment.upload"/>
+       <% } %>
+       </html:submit>
     </td>
   </tr>
  <!-- show attachments -->
- <bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
   <tr class="lightBlueRow">
    <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
    <td colspan="3">
-<%
-  final List attachList = Util.getAttachList(composeKey, session);
-  if (attachList != null && attachList.size() > 0) {
-     pageContext.setAttribute("attachList", attachList);
+<% if (attachExist) {
 %>
     <table width="575" class="messageHeader" cellpadding="3">
       <tr class="darkBlueRow">
