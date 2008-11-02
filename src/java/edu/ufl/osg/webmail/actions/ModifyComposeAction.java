@@ -57,7 +57,6 @@ public class ModifyComposeAction extends LookupDispatchAction {
     public ModifyComposeAction() {
         map.put("button.send", "sendMessage");
         map.put("button.attachment.upload", "uploadAttachment");
-        map.put("button.attachment.upload.more", "uploadAttachment");
         map.put("button.attachment.delete", "deleteAttachment");
         map.put("button.cancelMessage", "cancelMessage");
     }

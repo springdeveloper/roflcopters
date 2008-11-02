@@ -7,7 +7,7 @@
     <!-- Point JSTL fmt:tags to the Messages resources. -->
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-        <param-value>Messages</param-value>
+        <param-value>lang.Messages</param-value>
     </context-param>
 
     <context-param>

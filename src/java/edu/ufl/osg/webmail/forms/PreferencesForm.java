@@ -44,7 +44,6 @@ public class PreferencesForm extends ActionForm {
     private String action;
 
     private Boolean autocomplete;
-	private Boolean attachmentReminder;
     private String username;
     private String replyTo;
     private String signature;
@@ -138,14 +137,6 @@ public class PreferencesForm extends ActionForm {
 
     public void setAutocomplete(final Boolean autocomplete) {
         this.autocomplete = autocomplete;
-    }
-	
-	 public Boolean getAttachmentReminder() {
-        return attachmentReminder;
-    }
-
-    public void setAttachmentReminder(final Boolean attachmentReminder) {
-        this.attachmentReminder = attachmentReminder;
     }
 
     public String getUsername() {

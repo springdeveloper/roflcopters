@@ -71,19 +71,8 @@
       </div>
     </td>
   </tr>
- <tr >
-    <th width="20%" align="right" valign="top">Attachment Reminder:</th>
-    <td>
-      <html:checkbox property="attachmentReminder"/>
-      <div class="tip">
-        <p>
-		If checked, the system will attempt to detect when you forget to attach a file.
-		</p>
-        </div>
-    </td>
-  </tr>
 
-  <tr class="altrow">
+  <tr>
     <th width="20%" align="right" valign="top">Image URL:</th>
     <td>
 <%

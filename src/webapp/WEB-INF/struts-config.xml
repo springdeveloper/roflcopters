@@ -349,7 +349,7 @@
 
 
     <!-- ================================ Message Resources Definitions -->
-    <message-resources parameter="Messages"/>
+    <message-resources parameter="lang.Messages"/>
 
 
     <!-- ======================================= Plug Ins Configuration -->
