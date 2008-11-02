@@ -2,7 +2,6 @@
                                         edu.ufl.osg.webmail.util.Util,
                                         java.util.Collection,
                                         java.util.ArrayList,
-                                        java.util.Calendar,
                                         edu.ufl.osg.webmail.wrappers.MessageWrapper,
                                         java.util.Map,
                                         javax.mail.Flags,
@@ -340,19 +339,7 @@ if (!message.isSet(Flags.Flag.SEEN)) {
   <c:choose>
    <c:when test="${column == 'date'}">
     <td class="msgDate">
-<%  // Day MM/DD (eg Fri 10/31) or HH:SS AA (eg 8:28 AM) if sent today
-    Calendar today = Calendar.getInstance();
-
-    Calendar calSentDate = Calendar.getInstance();
-    calSentDate.setTime(message.getSentDate());
-
-    if ((today.get(Calendar.MONTH) == calSentDate.get(Calendar.MONTH))
-         && (today.get(Calendar.DATE) == calSentDate.get(Calendar.DATE))
-         && (today.get(Calendar.YEAR) == calSentDate.get(Calendar.YEAR))) { %>
-        <bean:write name="message" property="sentDate" filter="false" formatKey="message.recentdate.format"/>
-<%  } else { %>
-        <bean:write name="message" property="sentDate" filter="false" formatKey="message.date.format"/>
-<%  } %>
+     <bean:write name="message" property="sentDate" filter="false" formatKey="message.date.format"/>
     </td>
    </c:when>
 

@@ -93,10 +93,9 @@ public class SendAction extends Action {
         logger.debug("=== SendAction.execute() begin ===");
         ActionsUtil.checkSession(request);
 
+        // validation
         final ActionErrors errors = new ActionErrors();
         final ComposeForm compForm = (ComposeForm)form;
-
-        // "to" field validation
         if (compForm.getTo() == null || compForm.getTo().trim().equals("")) {
             errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.compose.to.required"));
             saveErrors(request, errors);
@@ -110,35 +109,10 @@ public class SendAction extends Action {
         final String subject = compForm.getSubject();
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
-        final User user = Util.getUser(httpSession);
-        final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
-        final Properties prefs = pp.getPreferences(user, httpSession);
 
         final InternetAddress[] to = parseAddresses(compForm.getTo(), errors);
         final InternetAddress[] cc = parseAddresses(compForm.getCc(), errors);
         final InternetAddress[] bcc = parseAddresses(compForm.getBcc(), errors);
-
-        // get attachment list from memory
-        final AttachList attachList = Util.getAttachList(compForm.getComposeKey(), httpSession);
-
-        /* jli+marlies intelligent attachment reminder requirement
-         * 4 part "and":
-         * 1. global attachment reminder var set,
-         * 2. hasn't already displayed attachment reminder
-         * 3. no files attached
-         * 4. string "attach" exists in body or subject
-         */
-        if (prefs.getProperty("compose.attachmentReminder").equals("true")
-            && (!compForm.isAttachRemindShown())
-            && (attachList.size() == 0)
-            && ((subject.indexOf("attach") != -1) || (body.indexOf("attach") != -1))) {
-            errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.attachment.reminder"));
-            saveErrors(request, errors);
-            compForm.setAttachment(null);
-            compForm.setAttachRemindShown(true);
-            return mapping.findForward("fail");
-        }
-
         if (!errors.isEmpty()) {
             saveErrors(request, errors);
             compForm.setAttachment(null);
@@ -146,6 +120,7 @@ public class SendAction extends Action {
         }
 
         final MimeMessage message = new MimeMessage(session);
+        final User user = Util.getUser(httpSession);
         message.setFrom(getFromAddress(user, httpSession));
         message.setRecipients(RecipientType.TO, to);
         message.setRecipients(RecipientType.CC, cc);
@@ -155,6 +130,9 @@ public class SendAction extends Action {
         message.setHeader("X-Mailer", "GatorMail WebMail (http://GatorMail.sf.net/)");
         message.setHeader("X-Originating-IP", request.getRemoteHost() + " [" + request.getRemoteAddr() + "]");
 
+        final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
+
+        final Properties prefs = pp.getPreferences(user, httpSession);
         final String replyTo = prefs.getProperty("compose.replyTo");
         if (replyTo != null) {
             final InternetAddress[] replyToAddr = parseAddresses(replyTo, errors);
@@ -165,6 +143,9 @@ public class SendAction extends Action {
         if (imageUrl != null && imageUrl.length() > 0) {
             message.setHeader("X-Image-Url", imageUrl);
         }
+
+        // get attachment list from memory
+        final AttachList attachList = Util.getAttachList(compForm.getComposeKey(), httpSession);
 
         // create message content
         if (attachList.size() == 0) {
