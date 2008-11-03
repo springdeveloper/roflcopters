@@ -128,7 +128,9 @@ public class SendAction extends Action {
          * 3. no files attached
          * 4. string "attach" exists in body or subject
          */
-        if (prefs.getProperty("compose.attachmentReminder").equals("true")
+        final String remindPref = prefs.getProperty("compose.attachmentReminder");
+        if ((remindPref != null)
+            && remindPref.equals("true")
             && (!compForm.isAttachRemindShown())
             && (attachList.size() == 0)
             && ((subject.indexOf("attach") != -1) || (body.indexOf("attach") != -1))) {
