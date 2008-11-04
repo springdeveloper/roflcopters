@@ -33,6 +33,7 @@
 <script type="text/javascript" src="yui/autocomplete/autocomplete-min.js"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
+
     function populateAddress(field) {
         var contacts = document.composeForm.contacts;
         var length = contacts.length;
@@ -341,8 +342,30 @@ var preventSubmit = function (e) {
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
   <td colspan="3">
-    <html:textarea property="body"
-          cols="<%= String.valueOf(Constants.COMPOSE_BODY_WIDTH) %>" rows="20" style="width : 99%" tabindex="50"/>
+  
+  <!--
+	
+	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
+   // Patrick and Evan
+   
+  -->
+  
+   <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+	<script language="JavaScript" type="text/javascript">
+
+	<!--
+	
+	var oFCKeditor = new FCKeditor( 'body' ) ;
+	oFCKeditor.BasePath	= "fckeditor/";
+	oFCKeditor.Height	= 300 ;
+   
+   // FIXME the Value should be the empty if the page is new or the contents of
+   // the message previously if the page is reloaded.
+	oFCKeditor.Value	= '' ;
+   
+	oFCKeditor.Create() ;
+	//-->
+	</script>
   </td>
  </tr>
  <tr class="lightBlueRow">

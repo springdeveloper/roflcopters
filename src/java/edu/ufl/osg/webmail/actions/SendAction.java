@@ -171,7 +171,7 @@ public class SendAction extends Action {
         // create message content
         if (attachList.size() == 0) {
             logger.debug("no attachments");
-            message.setContent(body, "text/plain; format=flowed");
+            message.setContent(body, "text/html; format=flowed");
             //message.addHeader("Content-Type", "text/plain; format=flowed");
         } else {
             logger.debug("there are attachments: " + attachList);
