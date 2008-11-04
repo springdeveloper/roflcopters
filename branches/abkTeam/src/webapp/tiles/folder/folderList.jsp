@@ -21,17 +21,25 @@
 <oscache:cache key='<%= "folderList.jsp#" + ((Folder)request.getAttribute("folder")).getFullName() + "::" + fullName %>' scope="session" time="300" groups="mailStore">
 <%
     String imageName = "/";
-    if (currentRootFolder.getFullName().equals("INBOX")) {
+    String messageID = "folder.label.";
+	boolean hasLabel = true;
+	
+	if (currentRootFolder.getFullName().equals("INBOX")) {
         imageName += "inbox";
+		messageID += "inbox";
     } else if (currentRootFolder.getFullName().equals(Constants.getSentFolderFullname(session))) {
         imageName += "sent";
+		messageID += "sent";
     } else if (currentRootFolder.getFullName().equals(Constants.getTrashFolderFullname(session))) {
         imageName += "trash";
+		messageID += "trash";
         // TODO When we support the concept of a Draft folder.
         //    } else if (currentRootFolder.getFullName().equals(Constants.DRAFT_FOLDER_FULLNAME)) {
         //        imageName += "draft";
     } else {
         imageName += "folder";
+		hasLabel = false;
+		messageID = currentRootFolder.getFullName(); //If this is a user created folder, we don't have a default string, so we fetch the folder name from the IMAP server. --Robert
     }
     // I'd rather do this by seeing if Folder objects are equal but that doesn't work. Fsck'ing JavaMail
     if (currentRootFolder.getFullName().equals(((Folder)request.getAttribute("folder")).getFullName())) {
@@ -55,8 +63,18 @@
     if (currentRootFolder.isSubscribed()) {
 %>
   <html:link forward="folder" paramId="folder" paramName="currentRootFolder" paramProperty="fullName" title="<%= fullName %>">
-   <html:img page="<%= imageName %>" alt="Folder:" border="0" align="absmiddle" hspace="5"/><bean:write name="currentRootFolder" property="name"/>
+   <html:img page="<%= imageName %>" alt="Folder:" border="0" align="absmiddle" hspace="5"/>
 <%
+	if(hasLabel == true){
+%>  
+  <bean:message key="<%= messageID %>"/>
+<%
+	} else {
+%>
+   hello!
+  <bean:write name="currentRootFolder" property="name"/>
+<%
+	}
     if (unreadMessageCount != 0) {
         out.print("(" + unreadMessageCount + ")");
     }
@@ -66,8 +84,17 @@
     } else if (Util.hasSubscribedSubfolder(currentRootFolder)) {
 %>
   <span title="Unsubscribed Folder. Subscribe to this folder in Edit Folders.">
-   <html:img page="<%= imageName %>" alt="Folder:" border="0" align="absmiddle" hspace="5"/><bean:write name="currentRootFolder" property="name"/>
+   <html:img page="<%= imageName %>" alt="Folder:" border="0" align="absmiddle" hspace="5"/>
 <%
+	if(hasLabel == true){
+%>  
+  <bean:message key="<%= messageID %>"/>
+<%
+	} else {
+%>
+  <bean:write name="currentRootFolder" property="name"/>
+<%
+	}
         if (unreadMessageCount != 0) {
             out.print("(" + unreadMessageCount + ")");
     }
