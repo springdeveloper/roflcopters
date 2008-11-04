@@ -71,7 +71,6 @@
 <%
 	} else {
 %>
-   hello!
   <bean:write name="currentRootFolder" property="name"/>
 <%
 	}
