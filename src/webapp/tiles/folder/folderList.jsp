@@ -33,9 +33,14 @@
     } else if (currentRootFolder.getFullName().equals(Constants.getTrashFolderFullname(session))) {
         imageName += "trash";
 		messageID += "trash";
-        // TODO When we support the concept of a Draft folder.
-        //    } else if (currentRootFolder.getFullName().equals(Constants.DRAFT_FOLDER_FULLNAME)) {
+    } else if (currentRootFolder.getFullName().equals(Constants.getDraftFolderFullname(session))) { //Added by Robert
         //        imageName += "draft";
+		imageName += "folder";
+		messageID += "drafts";
+	} else if (currentRootFolder.getFullName().equals(Constants.getJunkFolderFullname(session))) { //Added by Robert 
+		//	 imageName += "junk";
+		imageName += "folder";
+		messageID += "junk";
     } else {
         imageName += "folder";
 		hasLabel = false;

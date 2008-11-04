@@ -78,7 +78,13 @@ public final class Constants {
 
     /** name for the IMAP box to put sent messages within */
     public static final String SENT_FOLDER = "Sent";
+	
+	/** name for the IMAP box to put drafted messages within */
+    public static final String DRAFT_FOLDER = "Drafts";
 
+	/** name for the IMAP box to put junk messages within */
+    public static final String JUNK_FOLDER = "Junk";
+	
     /** request scoped key for a list of messages */
     public static final String MESSAGE_LIST = "messageList";
 
@@ -128,5 +134,35 @@ public final class Constants {
             }
         }
         return sentFolderFullname;
+    }
+	
+	public static String getDraftFolderFullname(final HttpSession session) throws MessagingException {
+        String draftFolderFullname;
+        synchronized (session) {
+            draftFolderFullname = (String)session.getAttribute("draftFolderFullname");
+            if (draftFolderFullname == null) {
+                final Folder inbox = Util.getFolder(session, "INBOX");
+                Util.releaseFolder(inbox);
+
+                draftFolderFullname = inbox.getFolder(DRAFT_FOLDER).getFullName();
+                session.setAttribute("draftFolderFullname", draftFolderFullname);
+            }
+        }
+        return draftFolderFullname;
+    }
+	
+	public static String getJunkFolderFullname(final HttpSession session) throws MessagingException {
+        String junkFolderFullname;
+        synchronized (session) {
+            junkFolderFullname = (String)session.getAttribute("junkFolderFullname");
+            if (junkFolderFullname == null) {
+                final Folder inbox = Util.getFolder(session, "INBOX");
+                Util.releaseFolder(inbox);
+
+                junkFolderFullname = inbox.getFolder(JUNK_FOLDER).getFullName();
+                session.setAttribute("junkFolderFullname", junkFolderFullname);
+            }
+        }
+        return junkFolderFullname;
     }
 }
