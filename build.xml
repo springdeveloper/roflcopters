@@ -292,6 +292,9 @@
             <fileset dir="${src.java.dir}">
                 <include name="**/*.properties"/>
             </fileset>
+            <fileset dir="${src.lang.dir}">
+                <include name="**/*.properties"/>
+            </fileset>			
         </copy>
     </target>
 
