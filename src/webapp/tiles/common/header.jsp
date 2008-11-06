@@ -9,6 +9,7 @@
 <%
     final User user = Util.getUser(session);
     Properties prefs = null;
+	String imgSigFile = "/UFsig_small_ja.gif";
     boolean hideHeader = false;
     if (user != null) {
         PreferencesProvider pp = (PreferencesProvider)application.getAttribute(Constants.PREFERENCES_PROVIDER);
@@ -34,7 +35,7 @@
    <table border="0" cellpadding="2">
     <tr>
      <td align="center" valign="middle">
-      <html:link href="http://www.ufl.edu/"><html:img page="/UFsig_small.gif" width="139" height="34" border="0"/></html:link>
+      <html:link href="http://www.ufl.edu/"><html:img page="<%= imgSigFile %>" width="139" height="34" border="0"/></html:link>
      </td>
     </tr>
 <%
