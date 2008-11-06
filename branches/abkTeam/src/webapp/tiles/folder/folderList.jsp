@@ -46,6 +46,7 @@
 		hasLabel = false;
 		messageID = currentRootFolder.getFullName(); //If this is a user created folder, we don't have a default string, so we fetch the folder name from the IMAP server. --Robert
     }
+	
     // I'd rather do this by seeing if Folder objects are equal but that doesn't work. Fsck'ing JavaMail
     if (currentRootFolder.getFullName().equals(((Folder)request.getAttribute("folder")).getFullName())) {
         imageName += "-opened";

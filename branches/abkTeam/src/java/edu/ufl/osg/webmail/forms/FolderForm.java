@@ -73,6 +73,13 @@ public class FolderForm extends ActionForm {
      */
     public void reset(final ActionMapping mapping, final HttpServletRequest request) {
         super.reset(mapping, request);
+		try {
+            request.setCharacterEncoding("UTF-8");
+            
+        }
+        catch(Exception e) {
+            
+        }
         setFolder(null);
         setFilter("");
         setFilterType(null);
