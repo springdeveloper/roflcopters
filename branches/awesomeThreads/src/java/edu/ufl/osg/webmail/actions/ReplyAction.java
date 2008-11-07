@@ -93,6 +93,8 @@ public class ReplyAction extends MessageAction {
 
         final ComposeForm compForm = (ComposeForm)form;
         final String action = compForm.getAction();
+        final String replyMessageID = message.getHeader("Message-ID")[0];
+        final String replyReferences = message.getHeader("References")[0];
         final Message replyMessage = "reply-all".equals(action) ? message.reply(true) : message.reply(false);
         // to == the reply-to address(es)
         compForm.setTo(ActionsUtil.getAddressString(replyMessage.getRecipients(Message.RecipientType.TO)));
@@ -102,6 +104,17 @@ public class ReplyAction extends MessageAction {
         compForm.setBcc(ActionsUtil.getAddressString(replyMessage.getRecipients(Message.RecipientType.BCC)));
         // puts an Re: in front of subject
         compForm.setSubject(replyMessage.getSubject());
+
+        logger.debug("original message's Message-ID: " + replyMessageID);
+        logger.debug("original message's References: " + replyReferences);
+        // add Message-ID (used for In-Reply-To in sent message)
+        if (replyMessageID != null) {
+            compForm.setReplyMessageID(replyMessageID);
+            // add References (when catenated with Message-ID, used for References in sent message)
+            if (replyReferences != null)
+                compForm.setReplyReferences(replyReferences);
+        }
+
         // set content:
         final StringBuffer textBuff = new StringBuffer();
 

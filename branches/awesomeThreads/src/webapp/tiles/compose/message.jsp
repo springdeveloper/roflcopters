@@ -141,6 +141,8 @@
 <html:form method="post" action="modifyCompose" enctype="multipart/form-data" focus="to">
 <html:hidden property="composeKey"/>
 <html:hidden property="attachRemindShown"/>
+<html:hidden property="replyMessageID"/>
+<html:hidden property="replyReferences"/>
 <style type="text/css">
     #toAutoComplete, #ccAutoComplete, #bccAutoComplete {position:relative;width:100%;height:2em;}/* set width of widget here*/
     #toAutoComplete {z-index:9000} /* for IE z-index of absolute divs inside relative divs issue */
