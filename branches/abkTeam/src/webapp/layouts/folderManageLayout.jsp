@@ -29,8 +29,8 @@
   <tr>
    <td valign="top" class="leftNavBar" width="170" rowspan="2">
      <tiles:get name="folderList"/>
-     <p>
-      <html:link forward="folderManage" titleKey="link.manageFolder.title">[Add/Edit/Delete]</html:link>
+     <p align="center">
+      <html:link forward="folderManage" titleKey="link.manageFolder.title"><bean:message key="link.manageFolder.label"/></html:link>
      </p>
      <br/>
      <tiles:get name="folderQuota"/>

@@ -195,15 +195,15 @@ var messageThreads = new Object();
         <c:choose>
         <c:when test="${folderSort == 'dateDN'}">
             
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateUP"/> " title="Sort by Date" >Date</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateUP"/> " title="Sort by Date" ><bean:message key="message.date"/></a>       
             <html:img page="/sort-down.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:when test="${folderSort == 'dateUP'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateDN"/> " title="Sort by Date" >Date</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateDN"/> " title="Sort by Date" ><bean:message key="message.date"/></a>       
             <html:img page="/sort-up.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:otherwise>
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateDN"/> " title="Sort by Date" >Date</a> 
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="dateDN"/> " title="Sort by Date" ><bean:message key="message.date"/></a> 
         </c:otherwise>
         </c:choose>
    </c:when>    
@@ -213,60 +213,60 @@ var messageThreads = new Object();
    <c:when test="${column == 'from'}">
         <c:choose>
         <c:when test="${folderSort == 'fromUP'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromDN"/> " title="Sort by Sender" >Sender</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromDN"/> " title="Sort by Sender" ><bean:message key="message.from"/></a>       
             <html:img page="/sort-up.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:when test="${folderSort == 'fromDN'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromUP"/> " title="Sort by Sender" >Sender</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromUP"/> " title="Sort by Sender" ><bean:message key="message.from"/></a>       
             <html:img page="/sort-down.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:otherwise>
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromDN"/> " title="Sort by Sender" >Sender</a> 
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="fromDN"/> " title="Sort by Sender" ><bean:message key="message.from"/></a> 
         </c:otherwise>
         </c:choose>
    </c:when>
    <c:when test="${column == 'size'}">
         <c:choose>
         <c:when test="${folderSort == 'sizeUP'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeDN"/> " title="Sort by Size" >Size</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeDN"/> " title="Sort by Size" ><bean:message key="message.size"/></a>       
             <html:img page="/sort-up.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:when test="${folderSort == 'sizeDN'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeUP"/> " title="Sort by Size" >Size</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeUP"/> " title="Sort by Size" ><bean:message key="message.size"/></a>       
             <html:img page="/sort-down.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:otherwise>
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeDN"/> " title="Sort by Size" >Size</a> 
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="sizeDN"/> " title="Sort by Size" ><bean:message key="message.size"/></a> 
         </c:otherwise>
         </c:choose>
    </c:when>
    <c:when test="${column == 'subject'}">
         <c:choose>
         <c:when test="${folderSort == 'subUP'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subDN"/> " title="Sort by Subject" >Subject</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subDN"/> " title="Sort by Subject" ><bean:message key="message.subject"/></a>       
             <html:img page="/sort-up.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:when test="${folderSort == 'subDN'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subUP"/> " title="Sort by Subject" >Subject</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subUP"/> " title="Sort by Subject" ><bean:message key="message.subject"/></a>       
             <html:img page="/sort-down.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:otherwise>
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subDN"/> " title="Sort by Subject" >Subject</a> 
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="subDN"/> " title="Sort by Subject" ><bean:message key="message.subject"/></a> 
         </c:otherwise>
         </c:choose>
    </c:when>
    <c:when test="${column == 'to'}">
         <c:choose>
         <c:when test="${folderSort == 'toUP'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toDN"/> " title="Sort by Receiver" >To</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toDN"/> " title="Sort by Receiver" ><bean:message key="message.to"/></a>       
             <html:img page="/sort-up.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:when test="${folderSort == 'toDN'}">
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toUP"/> " title="Sort by Receiver" >To</a>       
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toUP"/> " title="Sort by Receiver" ><bean:message key="message.to"/></a>       
             <html:img page="/sort-down.gif" border="0" align="absmiddle"/>
         </c:when>
         <c:otherwise>
-            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toDN"/> " title="Sort by Receiver" >To</a> 
+            <a href= "folder.do?folder=<%=folderName%>&amp;sort=<c:out value="toDN"/> " title="Sort by Receiver" ><bean:message key="message.to"/></a> 
         </c:otherwise>
         </c:choose>
    </c:when>
@@ -549,7 +549,7 @@ messageThreads["<%= messageID %>"] = msg;
      <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=<c:out value="${folderListPage-1}"/>">&lt;&nbsp;prev</a>
    </c:when>
    <c:otherwise>
-     <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=0">show&nbsp;all</a>
+     <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=0"><bean:message key="label.showAll"/></a>
    </c:otherwise>
   </c:choose>
 <select onchange="jumpToPage(this)">
