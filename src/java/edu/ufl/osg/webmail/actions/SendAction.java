@@ -163,11 +163,18 @@ public class SendAction extends Action {
         logger.debug("  equal to empty?: " + replyMessageID.trim().equals(""));
         logger.debug("reply's References: " + replyReferences);
         logger.debug("   equal to empty?: " + replyReferences.trim().equals(""));
-        // set catenation of replyMessageID, replyReferences to References
         if ((replyMessageID != null) && !replyMessageID.trim().equals("")) {
+            // set parent's Message-ID to In-Reply-To
             message.setHeader("In-Reply-To", replyMessageID);
-            if ((replyReferences != null) && !replyReferences.trim().equals(""))
-                message.setHeader("References", replyReferences + " " + replyMessageID);
+            if ((replyReferences != null)
+                && !replyReferences.trim().equals("")) {
+                // set catenation of replyReferences, replyMessageID
+                // to References
+                message.setHeader("References", replyReferences +
+                                  " " + replyMessageID);
+            } else { // first reply, just set to parent's Message-ID
+                message.setHeader("References", replyMessageID);
+            }
         }
 
         final String replyTo = prefs.getProperty("compose.replyTo");
