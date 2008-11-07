@@ -110,6 +110,8 @@ public class SendAction extends Action {
         final String subject = compForm.getSubject();
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
+        final String replyMessageID = compForm.getReplyMessageID();
+        final String replyReferences = compForm.getReplyReferences();
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, httpSession);
@@ -156,6 +158,17 @@ public class SendAction extends Action {
         message.setSentDate(new Date());
         message.setHeader("X-Mailer", "GatorMail WebMail (http://GatorMail.sf.net/)");
         message.setHeader("X-Originating-IP", request.getRemoteHost() + " [" + request.getRemoteAddr() + "]");
+
+        logger.debug("reply's MessageID: " + replyMessageID);
+        logger.debug("  equal to empty?: " + replyMessageID.trim().equals(""));
+        logger.debug("reply's References: " + replyReferences);
+        logger.debug("   equal to empty?: " + replyReferences.trim().equals(""));
+        // set catenation of replyMessageID, replyReferences to References
+        if ((replyMessageID != null) && !replyMessageID.trim().equals("")) {
+            message.setHeader("In-Reply-To", replyMessageID);
+            if ((replyReferences != null) && !replyReferences.trim().equals(""))
+                message.setHeader("References", replyReferences + " " + replyMessageID);
+        }
 
         final String replyTo = prefs.getProperty("compose.replyTo");
         if (replyTo != null) {
