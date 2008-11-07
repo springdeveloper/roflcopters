@@ -154,7 +154,7 @@ public class SendAction extends Action {
         message.setRecipients(RecipientType.BCC, bcc);
         message.setSubject(subject);
         message.setSentDate(new Date());
-        message.setHeader("X-Mailer", "GatorMail WebMail (http://GatorMail.sf.net/)");
+        message.setHeader("X-Mailer", "ROFLified GatorMail WebMail (http://GatorMail.sf.net/)");
         message.setHeader("X-Originating-IP", request.getRemoteHost() + " [" + request.getRemoteAddr() + "]");
 
         final String replyTo = prefs.getProperty("compose.replyTo");
