@@ -226,7 +226,7 @@ public class LoginAction extends Action {
      * an ActionErrors object containing any errors caught in the process.
      */
     private static ActionErrors initializeObjects(final User user, final ActionErrors errors, final HttpSession session) {
-	System.out.println("HELLO TO THE WORLD!!!! FROM CHRISG");        
+
 	// if any of these fail, log user out & ask him to try again
         try {
             // initialize the user object

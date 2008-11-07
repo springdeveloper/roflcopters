@@ -50,23 +50,23 @@ public class UserInfoDAO_DB implements UserInfoDAO {
     }
 
     public String getDisplayName(String username) throws UserInfoDAOException {
-    	return getField("displayName", username);
+    	return getField("displayId", username);
     }
 
     // password authentication by local DB not supported in current implementation
     // authentication to be done by mail server
     public String getDisplayName(String username, String password) throws UserInfoDAOException {
-    	return getField("displayName", username);
+    	return getField("displayId", username);
     }
 
     public String getPermId(String username) throws UserInfoDAOException {
-    	return getField("permId", username);
+    	return getField("userId", username);
     }
 
     // password authentication by local DB not supported in current implementation
     // authentication to be done by mail server
     public String getPermId(String username, String password) throws UserInfoDAOException {
-    	return getField("permId", username);
+    	return getField("userId", username);
     }
     
     /**
@@ -79,15 +79,16 @@ public class UserInfoDAO_DB implements UserInfoDAO {
     private String getField(String fieldName, String username) throws UserInfoDAOException {
         try {
             Connection connect = dataSource.getConnection();
-            PreparedStatement statement = connect.prepareStatement("SELECT " + fieldName + " FROM users WHERE gatorlinkId = '" + username + "'");
+            PreparedStatement statement = connect.prepareStatement("SELECT " + fieldName + " FROM user WHERE gatorlinkId = '" + username + "'");
 
             final ResultSet results = statement.executeQuery();
             results.first();
+			
             if (results.getString(1) != null) {
                 return results.getString(1);
             }
             else {
-                throw new UserInfoDAOException("User does not exist");
+                throw new UserInfoDAOException("User <" + username + "> does not exist.");
             }
 
         } catch (SQLException e) {
