@@ -84,6 +84,19 @@
   </tr>
 
   <tr class="altrow">
+    <th width="20%" align="right" valign="top">Plain Text Spell Checker:</th>
+    <td>
+      <html:checkbox property="plainTextSpellChecker"/>
+      <div class="tip">
+      If checked, a "<bean:message key='compose.checkSpelling'/>" button will be available when composing messages.
+       <p>
+       This only has effect if you use the plain text interface. The WYSIWYG editor has its own spell checking function.
+       </p>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
     <th width="20%" align="right" valign="top">Image URL:</th>
     <td>
 <%

@@ -214,6 +214,9 @@ public final class PreferencesAction extends Action {
 			final Boolean attachmentReminder = prefsForm.getAttachmentReminder();
 			prefs.setProperty("compose.attachmentReminder", attachmentReminder == null ? "false" : attachmentReminder.toString());
 
+            final Boolean plainTextSpellChecker = prefsForm.getPlainTextSpellChecker();
+            prefs.setProperty("compose.plainTextSpellChecker", plainTextSpellChecker == null ? "false" : plainTextSpellChecker.toString());
+
             final Boolean threading = prefsForm.getThreading();
             if (threading == null && prefs.getProperty("folder.list.threading") != null) {
                 prefs.remove("folder.list.threading");
@@ -276,6 +279,9 @@ public final class PreferencesAction extends Action {
             prefsForm.setAttachmentReminder(Boolean.valueOf(prefs.getProperty("compose.attachmentReminder")));
         } else {
             prefsForm.setAttachmentReminder(Boolean.FALSE);  // unchecked by default
+        }
+        if (prefs.getProperty("compose.plainTextSpellChecker") != null) {
+            prefsForm.setThreading(Boolean.valueOf(prefs.getProperty("compose.plainTextSpellChecker")));
         }
         if (prefs.getProperty("folder.list.threading") != null) {
             prefsForm.setThreading(Boolean.valueOf(prefs.getProperty("folder.list.threading")));
