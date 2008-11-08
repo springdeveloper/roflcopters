@@ -46,6 +46,7 @@ public class PreferencesForm extends ActionForm {
     private Boolean autocomplete;
 	private Boolean attachmentReminder;
     private String username;
+    private Boolean plainTextSpellChecker;
     private String replyTo;
     private String signature;
     private String imageUrl;
@@ -60,6 +61,7 @@ public class PreferencesForm extends ActionForm {
         super.reset(actionMapping, request);
         setAction(null);
         setAutocomplete(null);
+        setPlainTextSpellChecker(Boolean.FALSE);
         setSignature(null);
         setReplyTo(null);
         setUsername(null);
@@ -146,6 +148,14 @@ public class PreferencesForm extends ActionForm {
 
     public void setAttachmentReminder(final Boolean attachmentReminder) {
         this.attachmentReminder = attachmentReminder;
+    }
+
+    public Boolean getPlainTextSpellChecker() {
+        return plainTextSpellChecker;
+    }
+
+    public void setPlainTextSpellChecker(final Boolean plainTextSpellChecker) {
+        this.plainTextSpellChecker = plainTextSpellChecker;
     }
 
     public String getUsername() {
