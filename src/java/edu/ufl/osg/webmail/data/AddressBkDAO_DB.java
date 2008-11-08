@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,14 +130,18 @@ public class AddressBkDAO_DB implements AddressBkDAO {
         try {
             con = getConnection();
             PreparedStatement ps = null;
+			
             try {
-                ps = con.prepareStatement("SELECT entry " + "FROM addressbook " + "WHERE userid = ?");
-                ps.setString(1, permId);
+				//Fetch only the address book entry name and primary email for the Address Book managmenet window. From there, the user can view/modify/delete the entry. -r0b
+                ps = con.prepareStatement("SELECT abkEmail.email, abkPerson.name FROM abkPerson, abkEmail WHERE abkPerson.userId = ? AND abkPerson.contactId = abkPerson.contactId");
+                ps.setString(1, permId); 
+				
                 final ResultSet rs = ps.executeQuery();
+				
                 while (rs.next()) {
                     try {
-                        coll.add(new InternetAddress(rs.getString(1)));
-                    } catch (AddressException e) {
+                        coll.add(new InternetAddress(rs.getString(1), rs.getString(2)));
+                    } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use Options | File Templates.
                     }
                 }
@@ -168,14 +173,38 @@ public class AddressBkDAO_DB implements AddressBkDAO {
             con = getConnection();
             PreparedStatement ps = null;
             try {
-                ps = con.prepareStatement("INSERT INTO addressbook " + "(userid, entry) " + "VALUES (?, ?)");
+				
+                ps = con.prepareStatement("INSERT INTO abkPerson " + "(userId, name) " + "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, permId);
-                ps.setString(2, internetAddress.toString());
-
-                final int count = ps.executeUpdate();
-                if (count == 0) {
+                ps.setString(2, internetAddress.getPersonal());
+				
+                int count = ps.executeUpdate();
+                
+				if (count == 0) {
                     throw new AddressBkDAOException("Address book insert failed for entry: " + internetAddress.toString());
                 }
+				
+				ResultSet keys = ps.getGeneratedKeys();
+			
+				int key = -1;
+				
+				while(keys.next())
+					key = keys.getInt(1);
+					
+				if(key <= 0)
+					throw new AddressBkDAOException("Error retrieving index from abkPerson entry!");
+					
+				ps = con.prepareStatement("INSERT INTO abkEmail(userId, contactId, email, typeId) VALUES (?, ?, ?, 0)");
+                ps.setString(1, permId);
+				ps.setString(2, (new Integer(key)).toString() );
+                ps.setString(3, internetAddress.getAddress());
+				
+				count = ps.executeUpdate();
+                
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book insert failed for entry: " + internetAddress.toString());
+                }
+
             } finally {
                 if (ps != null) {
                     ps.close();
