@@ -298,6 +298,7 @@
             <!-- / -->
             <fileset dir="${build.jsp.dir}"/>
             <fileset dir="${src.webapp.dir}" includes="yui/**"/>
+            <fileset dir="${src.webapp.dir}" includes="speller/**"/>
             <fileset dir="${src.webapp.dir}" includes="alertMessage.js"/>
 
             <fileset refid="fileset.gatormail.images"/>
