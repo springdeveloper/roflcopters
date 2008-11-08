@@ -204,9 +204,15 @@ var preventSubmit = function (e) {
         </tr>
         <tr>
           <td align="center">
-            <input type="button" class="button" value="To" onclick="populateAddress(this.form.to)" accesskey="t">
-            <input type="button" class="button" value="CC" onclick="populateAddress(this.form.cc)" accesskey="c">
-            <input type="button" class="button" value="BCC" onclick="populateAddress(this.form.bcc)" accesskey="b">
+			<html:button property="addToTo" styleClass="button" onclick="populateAddress(this.form.to)" accesskey="t">
+				<bean:message key="message.to"/>
+			</html:button>
+			<html:button property="addToCC" styleClass="button" onclick="populateAddress(this.form.cc)" accesskey="c">
+				<bean:message key="message.cc"/>
+			</html:button>
+			<html:button property="addToBCC" styleClass="button" onclick="populateAddress(this.form.bcc)" accesskey="b">
+				<bean:message key="message.bcc"/>
+			</html:button>
           </td>
         </tr>
         <tr>
