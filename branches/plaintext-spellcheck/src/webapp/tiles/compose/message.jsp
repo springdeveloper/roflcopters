@@ -14,14 +14,33 @@
 <script type="text/javascript" src="yui/dom/dom-min.js"></script>
 <script type="text/javascript" src="yui/event/event-min.js"></script>
 
+<%-- Speller Pages code: http://spellerpages.sourceforge.net/ --%>
+<script language="javascript" type="text/javascript" src="speller/spellChecker.js"></script>
+
+<script language="javascript" type="text/javascript">
+function openSpellChecker() {
+    // get the textarea we're going to check
+    var subject = document.composeForm.subject;
+    var body = document.composeForm.body;
+    // give the spellChecker object a reference to our textarea
+    // pass any number of text objects as arguments to the constructor:
+    var speller = new spellChecker(subject, body);
+    // kick it off
+    speller.openChecker();
+}
+</script>
+
+
 
 <%
     final User user = Util.getUser(session);
     boolean autocomplete = true;
+    boolean plainTextSpellChecker = false;
     if (user != null) {
         final PreferencesProvider pp = (PreferencesProvider)application.getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, session);
         autocomplete = Boolean.valueOf(prefs.getProperty("compose.recipients.autocomplete", "true")).booleanValue();
+        plainTextSpellChecker = Boolean.valueOf(prefs.getProperty("compose.plainTextSpellChecker", "false")).booleanValue();
     }
     if (autocomplete) {
 %>
@@ -201,7 +220,12 @@ var preventSubmit = function (e) {
        <div id="toCompleteContainer"></div>
      </div>
     </td>
-    <td valign="top" rowspan="7" width="200">
+<%
+    int addressRowSpan = 7;
+    if (plainTextSpellChecker)
+        ++addressRowSpan;
+%>
+    <td valign="top" rowspan="<%= addressRowSpan %>" width="200">
       <table align="center" width="100%">
         <tr>
           <td align="center">
@@ -345,6 +369,17 @@ var preventSubmit = function (e) {
           cols="<%= String.valueOf(Constants.COMPOSE_BODY_WIDTH) %>" rows="20" style="width : 99%" tabindex="50"/>
   </td>
  </tr>
+
+ <!-- spell checker button -->
+<%  if (plainTextSpellChecker) { %>
+ <tr class="lightBlueRow">
+  <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
+   <td colspan="3">
+    <input type="button" onclick="openSpellChecker()" title="<bean:message key='compose.checkSpelling'/>" value="<bean:message key='compose.checkSpelling'/>"/>
+  </td>
+ </tr>
+<% } %>
+
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
   <td colspan="4" class="darkBlueRow">
