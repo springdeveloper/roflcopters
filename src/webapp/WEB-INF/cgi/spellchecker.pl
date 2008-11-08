@@ -3,8 +3,8 @@
 use CGI qw/ :standard /;
 use File::Temp qw/ tempfile tempdir /;
 
-my $spellercss = '/speller/spellerStyle.css';
-my $wordWindowSrc = '/speller/wordWindow.js';
+my $spellercss = '/GatorMail/speller/spellerStyle.css';
+my $wordWindowSrc = '/GatorMail/speller/wordWindow.js';
 my @textinputs = param( 'textinputs[]' ); # array
 my $aspell_cmd = 'aspell';
 my $lang = 'en_US';

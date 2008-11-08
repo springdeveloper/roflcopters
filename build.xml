@@ -261,6 +261,7 @@
                 <include name="**/struts-config.xml"/>
                 <include name="**/tiles-defs.xml"/>
                 <include name="**/web.xml"/>
+                <include name="cgi/**"/> <!-- speller pages spell checker -->
             </fileset>
             <filterset>
                 <filter token="DATE" value="${TODAY}"/>

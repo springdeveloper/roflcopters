@@ -13,11 +13,17 @@
 function spellChecker( textObject ) {
 
 	// public properties - configurable
-	this.popUpUrl = '/speller/spellchecker.html';
+	this.popUpUrl = '/GatorMail/speller/spellchecker.html';
 	this.popUpName = 'spellchecker';
 	this.popUpProps = "menu=no,width=440,height=350,top=70,left=120,resizable=yes,status=yes";
-	this.spellCheckScript = '/speller/server-scripts/spellchecker.php';
-	//this.spellCheckScript = '/cgi-bin/spellchecker.pl';
+	//this.spellCheckScript = '/speller/server-scripts/spellchecker.php';
+
+	// Uses CGI through Tomcat. You need to configure Tomcat to
+	// run this perl script! Here's a guide:
+	// http://www.wellho.net/forum/Perl-Programming/Running-Perl-CGI-scripts-under-Apache-Tomcat.html
+	// You'll also need Perl and an external spellchecking
+	// program. Currently configured to use GNU aspell.
+	this.spellCheckScript = '/GatorMail/cgi-bin/spellchecker.pl';
 
 	// values used to keep track of what happened to a word
 	this.replWordFlag = "R";	// single replace
