@@ -110,6 +110,7 @@ public class SendAction extends Action {
         final String subject = compForm.getSubject();
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
+        final String bodyplain = body.replaceAll("\\<.*?\\>", "");
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, httpSession);
@@ -169,17 +170,19 @@ public class SendAction extends Action {
         }
 
         // create message content
+        /* Patrick here.  Did away with single part messaging entirely.  Attachment handling is accomplished in the createMultipart method
         if (attachList.size() == 0) {
             logger.debug("no attachments");
             message.setContent(body, "text/html; format=flowed");
             //message.addHeader("Content-Type", "text/plain; format=flowed");
         } else {
             logger.debug("there are attachments: " + attachList);
-            final Multipart multipart = createMultipart(body, attachList, httpSession);
+                     */
+            final Multipart multipart = createMultipart(bodyplain, body, attachList, httpSession);
             // put all the parts into message
             message.setContent(multipart);
             message.saveChanges();
-        }
+   //     }
 
         // do the sending
         Transport.send(message);
@@ -228,13 +231,18 @@ public class SendAction extends Action {
     }
 
     // returns a MIME multipart - this is called when the email has attachments
-    private static Multipart createMultipart(final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
-        final Multipart multipart = new MimeMultipart();
-
-        // create the message part
-        final BodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText(body);
-        multipart.addBodyPart(messageBodyPart);
+    private static Multipart createMultipart(final String bodyplain, final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
+        final Multipart multipart = new MimeMultipart("alternative");
+      
+        // create the plain message part
+        final BodyPart messagePlainBodyPart = new MimeBodyPart();
+        messagePlainBodyPart.setText(bodyplain);
+        multipart.addBodyPart(messagePlainBodyPart);
+        
+        // create the HTML message part
+        final BodyPart messageHTMLBodyPart = new MimeBodyPart();
+        messageHTMLBodyPart.setContent(body, "text/html; format=flowed");
+        multipart.addBodyPart(messageHTMLBodyPart);
 
         // attach any forwarded message
         for (int i = 0; i < attachList.size(); i++) {
