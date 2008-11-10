@@ -232,19 +232,28 @@ public class SendAction extends Action {
 
     // returns a MIME multipart - this is called when the email has attachments
     private static Multipart createMultipart(final String bodyplain, final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
-        final Multipart multipart = new MimeMultipart("alternative");
+    
+        final Multipart multipart = new MimeMultipart("mixed");
+    
+        // create the alternative subpart
+        final Multipart alternativeMultipart = new MimeMultipart("alternative");
       
         // create the plain message part
         final BodyPart messagePlainBodyPart = new MimeBodyPart();
         messagePlainBodyPart.setText(bodyplain);
-        multipart.addBodyPart(messagePlainBodyPart);
+        alternativeMultipart.addBodyPart(messagePlainBodyPart);
         
         // create the HTML message part
         final BodyPart messageHTMLBodyPart = new MimeBodyPart();
         messageHTMLBodyPart.setContent(body, "text/html; format=flowed");
-        multipart.addBodyPart(messageHTMLBodyPart);
+        alternativeMultipart.addBodyPart(messageHTMLBodyPart);
+        
+        // start filling the super multipart message
+        final BodyPart messageAlternativeSubBodyPart = new MimeBodyPart();
+        messageAlternativeSubBodyPart.setContent(alternativeMultipart);
+        multipart.addBodyPart(messageAlternativeSubBodyPart);
 
-        // attach any forwarded message
+        // add alternative subparts for each attachment (if there are any)
         for (int i = 0; i < attachList.size(); i++) {
             final AttachObj attachObj = (AttachObj)attachList.get(i);
             if (attachObj.getIsForward()) {
