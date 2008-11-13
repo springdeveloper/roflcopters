@@ -37,6 +37,7 @@
         <property name="javadoc.footer" value=""/>
 
         <property name="ver.javamail" value="1.3.3"/>
+        <property name="ver.roflmail" value="1.0" />
         <property name="ver.servlet-api" value="2.4"/>
         <property name="ver.jstl" value="1.1"/>
         <property name="ver.struts" value="1.1"/>
@@ -56,13 +57,14 @@
         <property name="lib.servlet-api.dir" value="${lib.dir}/servlet-${ver.servlet-api}"/>
         <property name="lib.jstl.dir" value="${lib.dir}/jstl-${ver.jstl}"/>
         <property name="lib.javamail.dir" value="${lib.dir}/javamail-${ver.javamail}"/>
+        <property name="lib.roflmail.dir" value="${lib.dir}/roflmail" />
         <property name="lib.struts.dir" value="${lib.dir}/struts-${ver.struts}"/>
         <property name="lib.db.dir" value="${lib.dir}/db"/>
         <property name="lib.nekohtml.dir" value="${lib.dir}/nekohtml-${ver.nekohtml}"/>
         <property name="lib.xalan.dir" value="${lib.dir}/xalan-${ver.xalan}"/>
         <property name="lib.gatorlinkauth.dir" value="${lib.dir}/gatorlinkauth"/>
         <property name="lib.commons-pool.dir" value="${lib.dir}/commons-pool-${ver.commons-pool}"/>
-        <property name="lib.managesievecraplib.dir" value="${lib.dir}/managesievecraplib"/>
+        <property name="lib.managesieve.dir" value="${lib.dir}/managesieve"/>
         <property name="lib.oscache.dir" value="${lib.dir}/oscache-${ver.oscache}"/>
 
         <property name="build.dir" value="build"/>
@@ -93,6 +95,10 @@
         </fileset>
 
         <fileset dir="${lib.javamail.dir}" id="fileset.javamail">
+            <include name="*.jar"/>
+        </fileset>
+
+        <fileset dir="${lib.roflmail.dir}" id="fileset.roflmail">
             <include name="*.jar"/>
         </fileset>
 
@@ -133,7 +139,7 @@
             <include name="*.jar"/>
         </fileset>
 
-        <fileset dir="${lib.managesievecraplib.dir}" id="fileset.managesievecraplib.lib">
+        <fileset dir="${lib.managesieve.dir}" id="fileset.managesieve.lib">
             <include name="*.jar"/>
         </fileset>
 
@@ -152,6 +158,10 @@
 
         <path id="classpath.javamail">
             <fileset refid="fileset.javamail"/>
+        </path>
+
+        <path id="classpath.roflmail">
+            <fileset refid="fileset.roflmail"/>
         </path>
 
         <path id="classpath.struts">
@@ -178,8 +188,8 @@
             <fileset refid="fileset.commons-pool.lib"/>
         </path>
 
-        <path id="classpath.managesievecraplib">
-            <fileset refid="fileset.managesievecraplib.lib"/>
+        <path id="classpath.managesieve">
+            <fileset refid="fileset.managesieve.lib"/>
         </path>
 
         <path id="classpath.oscache">
@@ -192,12 +202,13 @@
         <javac debug="${javac.debug}" destdir="${build.classes.dir}" optimize="${javac.optimize}" srcdir="${src.java.dir}" deprecation="true">
             <classpath refid="classpath.servlet-api"/>
             <classpath refid="classpath.javamail"/>
+            <classpath refid="classpath.roflmail"/>
             <classpath refid="classpath.struts"/>
             <classpath refid="classpath.log4j"/>
             <classpath refid="classpath.j2ee"/>
             <classpath refid="classpath.xalan"/>
             <classpath refid="classpath.commons-pool"/>
-            <classpath refid="classpath.managesievecraplib"/>
+            <classpath refid="classpath.managesieve"/>
             <classpath refid="classpath.oscache"/>
         </javac>
     </target>
@@ -317,6 +328,7 @@
                 <include name="GatorMail.jar"/>
             </lib>
             <lib refid="fileset.javamail"/>
+            <lib refid="fileset.roflmail"/>
             <lib refid="fileset.struts.lib"/>
             <lib refid="fileset.jstl.lib"/>
             <lib file="${lib.dir}/log4j-${ver.log4j}.jar"/>
@@ -348,6 +360,7 @@
 
             <classpath refid="classpath.servlet-api"/>
             <classpath refid="classpath.javamail"/>
+            <classpath refid="classpath.roflmail"/>
             <classpath refid="classpath.struts"/>
             <classpath refid="classpath.log4j"/>
             <classpath refid="classpath.j2ee"/>

@@ -42,17 +42,17 @@ import javax.mail.MessagingException;
 import javax.mail.UIDFolder;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.search.AddressTerm;
-import javax.mail.search.AndTerm;
-import javax.mail.search.FlagTerm;
-import javax.mail.search.FromStringTerm;
-import javax.mail.search.HeaderTerm;
-import javax.mail.search.NotTerm;
-import javax.mail.search.OrTerm;
-import javax.mail.search.RecipientStringTerm;
-import javax.mail.search.SearchTerm;
-import javax.mail.search.SubjectTerm;
-import javax.mail.search.BodyTerm;
+import rofl.mail.search.AddressTerm;
+import rofl.mail.search.AndTerm;
+import rofl.mail.search.FlagTerm;
+import rofl.mail.search.FromStringTerm;
+import rofl.mail.search.HeaderTerm;
+import rofl.mail.search.NotTerm;
+import rofl.mail.search.OrTerm;
+import rofl.mail.search.RecipientStringTerm;
+import rofl.mail.search.SearchTerm;
+import rofl.mail.search.SubjectTerm;
+import rofl.mail.search.BodyTerm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -97,6 +97,11 @@ public class FolderAction extends Action {
         list.add("notFlaggedJunk");
         filterChoices = Collections.unmodifiableList(list);
     }
+
+    /** 
+     * List of common words to remove from compound searches.
+     */
+    private static String[] commonWords = {"a", "an", "and", "the", "or", "then", "that", "to", "it", "at"};
 
     /**
      * Sets up the request enviroment for the folder view. The current folder
@@ -353,96 +358,42 @@ public class FolderAction extends Action {
         return true;
     }
 
+    private static SearchTerm CompoundSearch(String filter) {
+        SearchTerm st = null;
+
+        logger.info("FolderAction::CompoundSearch(): searching for - " + filter);
+        // get rid off all common words to lower false positive matches
+        for(String s : commonWords) 
+            filter.replaceAll(s, "");
+
+        logger.info("FolderAction::CompoundSearch(): searching for - " + filter);
+
+        String[] words = filter.split(" +");
+
+        // make a body and subject SearchTerm for each word
+        SearchTerm[] sts = new SearchTerm[ words.length*2 ];
+        int i = 0;
+        for(String s : words) {
+            sts[i++] = new BodyTerm(s);
+            sts[i++] = new SubjectTerm(s);
+        }
+
+        return new OrTerm( sts );
+    }
+
     private static SearchTerm buildSearchFilter(final String type, final String filter, final List addressBookList, final Properties prefs) {
         SearchTerm searchTerm = null;
-        if (filter == null || type == null || type.equals("none")) {
+        if (filter == null || type == null || type.equals("none")) 
             searchTerm = null;
+        else if( filter != null )
+            searchTerm = CompoundSearch( filter );
 
-        } else if (type.equals("subjectAndSender")) {
-            final FromStringTerm fst = new FromStringTerm(filter);
-            final SubjectTerm ist = new SubjectTerm(filter);
-            searchTerm = new OrTerm(fst, ist);
-
-        } else if (type.equals("subject")) {
-            searchTerm = new SubjectTerm(filter);
-
-        } else if (type.equals("sender")) {
-            searchTerm = new FromStringTerm(filter);
-
-        } else if (type.equals("toRecipient")) {
-            searchTerm = new RecipientStringTerm(Message.RecipientType.TO, filter);
-
-        } else if (type.equals("allRecipients")) {
-            final SearchTerm[] orTerms = new SearchTerm[3];
-            orTerms[0] = new RecipientStringTerm(Message.RecipientType.TO, filter);
-            orTerms[1] = new RecipientStringTerm(Message.RecipientType.CC, filter);
-            orTerms[2] = new RecipientStringTerm(Message.RecipientType.BCC, filter);
-            searchTerm = new OrTerm(orTerms);
-
-        } else if (type.equals("body")) {
-            searchTerm = new BodyTerm(filter);
-
-        } else if (type.equals("new")) {
-            final Flags f = new Flags();
-            f.add(Flags.Flag.SEEN);
-            searchTerm = new FlagTerm(f, false);
-
-        } else if (type.equals("seen")) {
-            final Flags f = new Flags();
-            f.add(Flags.Flag.SEEN);
-            searchTerm = new FlagTerm(f, true);
-
-        } else if (type.equals("replied")) {
-            final Flags f = new Flags();
-            f.add(Flags.Flag.ANSWERED);
-            searchTerm = new FlagTerm(f, true);
-
-        } else if (type.equals("hasAttachment")) {
-            // TODO: Rewrite this using FlagTerm
-            searchTerm = new AttachmentTerm();
-
-        } else if (type.equals("noAttachment")) {
-            // TODO: Rewrite this using FlagTerm
-            searchTerm = new NotTerm(new AttachmentTerm());
-
-        } else if (type.equals("addressBook")) {
-            if (addressBookList.size() != 0) {
-                final FromEmailTerm[] fromAddresses = new FromEmailTerm[addressBookList.size()];
-                for (int i = 0; i < fromAddresses.length; i++) {
-                    fromAddresses[i] = new FromEmailTerm((InternetAddress)addressBookList.get(i));
-                }
-                searchTerm = new OrTerm(fromAddresses);
-            }
-
-        } else if (type.equals("notAddressBook")) {
-            if (addressBookList.size() != 0) {
-                final FromEmailTerm[] fromAddresses = new FromEmailTerm[addressBookList.size()];
-                for (int i = 0; i < fromAddresses.length; i++) {
-                    fromAddresses[i] = new FromEmailTerm((InternetAddress)addressBookList.get(i));
-                }
-                searchTerm = new NotTerm(new OrTerm(fromAddresses));
-            }
-
-        } else if (type.equals("flaggedJunk")) {
-            final String junkPattern = buildJunkPattern(prefs);
-            if (junkPattern != null) {
-                searchTerm = new HeaderTerm("X-UFL-Spam-Level", junkPattern);
-            }
-
-        } else if (type.equals("notFlaggedJunk")) {
-            final String junkPattern = buildJunkPattern(prefs);
-            if (junkPattern != null) {
-                searchTerm = new NotTerm(new HeaderTerm("X-UFL-Spam-Level", junkPattern));
-            }
-
-        } else {
-            searchTerm = new FlagTerm(new Flags(Flags.Flag.DELETED), false);
-
-        }
+        logger.info("type: " + type + "\tfilter: " + filter);
 
         if (searchTerm == null) {
             searchTerm = new FlagTerm(new Flags(Flags.Flag.DELETED), false);
         } else {
+            logger.info("non-null search term");
             searchTerm = new AndTerm(new FlagTerm(new Flags(Flags.Flag.DELETED), false), searchTerm);
         }
         return searchTerm;

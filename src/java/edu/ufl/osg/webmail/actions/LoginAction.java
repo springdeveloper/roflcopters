@@ -202,11 +202,11 @@ public class LoginAction extends Action {
         session.setAttribute(Constants.LOGGING_IN, Boolean.FALSE);
 
         /* FIXME jli: managesieve is broken, so commenting this
-           Causes 1 time "unexpected error" message when logging in
-        if (PreferencesAction.hasActiveVacationScript(session)) {
+           Causes 1 time "unexpected error" message when logging in 
+       if (PreferencesAction.hasActiveVacationScript(session)) {
             session.setAttribute("vacationEnabled", Boolean.TRUE);
         }
-        */
+       */ 
 
         // if user's session timed out while composing a message
         if (session.getAttribute(Constants.SAVED_COMPOSE_FORM) != null) {

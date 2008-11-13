@@ -123,7 +123,7 @@ public final class PreferencesAction extends Action {
             }
 
             /* FIXME jli: managesieve is broken, so commenting this
-               Causes broken preferences page
+               Causes broken preferences page 
             {
                 final Session sieveSession = getManageSieveSessionFor(user.getUsername());
                 try {
@@ -206,7 +206,7 @@ public final class PreferencesAction extends Action {
                     sieveSession.logout();
                 }
             }
-            */
+            //*/
 
             final Boolean autocomplete = prefsForm.getAutocomplete();
             prefs.setProperty("compose.recipients.autocomplete", autocomplete == null ? "false" : autocomplete.toString());

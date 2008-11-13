@@ -356,7 +356,7 @@
 
 
     <!-- ========== Tiles plugin ===================  -->
-    <!--												-->
+    <!--	       				      -->
     <!--
        This plugin initialize Tiles definition factory. This later can takes some
        parameters explained here after. The plugin first read parameters from web.xml, then
