@@ -278,8 +278,8 @@ var preventSubmit = function (e) {
   <tr class="lightBlueRow">
     <td width="15%" align="right" class="composeHeaderTitle"><bean:message key="compose.attachment.upload"/>:</td>
     <td colspan="3">
-       <html:file property="attachment" accesskey="f"/>
-       <html:submit property="action" styleClass="button">
+       <html:file property="attachment" tabindex = "50" accesskey="f"/>
+       <html:submit property="action" styleClass="button" tabindex = "60">
        <% if (attachExist) { %>
          <bean:message key="button.attachment.upload.more"/>
        <% } else { %>
@@ -332,7 +332,7 @@ var preventSubmit = function (e) {
 -->
     <table>
      <tr>
-      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" accesskey="c"/></td>
+      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" tabindex = "70" accesskey="c"/></td>
       <td><label for="copyToSent"><bean:message key="compose.copyToSent"/></label></td>
      </tr>
     </table>
@@ -341,8 +341,7 @@ var preventSubmit = function (e) {
 
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
-  <td colspan="3">
-  
+  <td colspan="3">  
   <!--
 	
 	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
@@ -355,7 +354,7 @@ var preventSubmit = function (e) {
 
 	<!--
 	
-	var oFCKeditor = new FCKeditor( 'body' ) ;
+	var oFCKeditor = new FCKeditor( 'body', '50' ) ;
 	oFCKeditor.BasePath	= "fckeditor/";
 	oFCKeditor.Height	= 300 ;
    
@@ -374,7 +373,7 @@ var preventSubmit = function (e) {
     <table>
      <tr>
       <td class="darkBlueRow">
-       <html:submit property="action" styleClass="button">
+       <html:submit property="action" tabindex = "90" styleClass="button">
         <bean:message key="button.send"/>
        </html:submit>
       </td>
