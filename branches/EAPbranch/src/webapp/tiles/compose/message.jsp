@@ -354,7 +354,7 @@ var preventSubmit = function (e) {
 
 	<!--
 	
-	var oFCKeditor = new FCKeditor( 'body', '50' ) ;
+	var oFCKeditor = new FCKeditor( 'body' ) ;
 	oFCKeditor.BasePath	= "fckeditor/";
 	oFCKeditor.Height	= 300 ;
    
