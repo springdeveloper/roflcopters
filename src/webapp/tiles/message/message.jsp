@@ -26,22 +26,48 @@
     
     IMAPFolder imapFolder = (IMAPFolder)folder;
     
-    String s = "/GatorMail/deleteMessage.do?folder=";
+    String s = "/GatorMail/";
+    s += "deleteMessage";
+    s += ".do?folder=";
     s += folder.getName();
     s += "&uid=";
     s += imapFolder.getUID(message);
     s += "&sort=dateDN";
     
+    String sp = "/GatorMail/";
+    sp += "prevMessage";
+    sp += ".do?folder=";
+    sp += folder.getName();
+    sp += "&uid=";
+    sp += imapFolder.getUID(message);
+    sp += "&sort=dateDN";
+    
+    String sn = "/GatorMail/";
+    sn += "nextMessage";
+    sn += ".do?folder=";
+    sn += folder.getName();
+    sn += "&uid=";
+    sn += imapFolder.getUID(message);
+    sn += "&sort=dateDN";
+    
+    String sr = "/GatorMail/";
+    sr += "reply";
+    sr += ".do?folder=";
+    sr += folder.getName();
+    sr += "&uid=";
+    sr += imapFolder.getUID(message);
+    sr += "&sort=dateDN";
+    
 %>
-
-Hi Evan! <%= s %>
-<%--prints out the following..."Hi Evan! /GatorMail/deleteMessage.do?folder=INBOX&uid=4924&sort=dateDN " %>
 
 <%--ANDY'S STUFF --%>
 <%-- Dependencies --%>
 <script type="text/javascript" src="yui/utilities/shortcuts.js"></script>
 <script>
-shortcut("Ctrl+Shift+D",function(){self.location=<%= s %>;});
+shortcut("Ctrl+Shift+D",function(){self.location="<%= s%>";});
+shortcut("Ctrl+Shift+R",function(){self.location="<%= sr%>";});
+shortcut("Ctrl+Shift+left",function(){self.location="<%= sp%>";});
+shortcut("Ctrl+Shift+right",function(){self.location="<%= sn%>";});
 </script>
 
 <%------------------------------------------------%>

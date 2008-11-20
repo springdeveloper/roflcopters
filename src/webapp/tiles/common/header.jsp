@@ -30,8 +30,6 @@ shortcut("Ctrl+Shift+P",function(){self.location="/GatorMail/preferences.do";});
 shortcut("Ctrl+Shift+L",function(){self.location="/GatorMail/logout.do";});
 </script>
 
-
-
 <table class="header" width="100%" height="91" border="0" cellpadding="0" cellspacing="0">
  <tr>
   <td rowspan="2" valign="middle" align="right"><html:img page="/spacer.gif" width="3" height="16" border="0"/></td>
