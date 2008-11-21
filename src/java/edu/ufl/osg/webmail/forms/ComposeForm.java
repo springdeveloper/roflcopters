@@ -75,6 +75,13 @@ public final class ComposeForm extends MessageForm {
         // XXX Does this need to be flushed out?
         // TODO Yes it should be BUT we make assumptions that prevent this from happening.
         // ModifyComposeAction and SentAction need to know how to correctly communicate
+        
+        // Set the request's encoding to UTF-8 when this form is loaded
+        try {
+         request.setCharacterEncoding("UTF-8");
+        } catch (Exception e) {
+          //cry
+        }
     }
 
     /**
