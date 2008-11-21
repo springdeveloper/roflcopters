@@ -52,6 +52,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -110,7 +111,6 @@ public class SendAction extends Action {
         final String subject = compForm.getSubject();
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
-//EVAN SUBAR- this is where the regex is located
         final String bodyplain = body.replaceAll("\\<.*?\\>", "");
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
@@ -231,7 +231,7 @@ public class SendAction extends Action {
         return addresses;
     }
 
-    // returns a MIME multipart - this is called when the email has attachments
+    // returns a MIME multipart
     private static Multipart createMultipart(final String bodyplain, final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
     
         final Multipart multipart = new MimeMultipart("mixed");
@@ -242,11 +242,13 @@ public class SendAction extends Action {
         // create the plain message part
         final BodyPart messagePlainBodyPart = new MimeBodyPart();
         messagePlainBodyPart.setText(bodyplain);
+        messagePlainBodyPart.setHeader("Content-Type", "text/plain; charset=UTF-8");
         alternativeMultipart.addBodyPart(messagePlainBodyPart);
         
         // create the HTML message part
         final BodyPart messageHTMLBodyPart = new MimeBodyPart();
-        messageHTMLBodyPart.setContent(body, "text/html; format=flowed");
+        messageHTMLBodyPart.setText(body);
+        messageHTMLBodyPart.setHeader("Content-Type", "text/html; charset=UTF-8");
         alternativeMultipart.addBodyPart(messageHTMLBodyPart);
         
         // start filling the super multipart message
