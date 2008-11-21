@@ -219,6 +219,26 @@
     <td colspan="2">&nbsp;</td>
   </tr>
 
+<tr class="subheader">
+    <th colspan="2" align="left">Region and Language Setting</th>
+  </tr>
+
+  <tr>
+    <th width="20%" align="right" valign="top">Language Setting:</th>
+    <td>
+      <html:select property="language">
+		<html:options collection="languages" property="value" labelProperty="label" />
+	  </html:select>
+      <div class="tip">
+       This is your current language setting.
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+
   <tr>
     <td>&nbsp;</td>
     <td>
