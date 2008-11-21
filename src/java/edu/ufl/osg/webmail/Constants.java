@@ -21,10 +21,15 @@
 package edu.ufl.osg.webmail;
 
 import edu.ufl.osg.webmail.util.Util;
-
+	
+import org.apache.struts.util.LabelValueBean;
+	
 import javax.servlet.http.HttpSession;
 import javax.mail.Folder;
 import javax.mail.MessagingException;
+
+import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * Constants for the WebMail application.
@@ -34,6 +39,16 @@ import javax.mail.MessagingException;
  * @version $Revision: 1.3 $
  */
 public final class Constants {
+
+	public final static Collection languages = new ArrayList();
+	static {
+		languages.add(new LabelValueBean("English", "en"));
+		languages.add(new LabelValueBean("\u65e5\u672c\u8a9e", "ja"));
+		languages.add(new LabelValueBean("Español", "es"));
+		languages.add(new LabelValueBean("\uD55C\uAD6D\uC5B4", "ko"));
+		languages.add(new LabelValueBean("\u6F22\u8A9E", "zh"));
+	}
+	
     /** The application scoped key for the JavaMail Session provider. */
     public static final String MAIL_SESSION_PROVIDER = "sessionProvider";
 

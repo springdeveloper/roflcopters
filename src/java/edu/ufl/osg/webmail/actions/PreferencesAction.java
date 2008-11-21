@@ -49,6 +49,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.BufferedReader;
 import java.io.StringReader;
+import java.util.Locale;
 
 /**
  * Loads and saves the peferences.
@@ -83,7 +84,15 @@ public final class PreferencesAction extends Action {
             } else if (username != null && !username.equals(prefs.getProperty("user.name"))) {
                 prefs.setProperty("user.name", username);
             }
-
+			
+			final String language = prefsForm.getLanguage();
+			if (language == null && prefs.getProperty("pref.lang") != null) {
+				prefs.remove("pref.lang");
+			} else if (language != null && !language.equals(prefs.getProperty("pref.lang"))) {
+				prefs.setProperty("pref.lang", language);
+				session.setAttribute("org.apache.struts.action.LOCALE", new Locale(language)); //Set the new setting. _RoB_
+			}
+			
             final String replyTo = prefsForm.getReplyTo();
             if (replyTo == null && prefs.getProperty("compose.replyTo") != null) {
                 prefs.remove("compose.replyTo");
@@ -258,6 +267,7 @@ public final class PreferencesAction extends Action {
 
     private void populateFormBeanFromPreferences(final PreferencesForm prefsForm, final Properties prefs, final User user) throws Exception {
         // Populate form bean from perferences.
+		prefsForm.setLanguage(prefs.getProperty("pref.lang"));
         prefsForm.setUsername(prefs.getProperty("user.name"));
         prefsForm.setReplyTo(prefs.getProperty("compose.replyTo"));
         prefsForm.setSignature(prefs.getProperty("compose.signature"));

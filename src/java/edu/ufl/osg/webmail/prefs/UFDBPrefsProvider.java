@@ -81,5 +81,12 @@ public class UFDBPrefsProvider extends DBPrefsProvider {
         if (signature == null) {
             prefs.setProperty("compose.signature", user.getSignature());
         }
+		
+		final String language = prefs.getProperty("pref.lang");
+		if (language == null) {
+			prefs.setProperty("pref.lang", "en"); //Set default language to english.
+		}
+		
+		
     }
 }
