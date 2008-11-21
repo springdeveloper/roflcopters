@@ -351,22 +351,22 @@ if (!message.isSet(Flags.Flag.SEEN)) {
       Flags.Flag flag = (Flags.Flag)pageContext.getAttribute("flag");
       if (Flags.Flag.ANSWERED.equals(flag)) {
 %>
-<html:img page="/replied.gif" altKey="message.flags.answered.alt" titleKey="message.flags.answered.title" border="0" align="absmiddle"/>
+<html:img page="/replied.png" altKey="message.flags.answered.alt" titleKey="message.flags.answered.title" border="0" align="absmiddle"/>
 <%
           noFlags = false;
       } else if (Flags.Flag.DELETED.equals(flag)) {
 %>
-<html:img page="/deleted.gif" altKey="message.flags.deleted.alt" titleKey="message.flags.deleted.title" border="0" align="absmiddle"/>
+<html:img page="/deleted.png" altKey="message.flags.deleted.alt" titleKey="message.flags.deleted.title" border="0" align="absmiddle"/>
 <%
           noFlags = false;
       } else if (Flags.Flag.FLAGGED.equals(flag)) {
 %>
-<html:img page="/flagged.gif" altKey="message.flags.flagged.alt" titleKey="message.flags.flagged.title" border="0" align="absmiddle"/>
+<html:img page="/flagged.png" altKey="message.flags.flagged.alt" titleKey="message.flags.flagged.title" border="0" align="absmiddle"/>
 <%
           noFlags = false;
       } else if (Flags.Flag.RECENT.equals(flag)) {
 %>
-<html:img page="/recent.gif" altKey="message.flags.recent.alt" titleKey="message.flags.recent.title" border="0" align="absmiddle"/>
+<html:img page="/recent.png" altKey="message.flags.recent.alt" titleKey="message.flags.recent.title" border="0" align="absmiddle"/>
 <%
           noFlags = false;
       } else if (Flags.Flag.DRAFT.equals(flag)) {
@@ -379,7 +379,7 @@ if (!message.isSet(Flags.Flag.SEEN)) {
 %></c:forEach><%
     if (Util.hasAttachment(message)) {
 %>
-<html:img page="/attachment.gif" altKey="message.flags.attachment.alt" titleKey="message.flags.attachment.title" border="0" align="absmiddle"/>
+<html:img page="/attachment.png" altKey="message.flags.attachment.alt" titleKey="message.flags.attachment.title" border="0" align="absmiddle"/>
 <%
         noFlags = false;
     }
@@ -392,7 +392,7 @@ if (!message.isSet(Flags.Flag.SEEN)) {
                 final String junkHeader = (String) junkHeaders.next();
                 if (junkHeader != null && junkHeader.indexOf(junkPattern) >= 0) {
 %>
-<html:img page="/junk.gif" altKey="message.flags.junk.alt" titleKey="message.flags.junk.title" border="0" align="absmiddle"/>
+<html:img page="/junk.png" altKey="message.flags.junk.alt" titleKey="message.flags.junk.title" border="0" align="absmiddle"/>
 <%
                     noFlags = false;
                     break;
