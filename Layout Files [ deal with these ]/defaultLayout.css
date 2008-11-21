@@ -1,0 +1,81 @@
+@import url(masterCSS.css);
+@import url(contentBox.css);
+
+#statusIconUI{
+	position:fixed;
+	top:50px;
+	left:750px;;
+	width:260px;
+	height:83px;
+	background-image:url(images/webmail-v2-loggedIn_06.png);
+	z-index:1;
+}
+
+#defaultContainer{
+	position:absolute;
+	top:0px;
+	left:200px;
+	right:30%;
+	width:600px;
+	height:100%;
+	z-index:0;
+}
+#defaultCenterUI{
+	position:absolute;
+	top:120px;
+	left:300px;
+	width:800px;
+	min-height:500px;
+	z-index:0;
+}
+#defaultCenterUIContentBoxMiddle{
+	position:relative;
+	margin-top:0px;
+	min-height:700px;
+	width:100%;
+	float:left;
+	z-index:0;
+}
+
+#defaultCenterUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	min-height:500px;
+	width:780px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
+#defaultFolderUIContentBox{
+	position:absolute;
+	top:145px;
+	left:30px;
+	min-height:500px;
+	width:225px;
+	z-index:0;
+}
+
+#defaultFooterUI{
+	position:absolute;
+	top:900px;
+	left:400px;
+	right:30%;
+	text-align:center;
+	font-size:10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+#defaultFolderUIContentBoxMiddle{
+	position:relative;
+	margin-top:0px;
+	min-height:500px;
+	width:100%;
+	float:left;
+	z-index:0;
+}
+
+#defaultFolderUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	min-height:500px;
+	width:200px;
+	background-color:#FFFFFF;
+}
