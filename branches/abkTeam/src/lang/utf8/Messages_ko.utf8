@@ -446,15 +446,66 @@ moveToFolder.result.single.success=Message moved to {0}.
 noInbox.title=INBOX Not Found
 performDeleteFolder.result.success=Folder successfully deleted.
 performDeleteFolder.result.cancel=Delete cancelled.
-preferences.replyTo.invalid=The Reply To address must be blank or a valid email address: {0}
-preferences.title=í™˜ê²½ì„¤ì •
+
+#Preferences page
+preferences.compose.image=Image URL:
+preferences.compose.image.help=Enter the full URL to a small image to be shown like a buddy icon for <br/>\
+        email if the reciepient's email client supports it.\
+        <p>The image should have a size of 48x48 which means buddy icons work well. <br/>\
+        When set a preview will be shown on the right.</p>
+preferences.compose.RAC=Recipient Auto Complete:
+preferences.compose.RAC.help=If checked, addresses in your address book will be autocompleted as you type them.\
+		<p>You must have at least one address in your address book for this to work.<br/>\
+		If your browser can remember previous recipients and you prefer that method then disable this feature.</p>
+preferences.compose.signature=Signature:
+preferences.compose.signature.help=Enter a custom signature to be attached when you compose messages. \
+		<p>You are encouraged to keep the "cut line", the two dashes and then a space. <br/>\
+		Many email clients reconize this as the start of your signature.</p>
 preferences.imageUrl.invalid=The Image Url must be a valid url: {0}
+preferences.junk.filter=Auto Filter Junk Mail:
+preferences.junk.filter.help=If checked, move messages with a Junk score higher than \
+		the threshold above into the "Junk" folder. <p>\
+        You will need to empty the Junk folder every now and then to prevent your mailbox from filling up.<br/>\
+        If the "Junk" folder doesn't exist it will be created for you.<br/>\
+        Enabling this will also affect message delivery in stand alone email clients.</p>
+preferences.junk.flag=Junk Mail Flag Threshold:
+preferences.junk.flag.help=Set the junk score threshold to flag messages as junk. Lower thresholds <br/>\
+		are more likely to mark a message as spam. <p>\
+		This setting also controls the message list view filter threshold.</p>
+preferences.junkThreahsold.invalid=The Junk Threshold must be a whole number between 0 and 15 inclusive.
+preferences.language.setting=Language Setting:
+preferences.language.setting.help=This is your current language setting.
+preferences.language.title=Region and Language Setting
 preferences.maxInactiveMultiplier.invalid=The maxInactiveMultiplier is either too low or too high.
 preferences.maxInactiveMultiplier.short=short
 preferences.maxInactiveMultiplier.default=default
 preferences.maxInactiveMultiplier.long=long
-preferences.junkThreahsold.invalid=The Junk Threshold must be a whole number between 0 and 15 inclusive.
+preferences.maxInactiveMultiplier.invalid=The maxInactiveMultiplier is either too low or too high.
+preferences.maxInactiveMultiplier.short=short
+preferences.maxInactiveMultiplier.default=default
+preferences.maxInactiveMultiplier.long=long
+preferences.nameAndAddress.fromName=From name:
+preferences.nameAndAddress.fromName.help=The name displayed in the From field of messages you compose.
+preferences.nameAndAddress.reply=Reply To address:
+preferences.nameAndAddress.reply.help=The address you want people to reply to if different than this one.
+preferences.nameAndAddress.title=Name and Address
+preferences.replyTo.invalid=The Reply To address must be blank or a valid email address: {0}
+preferences.title=í™˜ê²½ì„¤ì •
+preferences.vacation.enable=Enable Vacation Auto-Responder:
+preferences.vacation.enable.help=If checked, messages you receive will trigger an automatic response with the message above.
+preferences.vacation.message=Vacation Message:
+preferences.vacation.message.help=Keep the vacation message short and to the point.\
+		It is limited to about 1,000 characters.
+preferences.vacation.title=Vacation Auto-Responder
 preferences.vacationMessage.invalid=The vacation message must contain a message to enable the vacation auto-responder.
+preferences.view.hideHeader=Hide Page Headers:
+preferences.view.hideHeader.help=If checked, this hides the logo and other page header contents.
+preferences.view.showThread=Show Threads:
+preferences.view.showThread.help=If checked, highlight threads in the message list as you move the mouse over the list.\
+       <p>A few web browsers can get very sluggish with this enabled.</p>
+preferences.view.title=View
+#END of Preferences Page
+
 prompt.username=ì�´ë©”ì�¼
 prompt.password=ë¹„ë°€ë²ˆí˜¸
 renameFolder.result.success=Folder successfully renamed.
