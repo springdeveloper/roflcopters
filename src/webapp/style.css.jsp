@@ -10,7 +10,7 @@ TODO: This is a mess. Could split this into a few files or just clean it all up.
 body {
     height:768px;
 	width:800px;
-	background-image:url(../images/webmail-v2-bg0_01.png);
+	background-image:url(cssImg/webmail-v2-bg0_01.png);
 	background-repeat:repeat-x;
 	background-attachment:scroll;
 	overflow:auto;
@@ -32,7 +32,7 @@ body {
 	position:fixed;
 	top:0px;
 	left:0px;
-	background-image:url(../images/webmail-v2-bg1_03.png);
+	background-image:url(cssImg/webmail-v2-bg1_03.png);
 	width:100%;
 	height:141px;
 	z-index:1;
@@ -44,7 +44,7 @@ body {
 	left:0px;
 	width:100%;
 	height:47px;
-	background-image:url(../images/webmail-v2-grayBar_06.png);
+	background-image:url(cssImg/webmail-v2-grayBar_06.png);
 	background-repeat:repeat-x;
 	z-index:3;
 	
@@ -196,7 +196,7 @@ a:visited {
 	left:0px;
 	width:10px;
 	height:15px;
-	background-image:url(../images/webmail-v2-topLeftCorner_06.png);
+	background-image:url(cssImg/webmail-v2-topLeftCorner_06.png);
 	z-index:1;
 }
 .top{
@@ -205,7 +205,7 @@ a:visited {
 	left:10px;
 	right:15px;
 	height:10px;
-	background-image:url(../images/webmail-v2-topContent_08.png);
+	background-image:url(cssImg/webmail-v2-topContent_08.png);
 	background-repeat:repeat-x;
 	z-index:1;
 }
@@ -215,7 +215,7 @@ a:visited {
 	right:0px;
 	width:15px;
 	height:15px;
-	background-image:url(../images/webmail-v2-topRightCorner_10.png);
+	background-image:url(cssImg/webmail-v2-topRightCorner_10.png);
 	z-index:1;
 }
 .bottomLeft{
@@ -224,7 +224,7 @@ a:visited {
 	left:0px;
 	width:10px;
 	height:18px;
-	background-image:url(../images/webmail-v2-bottomLeftCorner_28.png);
+	background-image:url(cssImg/webmail-v2-bottomLeftCorner_28.png);
 	z-index:1;
 }
 .bottom{
@@ -233,7 +233,7 @@ a:visited {
 	left:10px;
 	right:15px;
 	height:18px;
-	background-image:url(../images/webmail-v2-bottom_29.png);
+	background-image:url(cssImg/webmail-v2-bottom_29.png);
 	background-repeat:repeat-x;
 	z-index:1;
 }
@@ -243,7 +243,7 @@ a:visited {
 	right:0px;
 	width:15px;
 	height:18px;
-	background-image:url(../images/webmail-v2-bottomRightCorner_28.png);
+	background-image:url(cssImg/webmail-v2-bottomRightCorner_28.png);
 	z-index:1;
 }
 .left{
@@ -252,7 +252,7 @@ a:visited {
 	top:15px;
 	bottom:18px;
 	width:10px;
-	background-image:url(../images/webmail-v2-left_09.png);
+	background-image:url(cssImg/webmail-v2-left_09.png);
 	background-repeat:repeat-y;
 	z-index:1;
 }
@@ -262,7 +262,7 @@ a:visited {
 	right:0px;
 	bottom:18px;
 	width:15px;
-	background-image:url(../images/webmail-v2-right_20.png);
+	background-image:url(cssImg/webmail-v2-right_20.png);
 	background-repeat:repeat-y;
 	z-index:1;
 }
@@ -282,7 +282,7 @@ a:visited {
 	left:750px;
 	width:260px;
 	height:83px;
-	background-image:url(../images/webmail-v2-loggedIn_06.png);
+	background-image:url(cssImg/webmail-v2-loggedIn_06.png);
 	z-index:1;
 }
 
