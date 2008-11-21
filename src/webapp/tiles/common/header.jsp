@@ -9,14 +9,24 @@
 <%
     final User user = Util.getUser(session);
     Properties prefs = null;
-	String imgSigFile = "/UFsig_small_ja.gif";
+	String lang = "";
+	String imgSigFile = "/UFsig_small";
     boolean hideHeader = false;
+	
     if (user != null) {
         PreferencesProvider pp = (PreferencesProvider)application.getAttribute(Constants.PREFERENCES_PROVIDER);
         prefs = pp.getPreferences(user, session);
         hideHeader = Boolean.valueOf(prefs.getProperty("view.header.hide", "false")).booleanValue();
+		lang = prefs.getProperty("pref.lang","false");
     }
-    if (!hideHeader) {
+	
+	if(lang.equals("ja"))
+		imgSigFile += "_"+lang;
+	
+	
+    imgSigFile += ".gif";
+	
+	if (!hideHeader) {
 %>
 <table class="header" width="100%" height="91" border="0" cellpadding="0" cellspacing="0">
  <tr>
