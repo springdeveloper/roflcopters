@@ -19,7 +19,7 @@
 
 package edu.ufl.osg.webmail.data;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -42,11 +42,11 @@ public class AddressBkDAO_Transient implements AddressBkDAO {
         return list;
     }
 
-    public void addEntry(final String permId, final InternetAddress internetAddress) throws AddressBkDAOException {
+    public void addEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored
     }
 
-    public void removeEntry(final String permId, final InternetAddress internetAddress) throws AddressBkDAOException {
+    public void removeEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored
     }
 }

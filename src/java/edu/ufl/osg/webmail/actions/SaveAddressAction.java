@@ -35,7 +35,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -83,11 +83,35 @@ public class SaveAddressAction extends Action {
 
         // go ahead and add the entry
         final AddressForm addressForm = (AddressForm)form;
+		
         String email = addressForm.getEmail();
         email = email != null ? email.trim() : null;
+		
         String name = addressForm.getName();
         name = name != null ? name.trim() : null;
-        final InternetAddress iAddress = new InternetAddress(email, name);
+		
+		String company = addressForm.getCompany();
+		company = company != null ? company.trim() : null;
+		
+		String position = addressForm.getPosition();
+		position = position != null ? position.trim() : null;	
+		
+		String phoneHome = addressForm.getPhoneHome();
+		phoneHome = phoneHome != null ? phoneHome.trim() : null;
+
+		String phoneWork = addressForm.getPhoneWork();
+		phoneWork = phoneWork != null ? phoneWork.trim() : null;
+		
+		String phoneCell = addressForm.getPhoneCell();
+		phoneCell = phoneCell != null ? phoneCell.trim() : null;
+		
+		String address = addressForm.getAddress();
+		address = address != null ? address.trim() : null;	
+		
+		String notes = addressForm.getNotes();
+		notes = notes != null ? notes.trim() : null;	
+		
+        final AddressBkEntry iAddress = new AddressBkEntry(name,email,company,position,phoneHome,phoneWork,phoneCell,address,notes);
 
         if (addressList.contains(iAddress)) {
             logger.error("addressList already contains " + iAddress);
