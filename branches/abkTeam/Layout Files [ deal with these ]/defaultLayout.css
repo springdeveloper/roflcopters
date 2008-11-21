@@ -4,7 +4,7 @@
 #statusIconUI{
 	position:fixed;
 	top:50px;
-	left:750px;;
+	left:750px;
 	width:260px;
 	height:83px;
 	background-image:url(images/webmail-v2-loggedIn_06.png);
@@ -24,8 +24,9 @@
 	position:absolute;
 	top:120px;
 	left:300px;
-	width:800px;
+	right:60px;
 	min-height:500px;
+	min-width:500px;
 	z-index:0;
 }
 #defaultCenterUIContentBoxMiddle{
@@ -40,11 +41,12 @@
 #defaultCenterUIContent{
 	margin-left:10px;
 	margin-top:10px;
+	margin-right:10px;
 	min-height:500px;
-	width:780px; /*  This needs to be 20 less than the original width */
+	right:20px; /*  This needs to be 20 less than the original width */
 	background-color:#FFFFFF;
 }
-#defaultFolderUIContentBox{
+#defaultSideBarUIContentBox{
 	position:absolute;
 	top:145px;
 	left:30px;
@@ -63,7 +65,7 @@
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 }
 
-#defaultFolderUIContentBoxMiddle{
+#defaultSideBarUIContentBoxMiddle{
 	position:relative;
 	margin-top:0px;
 	min-height:500px;
@@ -72,7 +74,7 @@
 	z-index:0;
 }
 
-#defaultFolderUIContent{
+#defaultSideBarUIContent{
 	margin-left:10px;
 	margin-top:10px;
 	min-height:500px;
