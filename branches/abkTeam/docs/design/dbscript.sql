@@ -48,11 +48,9 @@ CREATE INDEX `personuid` ON `public`.`abkPerson` (`userId` ASC) ;
 -- Table `public`.`abkEmail`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `public`.`abkEmail` (
-  `typeId` SMALLINT NOT NULL ,
   `contactId` INT NOT NULL ,
   `userId` INT NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`typeId`) ,
   CONSTRAINT `emailcid`
     FOREIGN KEY (`contactId` )
     REFERENCES `public`.`abkPerson` (`contactId` )
@@ -92,7 +90,6 @@ CREATE INDEX `mluid` ON `public`.`abkML` (`userId` ASC) ;
 CREATE  TABLE IF NOT EXISTS `public`.`abkMLMember` (
   `contactId` INT NOT NULL ,
   `groupId` INT NOT NULL ,
-  `typeId` SMALLINT NOT NULL ,
   CONSTRAINT `mlmembergid`
     FOREIGN KEY (`groupId` )
     REFERENCES `public`.`abkML` (`groupId` )
@@ -102,18 +99,11 @@ CREATE  TABLE IF NOT EXISTS `public`.`abkMLMember` (
     FOREIGN KEY (`contactId` )
     REFERENCES `public`.`abkPerson` (`contactId` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `mlmembertid`
-    FOREIGN KEY (`typeId` )
-    REFERENCES `public`.`abkEmail` (`typeId` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE);
+    ON UPDATE NO ACTION);
 
 CREATE INDEX `mlmembergid` ON `public`.`abkMLMember` (`groupId` ASC) ;
 
 CREATE INDEX `mlmembercid` ON `public`.`abkMLMember` (`contactId` ASC) ;
-
-CREATE INDEX `mlmembertid` ON `public`.`abkMLMember` (`typeId` ASC) ;
 
 
 -- -----------------------------------------------------
