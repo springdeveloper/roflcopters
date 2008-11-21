@@ -4,53 +4,46 @@
 
 <table class="headerTable" cellspacing="0" cellpadding="0" width="100%">
   <tr class="header">
-    <th><a name="top">GatorMail Help</a></th>
+    <th><a name="top"><bean:message key="help.header"/></a></th>
   </tr>
   <tr>
     <td>
 	<p>
-	This help page is a work in progress. We will add more answers
-	as people bring us more questions, and as we document GatorMail's
-	features. Thanks for trying GatorMail.
+	<bean:message key="help.intro"/>
 	</p>
 	<blockquote>
 	<ul>
-	  <li><html:link href="#gl">I have a question that is not specific to the	Webmail system, like mail
-	      forwarding or other general Gatorlink questions.</html:link>
+	  <li><html:link href="#gl"><bean:message key="help.question.gl"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#login">I can't log in.</html:link>
+	      <html:link href="#login"><bean:message key="help.question.login"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#noINBOX">I get a "Couldn't find folder" error for INBOX when I log in.</html:link>
+	      <html:link href="#noINBOX"><bean:message key="help.question.noINBOX"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#userInfoException">I get a "Could not access required user information" error when I try to log in.</html:link>
+	      <html:link href="#userInfoException"><bean:message key="help.question.userInfoException"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#composeNewWindow">Could you make it so that
-	      when I compose a message it opens in a new window?</html:link>
+	      <html:link href="#composeNewWindow"><bean:message key="help.question.composeNewWindow"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#sentMail">Why are my messages not being stored in my Sent folder?</html:link>
+	      <html:link href="#sentMail"><bean:message key="help.question.sentMail"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#displayName">Where do my display name and signature come from? Why are they all capital
-	      letters?</html:link>
+	      <html:link href="#displayName"><bean:message key="help.question.displayName"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#pagination">How do I limit how many messages are shown in the message listing?</html:link>
+	      <html:link href="#pagination"><bean:message key="help.question.pagination"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#subscribed">What does the "Subscribed" column signify on the "Manage Folders" page?</html:link>
+	      <html:link href="#subscribed"><bean:message key="help.question.subscribed"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#foldersDisapeared">Why can't I see some of my folders? I know they exist, but GatorMail
-	      doesn't show them.</html:link>
+	      <html:link href="#foldersDisapeared"><bean:message key="help.question.foldersDisapeared"/></html:link>
 	  </li>
 	  <li>
-	      <html:link href="#open">None of these questions help with my GatorMail specific problem. How do I get
-	      a hold of you guys?</html:link>
+	      <html:link href="#open"><bean:message key="help.question.open"/></html:link>
 	  </li>
 	</ul>
 	</blockquote>
@@ -64,14 +57,13 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="gl">I have a question that is not specific to the Webmail system, like mail
-		forwarding or other general Gatorlink	questions.</a>
+		<a name="gl"><bean:message key="help.question.gl"/></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td>
-		Contact the Help Desk at (352)392-HELP or <a href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</a>.
-		<html:link href="#top">[top]</html:link>
+		<bean:message key="help.answer.gl"/>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -85,22 +77,13 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="login">I can't log in.</a>
+		<a name="login"><bean:message key="help.question.login"/></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td>
-		First of all, you must have a
-		<html:link href="http://gatorlink.ufl.edu">Gatorlink account</html:link>.
-		Make sure you	are entering your user ID like "gatorfan" , not like
-		"gatorfan@ufl.edu" or anything that is not your user ID that you
-		picked when you set up your account. It should be in all lower-case
-		letters, and make sure you aren't including any spaces before or after
-		your user ID. Your password is case sensitive, so make sure you are
-		typing it exactly correctly. If you forgot your password or have any
-		other problems with your account contact the Help Desk at 392-HELP or
-		<html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>.
-		<html:link href="#top">[top]</html:link>
+		<bean:message key="help.answer.login"/>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -114,26 +97,14 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="noINBOX">I get a "Couldn't find folder" error for INBOX when I log in.</a>
+		<a name="noINBOX"><bean:message key="help.question.noINBOX"/></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td>
 		<p>
-		It is possible that you don't have a Gatorlink mailbox.
-		This is often the case when your Gatorlink mail is being
-		forwarded to some other account, and your mailbox hasn't yet
-		been created. Alternately, you may be a Gatorlink user who
-		doesn't qualify for a mailbox. You may edit and view your
-		Gatorlink account information at the
-		<html:link href="http://gatorlink.ufl.edu/">Gatorlink account site</html:link>.
-		</p>
-		<p>
-		It is also possible that the mail server is experiencing an
-		internal error. Please contact the Help Desk at (352)392-HELP
-		or <html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>
-		if you think this may be the case.
-		<html:link href="#top">[top]</html:link>
+		<bean:message key="help.answer.noINBOX"/>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 		</p>
 	    </td>
 	  </tr>
@@ -148,7 +119,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-	      <a name="userInfoException">I get a "Could not access required user information" error when I try to log in.</a>
+	      <a name="userInfoException"><bean:message key="help.question.userInfoException"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -174,6 +145,7 @@
 		you have a UF Directory entry, please report the problem
 		to the Help Desk at (352)392-HELP
 		or <html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>.
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 		</p>
 	    </td>
 	  </tr>
@@ -188,9 +160,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="composeNewWindow">
-		Could you make it so that when I compose a message it opens in a new window?
-		</a>
+		<a name="composeNewWindow"><bean:message key="help.question.composeNewWindow"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -200,7 +170,7 @@
 		with a choice similar to "Open in New Window" should be available. When you
 		choose this you will be able to compose a message in one window and read or
 		other activities in another window.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -214,14 +184,14 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="sentMail">Why are my messages not being stored in my Sent folder?</a>
+		<a name="sentMail"><bean:message key="help.question.sentMail"/></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td>
 		You need to click the "<bean:message key="compose.copyToSent"/>" check box
 		next the "<bean:message key="button.send"/>" button.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -235,8 +205,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="displayName">Where do my display name and signature come from? Why are they all capital
-		letters?</a>
+		<a name="displayName"><bean:message key="help.question.displayName"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -246,7 +215,7 @@
 		<code>From:</code> field of emails. To change your directory information,
 		please visit UF's
 		<html:link href="http://directory.ufl.edu/edit">directory editing site</html:link>.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -260,14 +229,14 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="pagination">How do I limit how many messages are shown in the message listing?</a>
+		<a name="pagination"><bean:message key="help.question.pagination"/></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td>
 		GatorMail currently does not support paginating the list of messages when
 		viewing a folder. This feature is on our short list of features to implement.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -281,7 +250,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="subscribed">What does the "Subscribed" column signify on the "Manage Folders" page?</a>
+		<a name="subscribed"><bean:message key="help.question.subscribed"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -292,7 +261,7 @@
 		may treat each type of folder differently. GatorMail allows you to
 		set the subscribed status of your folders, and will ignore (not
 		display) unsubscribed folders, except in the "Manage Folders" page.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
@@ -306,8 +275,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="foldersDisapeared">Why can't I see some of my folders? I know they exist, but GatorMail
-		doesn't show them.</a>
+		<a name="foldersDisapeared"><bean:message key="help.question.foldersDisapeared"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -322,7 +290,7 @@
 		subscription status of each of your folders. If the "Subscribed"
 		column is marked "N", click the folder's "Modify Folder" link, and
 		then press the "Subscribe Folder" button on the next page.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 		</p>
 	    </td>
 	  </tr>
@@ -337,8 +305,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="open">None of these questions help with my GatorMail specific problem. How do I get
-		a hold of you guys?</a>
+		<a name="open"><bean:message key="help.question.open"/></a>
 	    </td>
 	  </tr>
 	  <tr>
@@ -347,7 +314,7 @@
 		<html:link forward="feedback">Send Feedback</html:link> at the top of most
 		pages or you can ask for support at
         <html:link href="http://GatorMail.sf.net/support">http://GatorMail.sf.net/support</html:link>.
-		<html:link href="#top">[top]</html:link>
+		<html:link href="#top">[<bean:message key="help.top"/>]</html:link>
 	    </td>
 	  </tr>
         </table>
