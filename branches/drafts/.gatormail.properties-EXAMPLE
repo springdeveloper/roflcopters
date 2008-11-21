@@ -1,0 +1,9 @@
+## To upload attachments to your server, you MUST make a copy this file named
+## ".gatormail.properties" in the same directory, and uncomment ONE of the two
+## variables below. Change the path, if you need to.
+
+## Windows users! Uncomment this one. Note that it needs to be "/", not "\"
+#gatormail.attachment.path=C:/Program Files/Apache Software Foundation/Tomcat 5.5/webapps/GatorMail/attachments
+
+## Linux users (congratulations!), uncomment this one:
+#gatormail.attachment.path=/var/lib/tomcat5.5/webapps/GatorMail/attachments
