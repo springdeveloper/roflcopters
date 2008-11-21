@@ -22,7 +22,7 @@ package edu.ufl.osg.webmail.data;
 
 import org.apache.log4j.Logger;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -60,7 +60,7 @@ public final class AddressList implements List, java.io.Serializable {
     public boolean containsEmail(final String email) {
         final int size = addressList.size();
         for (int i = 0; i < size; i++) {
-            final InternetAddress internetAddress = (InternetAddress)addressList.get(i);
+            final AddressBkEntry internetAddress = (AddressBkEntry)addressList.get(i);
             if (internetAddress.getAddress().equals(email))
                 return true;
         }
@@ -70,7 +70,7 @@ public final class AddressList implements List, java.io.Serializable {
     /**
      * Adds Email entry into both in-memory list and backend storage.
      */
-    public boolean addAddress(final InternetAddress internetAddress) throws AddressBkDAOException {
+    public boolean addAddress(final AddressBkEntry internetAddress) throws AddressBkDAOException {
         getAddressBkDAO().addEntry(permId, internetAddress);
         return add(internetAddress);
     }
@@ -78,7 +78,7 @@ public final class AddressList implements List, java.io.Serializable {
     /**
      * Removes Email entry from both in-memory list and backend storage.
      */
-    public boolean removeAddress(final InternetAddress internetAddress) throws AddressBkDAOException {
+    public boolean removeAddress(final AddressBkEntry internetAddress) throws AddressBkDAOException {
         getAddressBkDAO().removeEntry(permId, internetAddress);
         return remove(internetAddress);
     }
@@ -87,7 +87,7 @@ public final class AddressList implements List, java.io.Serializable {
         final StringBuffer buff = new StringBuffer();
         final int size = addressList.size();
         for (int i = 0; i < size; i++) {
-            final InternetAddress internetAddress = (InternetAddress)addressList.get(i);
+            final AddressBkEntry internetAddress = (AddressBkEntry)addressList.get(i);
             buff.append(internetAddress.toString());
             if (i < size - 1)
                 buff.append(", ");
@@ -106,13 +106,13 @@ public final class AddressList implements List, java.io.Serializable {
     // satisfy the List interface:
     ////////////////////////////////////////////////////////////
     public void add(final int index, final Object element) {
-        if (!(element instanceof InternetAddress)) return;
+        if (!(element instanceof AddressBkEntry )) return;
         addressList.add(index, element);
         sort();
     }
 
     public boolean add(final Object o) {
-        if (!(o instanceof InternetAddress)) return false;
+        if (!(o instanceof AddressBkEntry )) return false;
         addressList.add(o);
         sort();
         return true;
@@ -122,7 +122,7 @@ public final class AddressList implements List, java.io.Serializable {
         final Iterator it = c.iterator();
         while (it.hasNext()) {
             final Object o = it.next();
-            if (!(o instanceof InternetAddress)) return false;
+            if (!(o instanceof AddressBkEntry )) return false;
         }
         addressList.addAll(c);
         sort();
@@ -133,7 +133,7 @@ public final class AddressList implements List, java.io.Serializable {
         final Iterator it = c.iterator();
         while (it.hasNext()) {
             final Object o = it.next();
-            if (!(o instanceof InternetAddress)) return false;
+            if (!(o instanceof AddressBkEntry )) return false;
         }
         addressList.addAll(index, c);
         sort();
@@ -205,7 +205,7 @@ public final class AddressList implements List, java.io.Serializable {
     }
 
     public Object set(final int index, final Object element) {
-        if (!(element instanceof InternetAddress)) return null;
+        if (!(element instanceof AddressBkEntry )) return null;
         return addressList.set(index, element);
     }
 

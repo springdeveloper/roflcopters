@@ -31,7 +31,7 @@
  import java.io.UnsupportedEncodingException;
  
  public class AddressBkEntry implements Comparable{
-	private InternetAddress email;
+	private InternetAddress email = new InternetAddress();
 	private String company;
 	private String position;
 	private String phoneHome;
@@ -39,6 +39,25 @@
 	private String phoneCell;
 	private String address;
 	private String notes;
+	
+	public AddressBkEntry(String name, String email) throws AddressException, UnsupportedEncodingException
+	{
+		setPersonal(name);
+		setAddress(email);
+	}
+	
+	public AddressBkEntry(String name, String email, String company, String position, String phoneHome, String phoneWork, String phoneCell, String address, String notes) throws AddressException, UnsupportedEncodingException
+	{
+		setPersonal(name);
+		setAddress(email);
+		setCompany(company);
+		setPosition(position);
+		setPhoneHome(phoneHome);
+		setPhoneWork(phoneWork);
+		setPhoneCell(phoneCell);
+		setMailingAddress(address);
+		setNotes(notes);
+	}
 	
 	public void setPersonal(String name) throws UnsupportedEncodingException {
 		email.setPersonal(name);
@@ -124,7 +143,7 @@
 	
 	public String toString()
 	{
-		return getAbkPersonEntry()+","+getAbkEmailEntry();
+		return email.toString();
 	}
 	
 	public int compareTo(Object comp) {

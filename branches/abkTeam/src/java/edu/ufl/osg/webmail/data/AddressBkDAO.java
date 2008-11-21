@@ -20,7 +20,7 @@
 
 package edu.ufl.osg.webmail.data;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 
 /**
  * Interface for interacting with the addressbook store.
@@ -32,7 +32,7 @@ public interface AddressBkDAO {
 
     public AddressList getAddressList(String permId) throws AddressBkDAOException;
 
-    public void addEntry(String permId, InternetAddress internetAddress) throws AddressBkDAOException;
+    public void addEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
 
-    public void removeEntry(String permId, InternetAddress internetAddress) throws AddressBkDAOException;
+    public void removeEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
 }

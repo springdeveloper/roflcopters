@@ -1,7 +1,7 @@
 <%@page contentType="text/html" import="edu.ufl.osg.webmail.Constants,
                                         java.util.HashMap,
                                         java.util.Map,
-                                        javax.mail.internet.InternetAddress"%>
+                                        edu.ufl.osg.webmail.data.AddressBkEntry"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="/tags/struts-html" prefix="html"%>
 <%@taglib uri="/tags/struts-bean" prefix="bean"%>
@@ -31,7 +31,7 @@
 %>
   <c:forEach items="${addressList}" var="internetAddress" varStatus="index">
    <%
-     InternetAddress internetAddress = (InternetAddress)pageContext.getAttribute("internetAddress");
+     AddressBkEntry internetAddress = (AddressBkEntry)pageContext.getAttribute("internetAddress");
      composeParams.put("to", internetAddress.toString());
      deleteParams.put("email", internetAddress.getAddress());
      deleteParams.put("name", internetAddress.getPersonal());
