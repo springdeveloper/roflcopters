@@ -39,7 +39,7 @@
 		messageID += "drafts";
 	} else if (currentRootFolder.getFullName().equals(Constants.getJunkFolderFullname(session))) { //Added by Robert 
 		//	 imageName += "junk";
-		imageName += "folder";
+		imageName += "junk";
 		messageID += "junk";
     } else {
         imageName += "folder";
@@ -61,7 +61,7 @@
             imageName += "-unread";
         }
     }
-    imageName += ".gif";
+    imageName += ".png";
 
 %>
 <div class="folderListFolder">
