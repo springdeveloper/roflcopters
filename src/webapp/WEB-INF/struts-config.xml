@@ -92,6 +92,7 @@
         <forward name="help" path="/help.do"/>
         <forward name="inbox" path="/folder.do?folder=INBOX" redirect="true"/>
         <forward name="INBOX" path="/folder.do?folder=INBOX"/>
+        <forward name="drafts" path="/folder.do?folder=INBOX/Drafts" />
         <forward name="login" path="/login.do"/>
         <forward name="logout" path="/logout.do"/>
         <forward name="message" path="/message.do"/>
@@ -114,6 +115,7 @@
         <forward name="saveAddress" path="/saveAddress.do"/>
         <forward name="saveAddresses" path="/saveAddresses.do"/>
         <forward name="selectAddresses" path="/selectAddresses.do"/>
+        <forward name="saveDraft" path="/saveDraft.do"/>
         <forward name="send" path="/send.do"/>
         <forward name="feedback" path="/feedback.do"/>
         <forward name="composeFeedback" path="/compose.do?to=consult@lists.ufl.edu&amp;subject=GatorMail+Webmail+Feedback+@VERSION@"/>
@@ -314,6 +316,7 @@
 
         <action path="/send" name="composeForm" scope="request" validate="false" type="edu.ufl.osg.webmail.actions.SendAction" input="/compose.jsp">
             <forward name="success" path="/folder.do?folder=INBOX"/>
+            <forward name="draft" path="/folder.do?folder=INBOX/Drafts"/>
             <forward name="fail" path="/compose.jsp"/>
         </action>
 

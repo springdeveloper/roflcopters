@@ -32,7 +32,7 @@ import javax.mail.MessagingException;
  * @author sandymac
  * @author drakee
  * @version $Revision: 1.3 $
- */
+*/
 public final class Constants {
     /** The application scoped key for the JavaMail Session provider. */
     public static final String MAIL_SESSION_PROVIDER = "sessionProvider";
@@ -79,6 +79,9 @@ public final class Constants {
     /** name for the IMAP box to put sent messages within */
     public static final String SENT_FOLDER = "Sent";
 
+    /** name for the IMAP box to but draft messages in */
+    public static final String DRAFT_FOLDER = "Drafts";
+
     /** request scoped key for a list of messages */
     public static final String MESSAGE_LIST = "messageList";
 
@@ -100,6 +103,9 @@ public final class Constants {
 
     public static final String MAILBEAN_KEY = "mailBean";
 
+    /**
+     * Cache trash folder full name in users session
+     */
     public static String getTrashFolderFullname(final HttpSession session) throws MessagingException {
         String trashFolderFullName;
         synchronized (session) {
@@ -115,6 +121,9 @@ public final class Constants {
         return trashFolderFullName;
     }
 
+    /**
+     * Cache sent folder full name in users session
+     */
     public static String getSentFolderFullname(final HttpSession session) throws MessagingException {
         String sentFolderFullname;
         synchronized (session) {
@@ -128,5 +137,23 @@ public final class Constants {
             }
         }
         return sentFolderFullname;
+    }
+
+    /**
+     * Cache draft folder full name in users session
+     */
+    public static String getDraftFolderFullname(final HttpSession session) throws MessagingException {
+        String draftFolderFullname;
+        synchronized (session) {
+            draftFolderFullname = (String)session.getAttribute("draftFolderFullname");
+            if (draftFolderFullname == null) {
+                final Folder inbox = Util.getFolder(session, "INBOX");
+                Util.releaseFolder(inbox);
+
+                draftFolderFullname = inbox.getFolder(DRAFT_FOLDER).getFullName();
+                session.setAttribute("draftFolderFullname", draftFolderFullname);
+            }
+        }
+        return draftFolderFullname;
     }
 }

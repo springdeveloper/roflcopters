@@ -187,6 +187,9 @@ var preventSubmit = function (e) {
        <html:submit property="action" styleClass="button">
         <bean:message key="button.cancelMessage"/>
        </html:submit>
+       <html:submit property="action" styleClass="button">
+        <bean:message key="button.saveDraft"/>
+       </html:submit>
       </td>
       <td class="darkBlueRow" colspan="2">&nbsp;</td>
      </tr>

@@ -44,8 +44,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handles user requests for sending mail, uploading and deleting attachments
- * in the compose view.
+ * Handles user requests for sending mail, saving drafts, 
+ * uploading and deleting attachments in the compose view.
  *
  * @author drakee
  * @version $Revision: 1.4 $
@@ -60,6 +60,7 @@ public class ModifyComposeAction extends LookupDispatchAction {
         map.put("button.attachment.upload.more", "uploadAttachment");
         map.put("button.attachment.delete", "deleteAttachment");
         map.put("button.cancelMessage", "cancelMessage");
+        map.put("button.saveDraft", "saveDraft");
     }
 
     protected Map getKeyMethodMap() {
@@ -200,6 +201,25 @@ public class ModifyComposeAction extends LookupDispatchAction {
     }
 
     /**
+     * Save message to draft folder
+     *
+     * @param     mapping             The ActionMapping used to select this
+     *                                instance
+     * @param     form                The optional ActionForm bean for this
+     *                                request (if any)
+     * @param     request             The HTTP request we are processing
+     * @param     response            The HTTP response we are creating
+     * @exception Exception if the application business
+     */
+    public ActionForward saveDraft(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+        ComposeForm compForm = (ComposeForm)form;
+        compForm.setIsDraft( true );
+        logger.info("set isDraft to true");
+        return sendMessage( mapping, compForm, request, response );
+    }
+
+    
+    /**
      * Call this when user hits the "attach file" button.
      *
      * @return                     true if attachment was successfully added,
@@ -216,6 +236,7 @@ public class ModifyComposeAction extends LookupDispatchAction {
         // retrieve attachment list for this user
         final HttpSession session = request.getSession();
         final AttachList attachList = Util.getAttachList(composeKey, session);
+        map.put("button.saveDraft", "saveDraft");
         // check that the new upload doesn't have a duplicate name
         if (attachList.containsFileName(attachment.getFileName())) {
             logger.warn("duplicate attachment name: " + attachment.getFileName());

@@ -447,17 +447,33 @@ if (!message.isSet(Flags.Flag.SEEN)) {
    </c:when>
 
    <c:when test="${column == 'subject'}">
-    <td class="msgSubject">
-     <html:link forward="message" name="messageParams">
-      <c:choose>
-       <c:when test="${! empty message.subject}">
-        <wm:write name="message" property="subject" filter="false" formatKey="message.subject.format" formatClassKey="message.subject.formatter"/>
-       </c:when>
-       <c:otherwise>
-        <i class="noSubject"><bean:message key="message.nosubject"/></i>
-       </c:otherwise>
-      </c:choose>
-     </html:link>
+   <td class="msgSubject">
+    <c:choose>
+      <c:when test="${folder.fullName == 'INBOX.Drafts' or folder.fullName == 'INBOX/Drafts'}">
+        <html:link forward="compose" name="messageParams">
+        <c:choose>
+         <c:when test="${! empty message.subject}">
+          <wm:write name="message" property="subject" filter="false" formatKey="message.subject.format" formatClassKey="message.subject.formatter"/>
+         </c:when>
+         <c:otherwise>
+         <i class="noSubject"><bean:message key="message.nosubject"/></i>
+         </c:otherwise>
+        </c:choose>
+        </html:link>
+      </c:when>
+      <c:otherwise>
+        <html:link forward="message" name="messageParams">
+        <c:choose>
+         <c:when test="${! empty message.subject}">
+          <wm:write name="message" property="subject" filter="false" formatKey="message.subject.format" formatClassKey="message.subject.formatter"/>
+         </c:when>
+         <c:otherwise>
+         <i class="noSubject"><bean:message key="message.nosubject"/></i>
+         </c:otherwise>
+        </c:choose>
+        </html:link>
+      </c:otherwise>
+     </c:choose>
     </td>
    </c:when>
 
