@@ -50,6 +50,7 @@
     final PreferencesProvider pp = (PreferencesProvider)application.getAttribute(Constants.PREFERENCES_PROVIDER);
     final Properties prefs = pp.getPreferences(user, session);
     final boolean threadingEnabled = Boolean.valueOf(prefs.getProperty("folder.list.threading", "false")).booleanValue();
+    final boolean treeThreadingEnabled = true;
     final int junkThreshold = Integer.valueOf(prefs.getProperty("message.junk.threshold", "8")).intValue();
     final String junkPattern;
     if (junkThreshold > 0) {
@@ -180,12 +181,55 @@ function ht(node) {
     }
 }
 
+// Toggle thread visibility - based on updateThread() above
+function toggleThread(nodeId) {
+    var refs = awesomeThreads[nodeId];
+    var threadVisible = awesomeThreads[nodeId].threadVisible;
+    if (refs) {
+        // iterate over all referenced messages, toggling visibility
+        for (var i = 0; i < refs.length; i++) {
+            var ref = refs[i];
+            var row;
+            if (typeof ref == "object") {
+                row = ref;
+            } else if (typeof ref == "string") {
+                row = document.getElementById(ref);
+            }
+            // FIXMEWTF: messages appear to be present in their own
+            // refs array (they disappear along with the parents when
+            // toggling off thread visibility). I don't understand
+            // why. Adding extra predicate prevents disappearance.
+            if (row && (row != document.getElementById(nodeId))) {
+                if (threadVisible)
+                    row.style.visibility = "collapse";
+                else
+                    row.style.visibility = "visible";
+            }
+        }
+        if (threadVisible) {
+            awesomeThreads[nodeId].threadVisible = false;
+            document.getElementById("expand"+nodeId).value = "+";
+        } else {
+            awesomeThreads[nodeId].threadVisible = true;
+            document.getElementById("expand"+nodeId).value = "-";
+        }
+    }
+}
+
 var messageThreads = new Object();
+var awesomeThreads = new Object(); // MUCH BETTER THREADS
 //-->
 </script>
 
 <table class="folderMessageList" width="100%" cellpadding="3" cellspacing="0" border="0">
  <tr class="folderMessageListHeader">
+<%  if (treeThreadingEnabled) { %>
+  <th>
+   <!-- unwritten. not sure how useful it is.
+   <input type="button" name="expandAllThreads" id="expandAllThreads" onclick="expandAll()" title="Expand All Threads" value="+"/>
+   -->
+  </th>
+<% } %>
   <th>
    <input type="checkbox" name="checkAllBox" id="checkAllBox" onclick="toggleAll(this)" title="Check All Messages"/>
   </th>
@@ -288,12 +332,20 @@ var messageThreads = new Object();
  </tr>
 </c:if>
 
-<c:forEach items="${messages}" var="message" varStatus="messageStatus">
 <%
-    Message message = (Message)pageContext.getAttribute("message");
+    ArrayList threadsList = (ArrayList)request.getAttribute("threadsList");
+
+    for (int threadI = 0; threadI < threadsList.size(); ++threadI) {
+        ArrayList thread = (ArrayList) threadsList.get(threadI);
+        String threadID = Integer.toString(((MimeMessage)thread.get(0)).getMessageID().hashCode());
+
+    for (int messI = 0; messI < thread.size(); ++messI) {
+
+    Message message = (Message)thread.get(messI);
+    pageContext.setAttribute("message", message);
     MessageWrapper wrappedMessage = new MessageWrapper(message);
     pageContext.setAttribute("wrappedMessage", wrappedMessage);
-    
+
 
     Map messageParams = new HashMap();
     Util.addMessageParams(message,sort, messageParams);
@@ -305,9 +357,11 @@ var messageThreads = new Object();
 
     // Get the Message-ID so it can be added to the TR.
     String messageID = "";
+    String realMID = "";
     if (message instanceof MimeMessage && ((MimeMessage)message).getMessageID() != null) {
         //messageID = ResponseUtils.filter(((MimeMessage)message).getMessageID());
         messageID = Integer.toString(((MimeMessage)message).getMessageID().hashCode());
+        realMID = ((MimeMessage)message).getMessageID();
     } else if (message.getFolder() instanceof UIDFolder) {
         // Just in case
         messageID = Long.toString(((UIDFolder)message.getFolder()).getUID(message));
@@ -323,6 +377,13 @@ if (!message.isSet(Flags.Flag.SEEN)) {
 }
 %>
  <tr class="<%= trClass %>" <%= id %> onMouseOver="st(this)" onMouseOut="ht(this)">
+<% if (treeThreadingEnabled) {
+    final String expandId = messageID != null ? "id=\"expand" + messageID + "\"" : "";
+%>
+  <td class="msgToggleThread">
+    <input type="button" <%= expandId %> onclick="toggleThread(<%= messageID %>)" title="Toggle thread visibility" value="+"/>
+  </td>
+<% } %>
   <td class="msgCheckbox">
    <c:choose>
     <c:when test="${! empty messageParams.uid}">
@@ -505,6 +566,7 @@ var msg = new Array();
         }
 
 %>msg.id = '<%= messageID %>';
+// realmid is '<%= realMID %>';
 msg.threadSubject = '<%= ResponseUtils.filter(threadSubject) %>';
 <%
     }
@@ -532,17 +594,52 @@ msg.threadSubject = '<%= ResponseUtils.filter(threadSubject) %>';
         }
 
         Iterator iter = references.iterator();
+        Object val;
         while (iter.hasNext()) {
             //ResponseUtils.filter((String)iter.next())
-%>msg[msg.length] = '<%= (iter.next()).hashCode() %>';
+            val = iter.next();
+%>
+msg[msg.length] = '<%= val.hashCode() %>'; // real Message-ID: <%= (String)val %>
 <%
         }
     }
 %>
 msg.eRC = msg.length; // Explicit Reference Count
+msg.threadVisible = false; // visibility of full thread
 messageThreads["<%= messageID %>"] = msg;
+
+
+<%
+    // if first message in thread (most recent), display with button
+    // else, hide, remove button
+    if (messI == 0) {
+%>
+         var msg = new Array();
+         msg.id = '<%= messageID %>';
+         msg.threadVisible = false; // visibility of full thread
+         awesomeThreads["<%= messageID %>"] = msg;
+<%
+     } else {
+%>
+         root = awesomeThreads["<%= threadID %>"];
+         root[root.length] = '<%= messageID %>';
+         document.getElementById("<%= messageID %>").style.visibility = "collapse";
+         document.getElementById("expand"+"<%= messageID %>").style.visibility = "collapse";
+<%
+     }
+     if (thread.size() == 1) {
+%>
+         document.getElementById("expand"+"<%= messageID %>").style.visibility = "collapse";
+<%
+     }
+%>
 //--></script>
-</c:forEach>
+
+<%
+   // close iteration over messages, threads
+    }
+}
+%>
 
 <c:if test="${! empty messages}">
  <tr>

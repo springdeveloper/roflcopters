@@ -45,6 +45,7 @@ import edu.ufl.osg.webmail.util.Util.SubjectSort;
 import edu.ufl.osg.webmail.util.Util.SubjectSortU;
 import edu.ufl.osg.webmail.util.Util.ToSort;
 import edu.ufl.osg.webmail.util.Util.ToSortU;
+import edu.ufl.osg.webmail.util.Util.ThreadDateSort;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionError;
@@ -67,9 +68,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 /**
@@ -734,6 +738,83 @@ final class ActionsUtil {
     }
 
     /**
+     * Convert an array of Messages into an ArrayList of ArrayLists,
+     * each of which represents a message thread.
+     */
+    protected static ArrayList buildThreads(Folder folder, Message[] messages) throws MessagingException {
+        LinkedHashMap<String, ArrayList> headerThreads = new LinkedHashMap<String, ArrayList>();
+        String[] refs = new String[64]; // this kind of sucks, maybe?
+        String[] messageID = new String[4];
+        ArrayList postProc = new ArrayList();
+        String key;
+
+        logger.debug("buildthreads() STARTING");
+        for (int i = 0; i < messages.length; ++i) {
+            refs = messages[i].getHeader("References");
+            if (refs != null) {
+                logger.debug("BT: non-null refs");
+                key = refs[0]; // the root!
+                StringTokenizer st = new StringTokenizer(key);
+                if (st.hasMoreTokens())
+                    key = st.nextToken();
+                logger.debug("BT: key of " + (messages[i].getHeader("Message-ID"))[0] + " is: "+ key);
+                if (!headerThreads.containsKey(key)) {
+                    // create new thread, add to table
+                    logger.debug("BT refs NO THREAD create now");
+                    ArrayList ar = new ArrayList();
+                    headerThreads.put(key, ar);
+                }
+                // add message to messages list of thread
+                ((ArrayList) headerThreads.get(key)).add(messages[i]);
+            } else {
+                // no References header - move to postProc array
+                logger.debug("BT: null refs");
+                postProc.add(messages[i]);
+            }
+        }
+
+        logger.debug("BT PP begin");
+        Iterator it = postProc.iterator();
+        Object var;
+        while (it.hasNext()) {
+            Message m = (Message) it.next();
+            messageID = m.getHeader("Message-ID");
+            key = messageID[0];
+            logger.debug("BT PP MID: " + key);
+            if (headerThreads.containsKey(key)) {
+                // WIN! this is root of a thread
+                // add message to messages list of thread
+                ((ArrayList) headerThreads.get(key)).add(m);
+            } else {
+                // just give up, for now. or forever. whatever.
+                logger.debug("BT nullrefs NO THREAD CREATE NOW");
+                ArrayList ar = new ArrayList();
+                ar.add(m);
+                headerThreads.put(key, ar);
+            }
+        }
+        logger.debug("buildthreads() DONE DONE DONE!!!!!");
+
+        logger.debug("buildthreads NOW SORT!");
+        ArrayList headerThreadsAr = new ArrayList();
+
+        // sort each thread
+        int yay = 0;
+        for (Map.Entry<String,ArrayList> e : headerThreads.entrySet()) {
+            ArrayList ar = e.getValue();
+            Collections.sort(ar, fetchSort("dateDN"));
+            logger.debug("BT sorting. thread " + yay++ + " size: " + ar.size());
+            headerThreadsAr.add(ar);
+        }
+
+        // sort threads list
+        Collections.sort(headerThreadsAr, fetchSort("threadDateDN"));
+
+        logger.debug("BT finishing. HTA size: " + headerThreadsAr.size());
+        return(headerThreadsAr);
+    }
+
+    /**
      * Returns a {@link java.util.List} of all folders a user is subscribed to.
      *
      * @param  store               The user's {@link javax.mail.Store}.
@@ -838,6 +919,8 @@ final class ActionsUtil {
             comparator = new FromSort();
         } else if ("fromUP".equals(sort)) {
             comparator = new FromSortU();
+        } else if ("threadDateDN".equals(sort)) {
+            comparator = new ThreadDateSort();
         } else {
             comparator = new DateSort();
         }
