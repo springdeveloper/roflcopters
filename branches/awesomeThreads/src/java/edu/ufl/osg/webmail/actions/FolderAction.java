@@ -61,6 +61,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -177,6 +178,13 @@ public class FolderAction extends Action {
 
             // Populate the request attributes
             request.setAttribute("messages", messageList);
+
+            // Build message threads
+            ArrayList threadsList = new ArrayList();
+            threadsList = ActionsUtil.buildThreads(folder, messages);
+
+            request.setAttribute("threadsList", threadsList);
+
         } finally {
             Util.releaseFolder(folder); // clean up
         }
