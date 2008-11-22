@@ -315,16 +315,14 @@ var messageThreads = new Object();
     final String id = messageID != null ? "id=\"" + messageID + "\"" : "";
 
 // XXX: This could be done better with taglibs
+String trClass = "";
 if (!message.isSet(Flags.Flag.SEEN)) {
-    %>
- <tr class="messageUnread" <%= id %> onMouseOver="st(this)" onMouseOut="ht(this)">
-    <%
+    trClass = "messageUnread";
 } else {
-    %>
- <tr class="messageSeen" <%= id %> onMouseOver="st(this)" onMouseOut="ht(this)">
-    <%
+    trClass = "messageSeen";
 }
 %>
+ <tr class="<%= trClass %>" <%= id %> onMouseOver="st(this)" onMouseOut="ht(this)">
   <td class="msgCheckbox">
    <c:choose>
     <c:when test="${! empty messageParams.uid}">
