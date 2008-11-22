@@ -50,7 +50,6 @@
     final PreferencesProvider pp = (PreferencesProvider)application.getAttribute(Constants.PREFERENCES_PROVIDER);
     final Properties prefs = pp.getPreferences(user, session);
     final boolean threadingEnabled = Boolean.valueOf(prefs.getProperty("folder.list.threading", "false")).booleanValue();
-    final boolean treeThreadingEnabled = true;
     final int junkThreshold = Integer.valueOf(prefs.getProperty("message.junk.threshold", "8")).intValue();
     final String junkPattern;
     if (junkThreshold > 0) {
@@ -208,7 +207,7 @@ function toggleThread(nodeId) {
         }
         if (threadVisible) {
             awesomeThreads[nodeId].threadVisible = false;
-            document.getElementById("expand"+nodeId).value = "+";
+            document.getElementById("expand"+nodeId).value = refs.threadsize;
         } else {
             awesomeThreads[nodeId].threadVisible = true;
             document.getElementById("expand"+nodeId).value = "-";
@@ -223,13 +222,9 @@ var awesomeThreads = new Object(); // MUCH BETTER THREADS
 
 <table class="folderMessageList" width="100%" cellpadding="3" cellspacing="0" border="0">
  <tr class="folderMessageListHeader">
-<%  if (treeThreadingEnabled) { %>
   <th>
-   <!-- unwritten. not sure how useful it is.
-   <input type="button" name="expandAllThreads" id="expandAllThreads" onclick="expandAll()" title="Expand All Threads" value="+"/>
-   -->
+   <!--column for message thread expand button-->
   </th>
-<% } %>
   <th>
    <input type="checkbox" name="checkAllBox" id="checkAllBox" onclick="toggleAll(this)" title="Check All Messages"/>
   </th>
@@ -377,13 +372,12 @@ if (!message.isSet(Flags.Flag.SEEN)) {
 }
 %>
  <tr class="<%= trClass %>" <%= id %> onMouseOver="st(this)" onMouseOut="ht(this)">
-<% if (treeThreadingEnabled) {
+<%
     final String expandId = messageID != null ? "id=\"expand" + messageID + "\"" : "";
 %>
   <td class="msgToggleThread">
     <input type="button" <%= expandId %> onclick="toggleThread(<%= messageID %>)" title="Toggle thread visibility" value="+"/>
   </td>
-<% } %>
   <td class="msgCheckbox">
    <c:choose>
     <c:when test="${! empty messageParams.uid}">
@@ -627,9 +621,20 @@ messageThreads["<%= messageID %>"] = msg;
          document.getElementById("expand"+"<%= messageID %>").style.visibility = "collapse";
 <%
      }
+
+     // if "thread" with only 1 message, remove button
      if (thread.size() == 1) {
 %>
          document.getElementById("expand"+"<%= messageID %>").style.visibility = "collapse";
+<%
+     }
+
+     //
+     if (messI == (thread.size()-1)) {
+%>
+         root = awesomeThreads["<%= threadID %>"];
+         root.threadsize = '<%= thread.size() %>';
+         document.getElementById("expand"+"<%= threadID %>").value = root.threadsize;
 <%
      }
 %>
