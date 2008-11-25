@@ -25,6 +25,8 @@ import edu.ufl.osg.webmail.Constants;
 import edu.ufl.osg.webmail.prefs.PreferencesProvider;
 import edu.ufl.osg.webmail.forms.ComposeForm;
 import edu.ufl.osg.webmail.util.Util;
+import edu.ufl.osg.webmail.data.AttachList;
+import edu.ufl.osg.webmail.data.AttachObj;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -40,7 +42,13 @@ import javax.mail.Message;
 import javax.mail.Folder;
 import javax.mail.Address;
 import javax.mail.Part;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.Flags;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Set up the view for the compose page.
@@ -72,10 +80,11 @@ public class ComposeAction extends Action {
         ActionsUtil.checkSession(request);
 
         final Long uid = (Long)PropertyUtils.getSimpleProperty(form, "uid");
-
         final HttpSession session = request.getSession();
         final ComposeForm compForm = (ComposeForm)form;
         final User user = Util.getUser(session);
+        final String composeKey = Util.generateComposeKey( session );
+        logger.info("compose key = " + composeKey);
 
         // If form has UID, we are editing a draft message
         if( uid != null ) {
@@ -107,11 +116,28 @@ public class ComposeAction extends Action {
                 compForm.setCc( ccStr );
                 compForm.setBcc( bccStr );
                 
-
-
-                compForm.setBody( (String)message.getContent() );
+                MimeMultipart content = null;
+                if( message.getContentType().toLowerCase().startsWith("text/plain") )
+                    compForm.setBody( (String)message.getContent() );
+                else {
+                    content = (MimeMultipart)message.getContent();
+                    compForm.setBody( (String)content.getBodyPart(0).getContent() );
+                }
                 compForm.setComposeKey( Util.generateComposeKey(session) );
 
+                // deal with attachments if any
+                if( content != null && content.getCount() > 1 ) {
+                    final Integer messageNumber = compForm.getMessageNumber();
+                    AttachList attachList = Util.getAttachList(composeKey, session);
+                    for( int i = 1; i < content.getCount(); ++i ) 
+                    {
+                        MimeBodyPart part = ((MimeBodyPart)content.getBodyPart( i ));
+                        AttachObj attachObj = new AttachObj( part, true );
+                        attachList.addAttachment( attachObj, attachObj.getObjData() );
+                        logger.info( "added " + part.getContentType() + " attachment to attachlist");
+                    }
+                }
+                
                 // delete message from draft folder
                 message.setFlag( Flags.Flag.DELETED, true );
                 folder.expunge();
@@ -135,5 +161,16 @@ public class ComposeAction extends Action {
 
         logger.debug("=== ComposeAction.execute() end ===");
         return mapping.findForward("success");
+    }
+
+    private static byte[] getBytes(Object obj) throws java.io.IOException{
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(obj);
+        oos.flush();
+        oos.close();
+        bos.close();
+        byte [] data = bos.toByteArray();
+        return data;
     }
 }

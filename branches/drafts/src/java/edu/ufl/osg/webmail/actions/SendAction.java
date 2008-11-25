@@ -287,7 +287,7 @@ public class SendAction extends Action {
         for (int i = 0; i < size; i++) {
             final MimeBodyPart attachBodyPart = (MimeBodyPart)bodyPartList.get(i);
             multipart.addBodyPart(attachBodyPart);
-            logger.debug("attached file: " + attachBodyPart.getFileName() + ", contentType: " + attachBodyPart.getContentType());
+            logger.info("attached file: " + attachBodyPart.getFileName() + ", contentType: " + attachBodyPart.getContentType());
         }
 
         return multipart;

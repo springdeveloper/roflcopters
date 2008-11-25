@@ -172,6 +172,7 @@ var preventSubmit = function (e) {
     final boolean attachExist = (attachList != null && attachList.size() > 0);
     if (attachExist) {
         pageContext.setAttribute("attachList", attachList);
+        System.out.println("attaching " + attachList + " to pageContext");
     }
 %>
 <table width="100%" cellpadding="2" cellspacing="0">
