@@ -27,6 +27,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import java.io.IOException;
 import java.util.StringTokenizer;
+import java.io.InputStream;
 
 /**
  * Basically a wrapper for MimeBodyPart.
@@ -47,6 +48,10 @@ public final class AttachObj implements java.io.Serializable {
     private String description;
     private int size;
     private boolean isForward = false;
+
+    // draft message-specific fields
+    private boolean isDraft = false;
+    private byte[] objData;
 
     // forwarded message-specific fields
     private String folderFullName;
@@ -87,6 +92,44 @@ public final class AttachObj implements java.io.Serializable {
             setSize(bodyPart.getSize());
         }
     }
+    
+    /**
+     * Creates a new instance of AttachObj. This constructor is used when 
+     * the bodypart is coming from a saved draft.
+     */
+    public AttachObj(final MimeBodyPart bodyPart, boolean draft) throws IOException, MessagingException {
+
+        // file name
+        setFileName(bodyPart.getFileName());
+
+        // content type
+        final String contentType = bodyPart.getContentType();
+        setContentType(contentType);
+
+        // disposition
+        setDisposition(bodyPart.getDisposition());
+
+        // description
+        setDescription(bodyPart.getDescription());
+
+        // size
+        if (bodyPart.getSize() < 0) {
+            // for some reason, JavaMail MimeBodyParts like to report
+            // themselves as 0 length. This gets the size straight from
+            // the input stream.
+            setSize(bodyPart.getInputStream().available());
+        } else {
+            setSize(bodyPart.getSize());
+        }
+        
+        setIsDraft( true );
+
+        // get binary data
+        InputStream in = bodyPart.getInputStream();
+        objData = new byte[ getSize() ];
+        in.read( objData );
+    }
+
 
     /**
      * Creates a new instance of AttachObj. This constructor is used
@@ -187,6 +230,18 @@ public final class AttachObj implements java.io.Serializable {
 
     public String toString() {
         return getFileName();
+    }
+
+    public void setIsDraft( boolean isDraft ) {
+        this.isDraft = isDraft;
+    }
+
+    public boolean getIsDraft() {
+        return isDraft;
+    }
+
+    public byte[] getObjData() {
+        return objData;
     }
 
     ////////////////////////////////////////////////////////////

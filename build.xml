@@ -20,7 +20,7 @@
         <!-- chris's 2 changes: -->
         <property name="gatormail.ldap.principal" value="gatormail" description="The LDAP principal"/>
         <property name="gatormail.ldap.creds" value="roflcopters" description="The LDAP password"/>
-        <property name="gatormail.attachment.path" value="" description="Local path to hold attachments until they are sent."/>
+        <property name="gatormail.attachment.path" value="/tmp" description="Local path to hold attachments until they are sent."/>
         <property name="VERSION" value="1.0.26 ALPHA"/>
 
         <!-- NOTE: For attachments to work, you MUST set the
