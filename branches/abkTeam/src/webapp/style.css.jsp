@@ -57,7 +57,17 @@ body {
 	height:57px;
 	z-index:1;
 }
-
+#nav{
+	position:fixed;
+	white-space: nowrap;
+	font-family: Arial;
+	top:110px;
+	left: 5px;
+	width:100%;
+	z-index:4;
+}
+a #nav {
+}
 .clearBottom {
 	font-size:1px;
 	height:1px;
@@ -317,6 +327,8 @@ a:visited {
 	margin-left:10px;
 	margin-top:10px;
 	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
 	min-height:500px;
 	right:20px; /*  This needs to be 20 less than the original width */
 	background-color:#FFFFFF;
