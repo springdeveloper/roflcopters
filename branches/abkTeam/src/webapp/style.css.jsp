@@ -68,6 +68,21 @@ body {
 }
 a #nav {
 }
+
+#headerImg{
+	position: fixed;
+	margin-left: 85%;
+	top:50;
+	z-index:4;
+}
+
+#headerName{
+	position: fixed;
+	margin-left: 85%;
+	top:85;
+	z-index:4;
+}
+
 .clearBottom {
 	font-size:1px;
 	height:1px;
@@ -172,6 +187,7 @@ a:visited {
 .header .loggedInAs {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
+	font-weight: bold;
     color: #CCCCCC;
 }
 

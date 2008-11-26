@@ -51,7 +51,7 @@ button.send=Send
 button.submit=Submit
 changeSubscription.result.subscribed.success=Folder subscribed.
 changeSubscription.result.unsubscribed.success=Folder unsubscribed.
-common.currentUser=<span class="username" title="{0}">{1}</span><br/><span class="loggedInAs">はログインしている</span>
+common.currentUser=<span class="username" title="{0}">{1}</span><span class="loggedInAs">はログインしている</span>
 compose.title=Compose
 compose.name=名前
 compose.type=File Type
@@ -198,11 +198,11 @@ folder.filter.seen=Read Messages
 folder.filter.replied=Replied Messages
 folder.filter.flaggedJunk=迷感を報告
 folder.filter.notFlaggedJunk=迷感を解除
-folder.label.inbox=Inbox
-folder.label.junk=コミメール
-folder.label.drafts=Drafts
-folder.label.sent=Sent
-folder.label.trash=Trash
+folder.label.inbox=受信トレイ
+folder.label.junk=迷惑メール
+folder.label.drafts=下書
+folder.label.sent=送信済みメール
+folder.label.trash=ゴミ箱
 folderManage.title=Manage Folders
 folderManage.table.folder=Folder
 folderManage.table.numMessages=Messages

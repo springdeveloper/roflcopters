@@ -51,7 +51,7 @@ button.send=Send
 button.submit=Submit
 changeSubscription.result.subscribed.success=Folder subscribed.
 changeSubscription.result.unsubscribed.success=Folder unsubscribed.
-common.currentUser=<span class="username" title="{0}">{1}</span><br/><span class="loggedInAs">はログインしている</span>
+common.currentUser=<span class="username" title="{0}">{1}</span><span class="loggedInAs">はログインしている</span>
 compose.title=Compose
 compose.name=名前
 compose.type=File Type
