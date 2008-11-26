@@ -47,10 +47,8 @@
 }
 
 #loginFooter{
-	position:absolute;
-	top:650px;
-	left:34%;
-	right:40%;
+	position:relative;
+
 	text-align:center;
 	font-size:9px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
