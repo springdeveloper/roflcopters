@@ -44,6 +44,7 @@ String loginFocus = "username";
 				</div>
 				
                 <div id="loginUIForm">
+				<html:errors property="<%= ActionErrors.GLOBAL_ERROR %>"/>
                 <!-- BEGIN LOGIN UI CONTENT -->
 					<table border="0" width="600" id="announcement">
 					    <tr>
