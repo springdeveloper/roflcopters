@@ -19,7 +19,6 @@
 <body>
 
 	<tiles:get name="header"/>
-   <tiles:get name="navBar"/>
 
    <div id="defaultSideBarUIContentBox"> <!-- THIS SHOULD BE THE NAME OF THE BOX.. all other names branch from this -->
    <!-- BEGIN CONTENT BOX DEFAULT CENTER UI -->
@@ -43,13 +42,14 @@
                  </div>
                  
                  <div id="ContentB"> <!-- WHERE THE SPACE INFO WILL GO -->
+				<p>
                  <% //TODO: Fix this.
 					try {
 					//java.lang.reflect.Method quotaMethod = com.sun.mail.imap.IMAPFolder.class.getMethod("getQuota", null);
 					java.lang.reflect.Method quotaMethod = request.getAttribute("folder").getClass().getMethod("getQuota", null);
 
 					%>
-							<hr align="center" width="90%">
+					
 							<tiles:get name="emptyTrash"/>
 							<tiles:get name="folderQuota"/>
 							<tiles:get name="emptyFolder"/>
@@ -58,10 +58,9 @@
 					// do nothing
 					}
 					%>
+					</p>
                  </div>
-                 <div id="ContentC">
-                 
-                 </div>
+   
       		<!-- DEFAULT FOLDER UI CONTENT STOP -->		
             <!-- BEGIN FOR IE -->
     		<div class="clear">&nbsp;</div> 
@@ -70,9 +69,9 @@
             <div class="right"></div> 
         </div>
 			<div class="defaultSideBarUIContentBoxBottom"> <!-- RENAME THIS TO REFLECT BOX -->
-        	<div class="bottomLeft"></div>
-        	<div class="bottom">&nbsp;</div>
-        	<div class="bottomRight"></div>
+				<div class="bottomLeft"></div>
+				<div class="bottom"></div>
+				<div class="bottomRight"></div>
 			</div>
     <!-- END CONTENT BOX LOGIN UI -->
     </div>
@@ -130,7 +129,7 @@
         </div>
         <div class="defaultCenterUIContentBoxBottom"> <!-- RENAME THIS TO REFLECT BOX -->
         	<div class="bottomLeft"></div>
-        	<div class="bottom">Test</div>
+        	<div class="bottom"></div>
         	<div class="bottomRight"></div>
         </div>
     <!-- END CONTENT BOX LOGIN UI -->
