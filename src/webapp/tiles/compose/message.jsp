@@ -180,8 +180,6 @@ var preventSubmit = function (e) {
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
   <td colspan="4" class="darkBlueRow">
     <table>
-     <tr>
-      <td class="darkBlueRow">
        <html:submit property="action" styleClass="button" accesskey="s">
         <bean:message key="button.send"/>
        </html:submit>
