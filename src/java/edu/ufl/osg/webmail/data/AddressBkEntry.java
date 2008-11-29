@@ -26,11 +26,12 @@
  package edu.ufl.osg.webmail.data;
  
  import java.lang.Comparable;
+ import java.io.Serializable;
  import javax.mail.internet.InternetAddress;
  import javax.mail.internet.AddressException;
  import java.io.UnsupportedEncodingException;
  
- public class AddressBkEntry implements Comparable{
+ public class AddressBkEntry implements Comparable, Serializable {
 	private InternetAddress email = new InternetAddress();
 	private String company;
 	private String position;
