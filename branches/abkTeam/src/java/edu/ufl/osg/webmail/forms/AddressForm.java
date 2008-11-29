@@ -44,6 +44,8 @@ public final class AddressForm extends ActionForm {
 	private String phoneCell;
 	private String address;
 	private String notes;
+	
+	private int index; // location of this address entry in in-mem list if already there
 
     /**
      * @param mapping The mapping used to select this instance
@@ -59,6 +61,7 @@ public final class AddressForm extends ActionForm {
 		setPhoneCell(null);
 		setAddress(null);
 		setNotes(null);
+		setIndex(-1);
 	}
 
     /**
@@ -142,6 +145,10 @@ public final class AddressForm extends ActionForm {
 		this.notes = notes;
 	}
 	
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
 	public String getCompany() {
 		return company;
 	}
@@ -168,6 +175,10 @@ public final class AddressForm extends ActionForm {
 	
 	public String getNotes() {
 		return notes;
+	}
+	
+	public int getIndex() {
+		return index;
 	}
 
 }

@@ -34,5 +34,7 @@ public interface AddressBkDAO {
 
     public void addEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
 
+    public void editEntry(String permId, String oldEmail, AddressBkEntry entry) throws AddressBkDAOException;
+    
     public void removeEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
 }

@@ -45,6 +45,10 @@ public class AddressBkDAO_Transient implements AddressBkDAO {
     public void addEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored
     }
+    
+    public void editEntry(String permId, String oldEmail, AddressBkEntry entry) throws AddressBkDAOException {
+    	// ignored
+    }
 
     public void removeEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored

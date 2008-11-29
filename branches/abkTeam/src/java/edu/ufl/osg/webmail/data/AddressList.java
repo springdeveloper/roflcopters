@@ -74,13 +74,36 @@ public final class AddressList implements List, java.io.Serializable {
         getAddressBkDAO().addEntry(permId, internetAddress);
         return add(internetAddress);
     }
-
+    
+    /**
+     * Writes updated contact info to DB without affecting in-mem list (assumed to already be updated)
+     * @param oldEmail email to identify contact in DB
+     * @param editedEntry data to update old data with
+     * @return true if successful, false otherwise
+     * @throws AddressBkDAOException
+     */
+    public boolean commitEditsForContact(final String oldEmail, final AddressBkEntry editedEntry) throws AddressBkDAOException {
+    	getAddressBkDAO().editEntry(permId, oldEmail, editedEntry);
+    	return true;
+    }
+    
     /**
      * Removes Email entry from both in-memory list and backend storage.
      */
     public boolean removeAddress(final AddressBkEntry internetAddress) throws AddressBkDAOException {
         getAddressBkDAO().removeEntry(permId, internetAddress);
-        return remove(internetAddress);
+        
+        // search through the in-mem contacts list to find entry with same main email as one
+        // given, when found delete entry
+        AddressBkEntry entryToRemove = null;
+        Iterator iterator = this.iterator();
+        while(iterator.hasNext()) {
+        	entryToRemove = (AddressBkEntry)iterator.next();
+        	if(entryToRemove.getAddress().equals(internetAddress.getAddress()))
+        		return remove(entryToRemove);
+        }
+        logger.error("Contact to remove not found in in-mem list");
+        throw new AddressBkDAOException("Contact to remove not found in in-mem list");
     }
 
     public String toString() {

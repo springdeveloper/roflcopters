@@ -229,6 +229,58 @@ public class AddressBkDAO_DB implements AddressBkDAO {
             throw new AddressBkDAOException(e.getMessage());
         }
     }
+    
+    public void editEntry(final String permId, final String oldEmail, final AddressBkEntry entry) throws AddressBkDAOException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            PreparedStatement ps = null;
+            try {
+                ps = con.prepareStatement("UPDATE abkPerson SET name=?, company=?, position=?, phoneHome=?, phoneWork=?, phoneCell=?, address=?, notes=? WHERE contactId=(SELECT contactId FROM abkEmail WHERE userId=? AND email=? LIMIT 1)");
+                ps.setString(1, entry.getPersonal() );
+				ps.setString(2, entry.getCompany() );
+				ps.setString(3, entry.getPosition() );
+				ps.setString(4, entry.getPhoneHome() );
+				ps.setString(5, entry.getPhoneWork() );
+			    ps.setString(6, entry.getPhoneCell() );
+				ps.setString(7, entry.getMailingAddress() );
+				ps.setString(8, entry.getNotes() );
+				ps.setString(9, permId);
+				ps.setString(10, oldEmail);
+                int count = ps.executeUpdate();
+                
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book edit failed for entry: " + entry.toString());
+                }
+					
+				ps = con.prepareStatement("UPDATE abkEmail set email=? WHERE userId=? AND email=?");
+				ps.setString(1, entry.getAddress());
+                ps.setString(2, permId);
+				ps.setString(3, oldEmail);
+				
+				count = ps.executeUpdate();
+			
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book edit failed for entry: " + entry.toString());
+                }
+
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+            //con.close();
+        } catch (Exception e) {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) {
+                logger.error(se.getMessage(), se);
+            }
+            throw new AddressBkDAOException(e.getMessage());
+        }
+    }
 
     public void removeEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         Connection con = null;
@@ -236,11 +288,24 @@ public class AddressBkDAO_DB implements AddressBkDAO {
             con = getConnection();
             PreparedStatement ps = null;
             try {
-                ps = con.prepareStatement("DELETE FROM abkPerson WHERE userId=? AND contactId = (SELECT contactId FROM abkEmail WHERE email = ?)");
+                ps = con.prepareStatement("DELETE FROM abkPerson WHERE userId=? AND contactId = (SELECT contactId FROM abkEmail WHERE userId=? AND email = ? LIMIT 1)");
+                ps.setString(1, permId);
+                ps.setString(2, permId);
+                ps.setString(3, entry.getAddress());
+
+                int count = ps.executeUpdate();
+                if (count == 0) {
+                    logger.error("address book delete failed. permId: " + permId + ", entry: " + entry.toString());
+                    throw new AddressBkDAOException("Address book delete failed for entry: " + entry.toString());
+                }
+                
+                // delete email entries where email and session id matches
+                ps = con.prepareStatement("DELETE FROM abkEmail WHERE userId=? AND email=?");
                 ps.setString(1, permId);
                 ps.setString(2, entry.getAddress());
 
-                final int count = ps.executeUpdate();
+                count = 0;
+                count = ps.executeUpdate();
                 if (count == 0) {
                     logger.error("address book delete failed. permId: " + permId + ", entry: " + entry.toString());
                     throw new AddressBkDAOException("Address book delete failed for entry: " + entry.toString());
