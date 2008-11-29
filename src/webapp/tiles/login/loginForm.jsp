@@ -40,7 +40,7 @@ String loginFocus = "username";
             <!-- DEFAULT FOLDER UI CONTENT START -->
 				
                 <div id="webmailTan">
-       	 			<html:img page="/webmail-tan.png" width="400" height="270" alt="Some Things Never Change..."/>                
+       	 			<html:img align="center" page="/webmail-tan.png" width="400" height="270" alt="Some Things Never Change..."/>                
 				</div>
 				
                 <div id="loginUIForm">

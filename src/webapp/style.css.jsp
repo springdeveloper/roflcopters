@@ -116,6 +116,7 @@ a #nav {
 	width:580px;
 	margin-left:10px;
 	background-color:#FFFFFF;
+	text-align:center;
 }
 
 #webmailTan{
@@ -142,7 +143,7 @@ a #nav {
 
 #loginFooter{
 	position:absolute;
-	top:650px;
+	top:750px;
 	left:34%;
 	right:40%;
 	text-align:center;
