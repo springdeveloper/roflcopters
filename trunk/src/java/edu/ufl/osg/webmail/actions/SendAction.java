@@ -52,6 +52,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -110,6 +111,7 @@ public class SendAction extends Action {
         final String subject = compForm.getSubject();
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
+        final String bodyplain = body.replaceAll("\\<.*?\\>", "");
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, httpSession);
@@ -127,16 +129,13 @@ public class SendAction extends Action {
          * 2. hasn't already displayed attachment reminder
          * 3. no files attached
          * 4. string "attach" exists in body or subject
-         *
-         * FIXME: breaks for forwards, because the forwarded message is
-         * an attachment.
          */
         final String remindPref = prefs.getProperty("compose.attachmentReminder");
         if ((remindPref != null)
             && remindPref.equals("true")
             && (!compForm.isAttachRemindShown())
             && (attachList.size() == 0)
-            && (subjMentionsAttach(subject) || bodyMentionsAttach(body))) {
+            && ((subject.indexOf("attach") != -1) || (body.indexOf("attach") != -1))) {
             errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.attachment.reminder"));
             saveErrors(request, errors);
             compForm.setAttachment(null);
@@ -172,17 +171,19 @@ public class SendAction extends Action {
         }
 
         // create message content
+        /* Patrick here.  Did away with single part messaging entirely.  Attachment handling is accomplished in the createMultipart method
         if (attachList.size() == 0) {
             logger.debug("no attachments");
-            message.setContent(body, "text/plain; format=flowed");
+            message.setContent(body, "text/html; format=flowed");
             //message.addHeader("Content-Type", "text/plain; format=flowed");
         } else {
             logger.debug("there are attachments: " + attachList);
-            final Multipart multipart = createMultipart(body, attachList, httpSession);
+                     */
+            final Multipart multipart = createMultipart(bodyplain, body, attachList, httpSession);
             // put all the parts into message
             message.setContent(multipart);
             message.saveChanges();
-        }
+   //     }
 
         // do the sending
         Transport.send(message);
@@ -230,16 +231,27 @@ public class SendAction extends Action {
         return addresses;
     }
 
-    // returns a MIME multipart - this is called when the email has attachments
-    private static Multipart createMultipart(final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
-        final Multipart multipart = new MimeMultipart();
+    // returns a MIME multipart
+    private static Multipart createMultipart(final String bodyplain, final String body, final AttachList attachList, final HttpSession session) throws MessagingException, AttachDAOException {
+    
+        final Multipart multipart = new MimeMultipart("mixed");
+    
+        // create the alternative subpart
+        final Multipart alternativeMultipart = new MimeMultipart("alternative");
+      
+        // create the plain message part
+        final BodyPart messagePlainBodyPart = new MimeBodyPart();
+        messagePlainBodyPart.setText(bodyplain);
+        messagePlainBodyPart.setHeader("Content-Type", "text/plain; charset=UTF-8");
+        alternativeMultipart.addBodyPart(messagePlainBodyPart);
 
-        // create the message part
-        final BodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText(body);
-        multipart.addBodyPart(messageBodyPart);
+        
+        // start filling the super multipart message
+        final BodyPart messageAlternativeSubBodyPart = new MimeBodyPart();
+        messageAlternativeSubBodyPart.setContent(alternativeMultipart);
+        multipart.addBodyPart(messageAlternativeSubBodyPart);
 
-        // attach any forwarded message
+        // add alternative subparts for each attachment (if there are any)
         for (int i = 0; i < attachList.size(); i++) {
             final AttachObj attachObj = (AttachObj)attachList.get(i);
             if (attachObj.getIsForward()) {
@@ -431,57 +443,6 @@ public class SendAction extends Action {
         for (depth = 0; depth < length && line.charAt(depth) == '>'; depth++) ;
 
         return depth;
-    }
-
-    /**
-     * Checks the body of the message for mention of attachments.
-     *
-     * @param body                a string
-     * @return                    boolean: if attachments mentioned
-     */
-    private static boolean bodyMentionsAttach(final String body) {
-        /* Either "attach" at beginning of a line, or in middle of a
-         * line that doesn't start with ">" (so it doesn't match
-         * quoted text). Need 2 for each case to take care of 1st line
-         * edge case.
-         *
-         * The (?i)(?s), \r\n horribleness is because the regex needs
-         * to match the *entire* string, not just a substring, and
-         * multiline mode (?m) doesn't appear to help.
-         */
-        boolean firstbegin = body.matches("(?i)(?s)^attach.*");
-        boolean otherbegin = body.matches("(?i)(?s).*?\r\nattach.*");
-        boolean firstmid = body.matches("(?i)(?s)^[^>][.[^\r\n]]*attach.*");
-        boolean othermid = body.matches("(?i)(?s).*?\r\n[^>][.[^\r\n]]*attach.*");
-
-        logger.debug("ATTACH body check.");
-        logger.debug("very beginning: " + firstbegin);
-        logger.debug("beginning ofline in middle: " + otherbegin);
-        logger.debug("middle ofline on 1st line: " + firstmid);
-        logger.debug("middle ofline in middle: " + othermid);
-
-        return (firstbegin || otherbegin || firstmid || othermid);
-    }
-
-    /**
-     * Checks the subject line for mention of attachments.
-     *
-     * @param subj                a string
-     * @return                    boolean: if attachments mentioned
-     */
-    private static boolean subjMentionsAttach(final String subj) {
-        /* subject has "attach" somewhere and does not start with
-         * "Re: " or "Fw: " or "Fwd: " (doesn't match replies or
-         * forwards). Not perfect.
-         */
-        final boolean b = subj.matches("(?i).*attach.*");
-        final boolean bre = subj.matches("(?i)^Re: .*");
-        final boolean bfwd = subj.matches("(?i)^Fw[d]: .*");
-        logger.debug("ATTACH subj check.");
-        logger.debug("in subj: " + b);
-        logger.debug("no Re: " + !bre);
-        logger.debug("no Fw[d]: " + !bfwd);
-        return (b && !bre && !bfwd);
     }
 
 }
