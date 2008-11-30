@@ -115,14 +115,19 @@ public class ComposeAction extends Action {
                 compForm.setTo( toStr );
                 compForm.setCc( ccStr );
                 compForm.setBcc( bccStr );
-                
-                MimeMultipart content = null;
-                if( message.getContentType().toLowerCase().startsWith("text/plain") )
-                    compForm.setBody( (String)message.getContent() );
-                else {
-                    content = (MimeMultipart)message.getContent();
-                    compForm.setBody( (String)content.getBodyPart(0).getContent() );
-                }
+
+                // messages have the following topology
+                //              multipart (content)
+                //                  |
+                //      -----------------------------
+                //      |                           |
+                //  alternativeMultipart         attachments (if any)
+                //  |                  |
+                // text               html
+                MimeMultipart content = (MimeMultipart)message.getContent();
+                MimeMultipart alternative = (MimeMultipart)content.getBodyPart(0).getContent();
+                // html message part
+                compForm.setBody( (String)alternative.getBodyPart(1).getContent() );
                 compForm.setComposeKey( Util.generateComposeKey(session) );
 
                 // deal with attachments if any
@@ -150,7 +155,7 @@ public class ComposeAction extends Action {
         else {
             // add signature to blank message body
             final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
-            compForm.setBody("\r\n\r\n\r\n" + pp.getPreferences(user, session).getProperty("compose.signature"));
+            compForm.setBody("<br /><br />" + pp.getPreferences(user, session).getProperty("compose.signature"));
 
             // generate unique compose key for this view
             compForm.setComposeKey(Util.generateComposeKey(session));
@@ -163,14 +168,4 @@ public class ComposeAction extends Action {
         return mapping.findForward("success");
     }
 
-    private static byte[] getBytes(Object obj) throws java.io.IOException{
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(obj);
-        oos.flush();
-        oos.close();
-        bos.close();
-        byte [] data = bos.toByteArray();
-        return data;
-    }
 }

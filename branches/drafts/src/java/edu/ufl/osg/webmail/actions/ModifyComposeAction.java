@@ -236,7 +236,6 @@ public class ModifyComposeAction extends LookupDispatchAction {
         // retrieve attachment list for this user
         final HttpSession session = request.getSession();
         final AttachList attachList = Util.getAttachList(composeKey, session);
-        map.put("button.saveDraft", "saveDraft");
         // check that the new upload doesn't have a duplicate name
         if (attachList.containsFileName(attachment.getFileName())) {
             logger.warn("duplicate attachment name: " + attachment.getFileName());

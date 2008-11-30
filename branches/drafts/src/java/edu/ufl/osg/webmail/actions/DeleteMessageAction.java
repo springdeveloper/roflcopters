@@ -166,7 +166,7 @@ public class DeleteMessageAction extends FolderAction {
             if (!deleteForever && (trashFolder != null // if we are in the trash folder, don't bother
                     && !Constants.getTrashFolderFullname(session).equals(folder.getFullName()))) {
                 // throw it in the trash
-                logger.debug("copying message #" + message.getMessageNumber() + " to Trash");
+                logger.debug("copying message #" + message.getMessageNumber() + " to Trash");                
                 final List unfinishedList = ActionsUtil.copyMessages(new Message[]{message}, folder, trashFolder, errors);
                 ActionsUtil.flushMailStoreGroupCache(request.getSession());
                 if (unfinishedList.size() > 0) {
