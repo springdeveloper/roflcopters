@@ -1,6 +1,6 @@
 /*
  * This file is part of GatorMail, a servlet based webmail.
- * Copyright (C) 2002-2004 William A. McArthur, Jr.
+ * Copyright (C) 2002, 2003 William A. McArthur, Jr.
  * Copyright (C) 2003 The Open Systems Group / University of Florida
  *
  * GatorMail is free software; you can redistribute it and/or modify
@@ -21,31 +21,29 @@
 package edu.ufl.osg.webmail.actions;
 
 import edu.ufl.osg.webmail.Constants;
-import edu.ufl.osg.webmail.data.AddressList;
+import edu.ufl.osg.webmail.beans.ResultBean;
 import edu.ufl.osg.webmail.data.MailingList;
-import edu.ufl.osg.webmail.data.ConfigDAO;
-import edu.ufl.osg.webmail.data.DAOFactory;
+import edu.ufl.osg.webmail.forms.MailingForm;
 import edu.ufl.osg.webmail.util.Util;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import edu.ufl.osg.webmail.data.MailingEntry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Saves a list of addresses into a user's address book.
+ * Saves an address entry into user's address book.
  *
  * @author drakee
- * @author sandymac
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
-public class AddressBkAction extends Action {
-    private static final Logger logger = Logger.getLogger(AddressBkAction.class.getName());
+public class SaveMailingAction extends Action {
+    private static final Logger logger = Logger.getLogger(SaveAddressAction.class.getName());
 
     /**
      * Saves an addressbook entry.
@@ -60,23 +58,30 @@ public class AddressBkAction extends Action {
      *                                logic throws an exception
      */
     public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        logger.debug("=== AddressBkAction.execute() begin ===");
+        logger.debug("=== SaveMailingAction.execute() begin ===");
         ActionsUtil.checkSession(request);
 
         final HttpSession session = request.getSession();
-
-        // check that there won't be too many entries in the addressbook
-        final ConfigDAO configDAO = DAOFactory.getInstance().getConfigDAO();
-        final String maxsizeStr = configDAO.getProperty("maxsizeAddressbook");
-        final int maxsize = Integer.parseInt(maxsizeStr);
-        request.setAttribute(Constants.ADDRESSBK_LIMIT, String.valueOf(maxsize));
-
-        final AddressList addressList = Util.getAddressList(session);
         final MailingList mailingList = Util.getMailingList(session);
-        final int size = addressList.size();
-        request.setAttribute(Constants.ADDRESSBK_USAGE, String.valueOf(size));
 
-        logger.debug("=== AddressBkAction.execute() end ===");
+        // go ahead and add the entry
+        final MailingForm addressForm = (MailingForm)form;
+		
+        String name = addressForm.getName();
+        name = name != null ? name.trim() : null;
+		
+		
+        final MailingEntry mailing = new MailingEntry(name);
+
+        // add entry to both in-memory list and backend storage
+        mailingList.addMailing(mailing);
+        logger.debug("saved to list of mailing lists entry: " + mailing);
+
+        // set success message for the upcoming view
+        final ResultBean result = new ResultBean(Util.getFromBundle("saveMailing.result.success"));
+        request.setAttribute(Constants.RESULT, result);
+
+        logger.debug("=== SaveMailingAction.execute() end ===");
         return mapping.findForward("success");
     }
 }

@@ -41,6 +41,15 @@ public class AddressBkDAO_Transient implements AddressBkDAO {
         }
         return list;
     }
+    
+    public MailingList getMailingList(final String permId) throws AddressBkDAOException {
+        MailingList list = (MailingList)books.get(permId);
+        if (list == null) {
+            list = new MailingList(permId);
+            books.put(permId, list);
+        }
+        return list;
+    }
 
     public void addEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored
@@ -52,5 +61,31 @@ public class AddressBkDAO_Transient implements AddressBkDAO {
 
     public void removeEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         // ignored
+    }
+    
+    public int addMailing(String permId, MailingEntry mailing) throws AddressBkDAOException {
+    	//ignored
+    	return -1;
+    }
+
+    public void editMailingName(int groupId, String newName) throws AddressBkDAOException {
+    	//ignored
+    }
+    
+    public void removeMailing(int groupId) throws AddressBkDAOException {
+    	//ignored
+    }
+    
+    public void addMailingContact(int groupId, int contactId) throws AddressBkDAOException {
+    	//ignored
+    }
+    
+    public int addMailingContact(int groupId, String email) throws AddressBkDAOException {
+    	return -1;
+    	//ignored
+    }
+    
+    public void removeMailingContact(int groupId, int contactId) throws AddressBkDAOException {
+    	//ignored
     }
 }

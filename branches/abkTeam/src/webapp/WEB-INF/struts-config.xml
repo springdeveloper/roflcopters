@@ -28,6 +28,8 @@
         <form-bean name="folderForm" type="edu.ufl.osg.webmail.forms.FolderForm"/>
         <form-bean name="folderActionForm" type="edu.ufl.osg.webmail.forms.FolderActionForm"/>
         <form-bean name="loginForm" type="edu.ufl.osg.webmail.forms.LoginForm"/>
+        <form-bean name="mailingForm" type="edu.ufl.osg.webmail.forms.MailingForm"/>
+        <form-bean name="mailingContactsForm" type="edu.ufl.osg.webmail.forms.MailingContactsForm"/>
         <form-bean name="messageForm" type="edu.ufl.osg.webmail.forms.MessageForm"/>
         <form-bean name="modifyFolderForm" type="edu.ufl.osg.webmail.forms.ModifyFolderForm"/>
         <form-bean name="moveCopyForm" type="edu.ufl.osg.webmail.forms.MoveCopyForm"/>
@@ -61,6 +63,7 @@
     <global-forwards>
         <forward name="about" path="/about.do"/>
         <forward name="addAddress" path="/addAddress.do"/>
+        <forward name="addMailing" path="/addMailing.do"/>
         <forward name="addressbook" path="/addressbook.do"/>
         <forward name="attachment" path="/attachment.do" redirect="true"/>
         <forward name="changeSubscribed" path="/changeSubscribed.do"/>
@@ -114,6 +117,8 @@
         <forward name="reply" path="/reply.do"/>
         <forward name="saveAddress" path="/saveAddress.do"/>
         <forward name="saveEditedAddress" path="/saveEditedAddress.do"/>
+        <forward name="saveMailing" path="/saveMailing.do"/>
+        <forward name="saveMailingContacts" path="/saveMailingContacts.do"/>
         <forward name="saveAddresses" path="/saveAddresses.do"/>
         <forward name="selectAddresses" path="/selectAddresses.do"/>
         <forward name="send" path="/send.do"/>
@@ -260,6 +265,10 @@
         <action path="/addAddress" type="edu.ufl.osg.webmail.actions.CheckSessionAction" validate="false">
             <forward name="success" path="/addAddress.jsp"/>
         </action>
+        
+        <action path="/addMailing" type="edu.ufl.osg.webmail.actions.CheckSessionAction" validate="false">
+            <forward name="success" path="/addMailing.jsp"/>
+        </action>
 
         <action path="/saveAddress" name="addressForm" scope="request" input="addAddress" type="edu.ufl.osg.webmail.actions.SaveAddressAction">
             <forward name="success" path="/addressbook.do"/>
@@ -269,6 +278,16 @@
         <action path="/saveEditedAddress" name="addressForm" scope="request" input="editAddress" type="edu.ufl.osg.webmail.actions.SaveEditedAddressAction">
             <forward name="success" path="/addressbook.do"/>
             <forward name="fail" path="/editAddress.do"/>
+        </action>
+        
+        <action path="/saveMailing" name="mailingForm" scope="request" input="addMailing" type="edu.ufl.osg.webmail.actions.SaveMailingAction">
+            <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/addMailing.do"/>
+        </action>
+        
+        <action path="/saveMailingContacts" name="mailingContactsForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.SaveMailingContactsAction">
+            <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/addMailing.do"/>
         </action>
 
         <action path="/deleteAddress" name="addressForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.DeleteAddressAction" validate="false">
