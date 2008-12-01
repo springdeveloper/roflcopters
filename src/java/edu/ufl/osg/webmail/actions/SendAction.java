@@ -112,6 +112,8 @@ public class SendAction extends Action {
         //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
         final String bodyplain = body.replaceAll("\\<.*?\\>", "");
+        final String replyMessageID = compForm.getReplyMessageID();
+        final String replyReferences = compForm.getReplyReferences();
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, httpSession);
@@ -161,6 +163,24 @@ public class SendAction extends Action {
         message.setSentDate(new Date());
         message.setHeader("X-Mailer", "ROFLified GatorMail WebMail (http://GatorMail.sf.net/)");
         message.setHeader("X-Originating-IP", request.getRemoteHost() + " [" + request.getRemoteAddr() + "]");
+
+        logger.debug("reply's MessageID: " + replyMessageID);
+        logger.debug("  equal to empty?: " + replyMessageID.trim().equals(""));
+        logger.debug("reply's References: " + replyReferences);
+        logger.debug("   equal to empty?: " + replyReferences.trim().equals(""));
+        if ((replyMessageID != null) && !replyMessageID.trim().equals("")) {
+            // set parent's Message-ID to In-Reply-To
+            message.setHeader("In-Reply-To", replyMessageID);
+            if ((replyReferences != null)
+                && !replyReferences.trim().equals("")) {
+                // set catenation of replyReferences, replyMessageID
+                // to References
+                message.setHeader("References", replyReferences +
+                                  " " + replyMessageID);
+            } else { // first reply, just set to parent's Message-ID
+                message.setHeader("References", replyMessageID);
+            }
+        }
 
         final String replyTo = prefs.getProperty("compose.replyTo");
         if (replyTo != null) {

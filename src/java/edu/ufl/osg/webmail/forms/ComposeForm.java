@@ -63,6 +63,12 @@ public final class ComposeForm extends MessageForm {
     /** Has the attachment reminder already been displayed? */
     private boolean attachRemindShown = false;
 
+    /** Holds Message-ID of message being replied to */
+    private String replyMessageID;
+
+    /** Holds References to put in new message */
+    private String replyReferences;
+
     /**
      * Resets the <code>FolderForm</code> and then resets TODO???.
      *
@@ -270,4 +276,41 @@ public final class ComposeForm extends MessageForm {
     public void setAttachRemindShown(final boolean attachRemindShown) {
         this.attachRemindShown = attachRemindShown;
     }
+
+    /**
+     * Getter for property replyMessageID.
+     *
+     * @return Value of property replyMessageID.
+     */
+    public String getReplyMessageID() {
+        return this.replyMessageID;
+    }
+
+    /**
+     * Setter for property replyMessageID.
+     *
+     * @param body New value of property replyMessageID.
+     */
+    public void setReplyMessageID(final String replyMessageID) {
+        this.replyMessageID = replyMessageID;
+    }
+
+    /**
+     * Getter for property replyReferences.
+     *
+     * @return Value of property replyReferences.
+     */
+    public String getReplyReferences() {
+        return this.replyReferences;
+    }
+
+    /**
+     * Setter for property replyReferences.
+     *
+     * @param body New value of property replyReferences.
+     */
+    public void setReplyReferences(final String replyReferences) {
+        this.replyReferences = replyReferences;
+    }
+
 }
