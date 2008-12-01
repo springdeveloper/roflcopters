@@ -76,6 +76,7 @@
         <forward name="deleteAttachment" path="/deleteAttachment.do"/>
         <forward name="deleteAddress" path="/deleteAddress.do"/>
         <forward name="deleteFolder" path="/deleteFolder.do"/>
+        <forward name="editAddress" path="/editAddress.do"/>
         <forward name="folderManage" path="/folderManage.do"/>
         <forward name="folderManageModify" path="/folderManageModify.do"/>
         <forward name="errorBasic" path="/errorBasic.do"/>
@@ -112,6 +113,7 @@
         <forward name="rawMessage" path="/rawMessage.do"/>
         <forward name="reply" path="/reply.do"/>
         <forward name="saveAddress" path="/saveAddress.do"/>
+        <forward name="saveEditedAddress" path="/saveEditedAddress.do"/>
         <forward name="saveAddresses" path="/saveAddresses.do"/>
         <forward name="selectAddresses" path="/selectAddresses.do"/>
         <forward name="send" path="/send.do"/>
@@ -263,9 +265,19 @@
             <forward name="success" path="/addressbook.do"/>
             <forward name="fail" path="/addAddress.do"/>
         </action>
+        
+        <action path="/saveEditedAddress" name="addressForm" scope="request" input="editAddress" type="edu.ufl.osg.webmail.actions.SaveEditedAddressAction">
+            <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/editAddress.do"/>
+        </action>
 
         <action path="/deleteAddress" name="addressForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.DeleteAddressAction" validate="false">
             <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/addressbook.do"/>
+        </action>
+        
+        <action path="/editAddress" name="addressForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.EditAddressAction" validate="false">
+            <forward name="success" path="/editAddress.jsp"/>
             <forward name="fail" path="/addressbook.do"/>
         </action>
 
@@ -349,7 +361,7 @@
 
 
     <!-- ================================ Message Resources Definitions -->
-    <message-resources parameter="Messages"/>
+    <message-resources parameter="lang.Messages"/>
 
 
     <!-- ======================================= Plug Ins Configuration -->

@@ -7,8 +7,7 @@
                                         edu.ufl.osg.webmail.Constants,
                                         edu.ufl.osg.webmail.User,
                                         java.util.List,
-                                        java.util.Iterator,
-                                        java.text.DecimalFormat"%>
+                                        java.util.Iterator"%>
 <%@ page import="com.opensymphony.oscache.web.ServletCacheAdministrator"%>
 <%@ page import="com.opensymphony.oscache.base.Cache"%>
 <%@ page import="com.opensymphony.oscache.base.NeedsRefreshException"%>
@@ -70,7 +69,6 @@
     }
     pageContext.setAttribute("quotaRootName", quotaRootName);
 %>
-
  <c:forEach items="${quotaBean.resources}" var="resource">
       <div class="folderQuotaResource">
         <div class="folderQuotaResourceTitle" title="<c:out value="${quotaBean.quotaRoot}"/>"><c:out value="${quotaRootName}"/></div>
@@ -79,13 +77,7 @@
           <div class="folderQuotaResourceFree" style="width:<c:out value="${resource.percentFree}"/>%;" title="<c:out value="${resource.name}"/> <c:out value="${resource.percentFree}"/>% free"></div>
         </div>
         <div class="folderQuotaMessage">
-<%
-    final DecimalFormat df = new DecimalFormat("0.00");
-    final QuotaBean.ResourceBean rb = (QuotaBean.ResourceBean)pageContext.getAttribute("resource");
-    final String usedMB = df.format((rb.getUsage())/1024F);
-    final String limitMB = df.format((rb.getLimit())/1024F);
-%>
-         <bean:message key="folder.quota.message" arg0="<%= usedMB %>" arg1="<%= limitMB %>"/>
+         <bean:message key="folder.quota.message" arg0='<%= Long.toString(((QuotaBean.ResourceBean)pageContext.getAttribute("resource")).getUsage()) %>' arg1='<%= Long.toString(((QuotaBean.ResourceBean)pageContext.getAttribute("resource")).getLimit()) %>'/> 
         </div>
       </div>
 
@@ -95,4 +87,3 @@
 
     </div>
   </div>
-</div>

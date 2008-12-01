@@ -1,7 +1,8 @@
 <%@page contentType="text/html" import="edu.ufl.osg.webmail.Constants,
                                         java.util.HashMap,
                                         java.util.Map,
-                                        javax.mail.internet.InternetAddress"%>
+                                        edu.ufl.osg.webmail.data.AddressBkEntry,
+                                        edu.ufl.osg.webmail.data.AddressList"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="/tags/struts-html" prefix="html"%>
 <%@taglib uri="/tags/struts-bean" prefix="bean"%>
@@ -28,13 +29,20 @@
     pageContext.setAttribute("composeParams", composeParams);
     Map deleteParams = new HashMap();
     pageContext.setAttribute("deleteParams", deleteParams);
+    Map editParams = new HashMap();
+    pageContext.setAttribute("editParams", editParams);
+    
+    int indexCount = 0; // counter for upcoming loop 
 %>
   <c:forEach items="${addressList}" var="internetAddress" varStatus="index">
    <%
-     InternetAddress internetAddress = (InternetAddress)pageContext.getAttribute("internetAddress");
+     AddressBkEntry internetAddress = (AddressBkEntry)pageContext.getAttribute("internetAddress");
+     AddressList addressList = (AddressList)pageContext.getAttribute("addressList");
      composeParams.put("to", internetAddress.toString());
      deleteParams.put("email", internetAddress.getAddress());
      deleteParams.put("name", internetAddress.getPersonal());
+     editParams.put("index", indexCount++); // get location of contact in in-memory list
+     
    %>
     <c:choose>
      <c:when test="${index.index % 2 == 0}">
@@ -44,12 +52,12 @@
       <tr class="altrow">
      </c:otherwise>
     </c:choose>
-     <td><bean:write name="internetAddress" property="personal"/></td>
      <td>
-	 <html:link forward="compose" name="composeParams" scope="page">
-	   <bean:write name="internetAddress" property="address"/>
-	 </html:link>
+     	<html:link forward="editAddress" name="editParams" scope="page">
+     		<bean:write name="internetAddress" property="personal"/>
+     	</html:link>
      </td>
+     <td><bean:write name="internetAddress" property="address"/></td>
      <td>
 	 <html:link forward="deleteAddress" name="deleteParams" scope="page">
 	   <bean:message key="addressbook.delete"/>

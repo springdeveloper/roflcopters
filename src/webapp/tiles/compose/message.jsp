@@ -33,7 +33,6 @@
 <script type="text/javascript" src="yui/autocomplete/autocomplete-min.js"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
-
     function populateAddress(field) {
         var contacts = document.composeForm.contacts;
         var length = contacts.length;
@@ -141,7 +140,6 @@
 %>
 <html:form method="post" action="modifyCompose" enctype="multipart/form-data" focus="to">
 <html:hidden property="composeKey"/>
-<html:hidden property="attachRemindShown"/>
 <style type="text/css">
     #toAutoComplete, #ccAutoComplete, #bccAutoComplete {position:relative;width:100%;height:2em;}/* set width of widget here*/
     #toAutoComplete {z-index:9000} /* for IE z-index of absolute divs inside relative divs issue */
@@ -167,14 +165,6 @@ var preventSubmit = function (e) {
 }
 //-->
 </script>
-<bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
-<%
-    final List attachList = Util.getAttachList(composeKey, session);
-    final boolean attachExist = (attachList != null && attachList.size() > 0);
-    if (attachExist) {
-        pageContext.setAttribute("attachList", attachList);
-    }
-%>
 <table width="100%" cellpadding="2" cellspacing="0">
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
@@ -214,9 +204,15 @@ var preventSubmit = function (e) {
         </tr>
         <tr>
           <td align="center">
-            <input type="button" class="button" value="To" onclick="populateAddress(this.form.to)" accesskey="t">
-            <input type="button" class="button" value="CC" onclick="populateAddress(this.form.cc)" accesskey="c">
-            <input type="button" class="button" value="BCC" onclick="populateAddress(this.form.bcc)" accesskey="b">
+			<html:button property="addToTo" styleClass="button" onclick="populateAddress(this.form.to)" accesskey="t">
+				<bean:message key="message.to"/>
+			</html:button>
+			<html:button property="addToCC" styleClass="button" onclick="populateAddress(this.form.cc)" accesskey="c">
+				<bean:message key="message.cc"/>
+			</html:button>
+			<html:button property="addToBCC" styleClass="button" onclick="populateAddress(this.form.bcc)" accesskey="b">
+				<bean:message key="message.bcc"/>
+			</html:button>
           </td>
         </tr>
         <tr>
@@ -278,21 +274,19 @@ var preventSubmit = function (e) {
   <tr class="lightBlueRow">
     <td width="15%" align="right" class="composeHeaderTitle"><bean:message key="compose.attachment.upload"/>:</td>
     <td colspan="3">
-       <html:file property="attachment" tabindex = "50" accesskey="f"/>
-       <html:submit property="action" styleClass="button" tabindex = "60">
-       <% if (attachExist) { %>
-         <bean:message key="button.attachment.upload.more"/>
-       <% } else { %>
-         <bean:message key="button.attachment.upload"/>
-       <% } %>
-       </html:submit>
+       <html:file property="attachment" accesskey="f"/>
+       <html:submit property="action" styleClass="button"><bean:message key="button.attachment.upload"/></html:submit>
     </td>
   </tr>
  <!-- show attachments -->
+ <bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
   <tr class="lightBlueRow">
    <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
    <td colspan="3">
-<% if (attachExist) {
+<%
+  final List attachList = Util.getAttachList(composeKey, session);
+  if (attachList != null && attachList.size() > 0) {
+     pageContext.setAttribute("attachList", attachList);
 %>
     <table width="575" class="messageHeader" cellpadding="3">
       <tr class="darkBlueRow">
@@ -332,7 +326,7 @@ var preventSubmit = function (e) {
 -->
     <table>
      <tr>
-      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" tabindex = "70" accesskey="c"/></td>
+      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" accesskey="c"/></td>
       <td><label for="copyToSent"><bean:message key="compose.copyToSent"/></label></td>
      </tr>
     </table>
@@ -341,30 +335,9 @@ var preventSubmit = function (e) {
 
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
-  <td colspan="3">  
-  <!--
-	
-	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
-   // Patrick and Evan
-   
-  -->
-  
-   <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
-	<script language="JavaScript" type="text/javascript">
-
-	<!--
-	
-	var oFCKeditor = new FCKeditor( 'body' ) ;
-	oFCKeditor.BasePath	= "fckeditor/";
-	oFCKeditor.Height	= 300 ;
-   
-   // FIXME the Value should be the empty if the page is new or the contents of
-   // the message previously if the page is reloaded.
-	oFCKeditor.Value	= '' ;
-   
-	oFCKeditor.Create() ;
-	//-->
-	</script>
+  <td colspan="3">
+    <html:textarea property="body"
+          cols="<%= String.valueOf(Constants.COMPOSE_BODY_WIDTH) %>" rows="20" style="width : 99%" tabindex="50"/>
   </td>
  </tr>
  <tr class="lightBlueRow">
@@ -373,7 +346,7 @@ var preventSubmit = function (e) {
     <table>
      <tr>
       <td class="darkBlueRow">
-       <html:submit property="action" tabindex = "90" styleClass="button">
+       <html:submit property="action" styleClass="button">
         <bean:message key="button.send"/>
        </html:submit>
       </td>
