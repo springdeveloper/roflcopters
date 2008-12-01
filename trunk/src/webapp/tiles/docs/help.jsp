@@ -355,7 +355,93 @@
   </tr>
   <tr><td>&nbsp;</td></tr>
   
-</table>
+  <%-- shortcuts entry --%>
+  <tr>
+    <td>
+	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
+	  <tr class="subheader">
+	    <td>
+		<a name="open">Keyboard Shortcuts</a>
+	    </td>
+	  </tr>
+	  <tr><td>&nbsp;</td></tr>
+	    </table>
+    </td>
+  </tr>
+	    
+  <%-- Edit by Andy --%> 
+	     
+	    <font face="Arial, Helvetica, sans-serif" size="-1"><p>
+	    <table width="90%" border="1" cellspacing="0" cellpadding="2">
+	  <tr bgcolor="#c3d9ff">
+		<th valign=middle align=center><font size=-1>Shortcut Key</font></th>
+		<th valign=middle align=center><font size=-1>Definition</font></th>
+		<th valign=middle align=center><font size=-1>Action</font></th>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + c</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Compose</font></td>
+		<td valign=top><font size=-1>Allows you to compose
+		  a new message.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + h</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Home Page</font></td>
+		<td valign=top><font size=-1>Returns back to the main page.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + p</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Preferences</font></td>
+		<td valign=top><font size=-1>Allows you to access your preferences.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + a</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Address Book</font></td>
+		<td valign=top><font size=-1>Allows you to access your address book.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + m</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Manager Folders</font></td>
+		<td valign=top><font size=-1>Allows you to access your manage folders.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + l</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Logout</font></td>
+		<td valign=top><font size=-1>Logout of the system.</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + right arrow</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Next message</font></td>
+		  <td valign=top><font size=-1>Moves your cursor to the
+		  next message.
+		  <font size="-2">(Only applicable in 'Message View.')</font></td>
+	 </tr>
+	 <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + left arrow</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Previous message</font></td>
+		  <td valign=top><font size=-1>Moves your cursor to the
+		  previous message. 
+		  <font size="-2">(Only applicable in 'Message View.')</font></td>
+	</tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + d</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Delete</font></td>
+		<td valign=top><font size=-1>Allows you to deletea message.  
+		  <font size="-2">(Only applicable in 'Message View.')</font></td>
+	  </tr>
+	  <tr>
+		<th valign=middle align=center><font size=-1>Ctrl + Shift + r</font></th>
+		<td valign=middle align=center nowrap><font size=-1>Reply</font></td>
+		<td valign=top><font size=-1>Allows you to reply to
+		  a message. 
+		  <font size="-2">(Only applicable in 'Message View.')</font></td>
+	  </tr>
+
+	</table>
+    </font>
+
+  <tr><td>&nbsp;</td></tr>
+ </table>
 
 <%--
 <li>

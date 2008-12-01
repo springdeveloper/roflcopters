@@ -2,21 +2,76 @@
                                         javax.mail.Address,
                                         edu.ufl.osg.webmail.wrappers.MessageWrapper,
                                         edu.ufl.osg.webmail.util.Util,
-                                        javax.mail.Folder"%>
+                                        javax.mail.Folder,
+                                        com.sun.mail.imap.IMAPFolder"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="/tags/struts-tiles" prefix="tiles"%>
 <%@taglib uri="/tags/struts-html" prefix="html"%>
 <%@taglib uri="/tags/struts-bean" prefix="bean"%>
 <%@taglib uri="/tags/webmail" prefix="wm"%>
+
 <%
-    Message message = (Message)request.getAttribute("message");
+    Message message = (Message)request.getAttribute("message");	
     Folder folder = message.getFolder();
     if (folder != null) {
         Util.getFolder(folder);
     }
     MessageWrapper wrappedMessage = new MessageWrapper(message);
     pageContext.setAttribute("wrappedMessage", wrappedMessage);
+
+//-----------------------------------------------------------
+// CHANGES MADE BY EVAN SUBAR
+
+    String hi = "hello evan";
+    
+    IMAPFolder imapFolder = (IMAPFolder)folder;
+    
+    String s = "/GatorMail/";
+    s += "deleteMessage";
+    s += ".do?folder=";
+    s += folder.getName();
+    s += "&uid=";
+    s += imapFolder.getUID(message);
+    s += "&sort=dateDN";
+    
+    String sp = "/GatorMail/";
+    sp += "prevMessage";
+    sp += ".do?folder=";
+    sp += folder.getName();
+    sp += "&uid=";
+    sp += imapFolder.getUID(message);
+    sp += "&sort=dateDN";
+    
+    String sn = "/GatorMail/";
+    sn += "nextMessage";
+    sn += ".do?folder=";
+    sn += folder.getName();
+    sn += "&uid=";
+    sn += imapFolder.getUID(message);
+    sn += "&sort=dateDN";
+    
+    String sr = "/GatorMail/";
+    sr += "reply";
+    sr += ".do?folder=";
+    sr += folder.getName();
+    sr += "&uid=";
+    sr += imapFolder.getUID(message);
+    sr += "&sort=dateDN";
+    
 %>
+
+<%--ANDY'S STUFF --%>
+<%-- Dependencies --%>
+<script type="text/javascript" src="yui/utilities/shortcuts.js"></script>
+<script>
+shortcut("Ctrl+Shift+D",function(){self.location="<%= s%>";});
+shortcut("Ctrl+Shift+R",function(){self.location="<%= sr%>";});
+shortcut("Ctrl+Shift+left",function(){self.location="<%= sp%>";});
+shortcut("Ctrl+Shift+right",function(){self.location="<%= sn%>";});
+</script>
+
+<%------------------------------------------------%>
+
 
 <table class="messageHeader"  width="100%" cellspacing="0" cellpadding="2" border="0">
   <tr>
@@ -134,3 +189,4 @@
         Util.releaseFolder(folder);
     }
 %>
+
