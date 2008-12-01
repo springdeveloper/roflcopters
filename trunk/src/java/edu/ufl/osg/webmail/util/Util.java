@@ -362,6 +362,42 @@ public class Util {
         }
     }
 
+    public static class ThreadDateSort implements Comparator {
+        /**
+         *
+         * Sorts threads based on date.
+         *
+         * @param o1 the first object to be compared.
+         * @param o2 the second object to be compared.
+         * @return a negative integer, zero, or a positive
+         *         integer as the first argument is less
+         *         than, equal to, or greater than the
+         *         second.
+         */
+        public int compare(final Object o1, final Object o2) {
+            Date d1 = null;
+            Date d2 = null;
+            final ArrayList a1 = (ArrayList)o1;
+            final ArrayList a2 = (ArrayList)o2;
+            final Message m1 = (Message)a1.get(0);
+            final Message m2 = (Message)a2.get(0);
+
+            try {
+                d1 = m1.getReceivedDate();
+            } catch (MessagingException me) {
+                me.printStackTrace();
+            }
+
+            try {
+                d2 = m2.getReceivedDate();
+            } catch (MessagingException me) {
+                me.printStackTrace();
+            }
+
+            return d2.compareTo(d1);
+        }
+    }
+
     public static class SubjectSort implements Comparator {
         /**
          * Compares its two arguments for order. Returns a negative integer,
