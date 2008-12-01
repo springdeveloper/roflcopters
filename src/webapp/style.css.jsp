@@ -658,6 +658,20 @@ td.submitButton, td.resetButton {
 	font-weight: bold;
 }
 
+table.abkLayout {
+	table-layout: fixed;
+	width: 90%;
+	margin: auto;
+}
+
+table.abkLayout table {
+	border: thin solid black;
+}
+
+table.abkLayout tr td.first {
+	width: 60%;
+}
+
 /* ========= Message view ========== */
 
 /* message header */

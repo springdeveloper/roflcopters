@@ -245,6 +245,7 @@ public class LoginAction extends Action {
         try {
             // make sure the address list is in session
             Util.getAddressList(session);
+            Util.getMailingList(session);
         } catch (Exception e) {
             logger.error(Util.buildErrorMessage(e, user));
             errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.addressbk.dao.exception"));

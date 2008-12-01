@@ -1,6 +1,6 @@
 /*
  * This file is part of GatorMail, a servlet based webmail.
- * Copyright (C) 2002-2004 William A. McArthur, Jr.
+ * Copyright (C) 2002, 2003 William A. McArthur, Jr.
  * Copyright (C) 2003 The Open Systems Group / University of Florida
  *
  * GatorMail is free software; you can redistribute it and/or modify
@@ -21,34 +21,43 @@
 package edu.ufl.osg.webmail.actions;
 
 import edu.ufl.osg.webmail.Constants;
-import edu.ufl.osg.webmail.data.AddressList;
+import edu.ufl.osg.webmail.beans.ResultBean;
+import edu.ufl.osg.webmail.data.MailingEntry;
 import edu.ufl.osg.webmail.data.MailingList;
-import edu.ufl.osg.webmail.data.ConfigDAO;
-import edu.ufl.osg.webmail.data.DAOFactory;
+import edu.ufl.osg.webmail.data.AddressList;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
+import edu.ufl.osg.webmail.forms.MailingForm;
+import edu.ufl.osg.webmail.forms.MailingContactsForm;
+import edu.ufl.osg.webmail.forms.MoveCopyForm;
 import edu.ufl.osg.webmail.util.Util;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import javax.mail.Flags;
+import javax.mail.Folder;
+import javax.mail.Message;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Iterator;
 
 /**
- * Saves a list of addresses into a user's address book.
+ * Moves or copies 1 or more messages into another folder.
  *
  * @author drakee
- * @author sandymac
  * @version $Revision: 1.3 $
  */
-public class AddressBkAction extends Action {
-    private static final Logger logger = Logger.getLogger(AddressBkAction.class.getName());
+public class SaveMailingContactsAction extends Action {
+    private static final Logger logger = Logger.getLogger(MoveCopyAction.class.getName());
 
     /**
-     * Saves an addressbook entry.
+     * Move or copy a message from one folder to another.
      *
      * @param     mapping             The ActionMapping used to select this
      *                                instance
@@ -60,23 +69,34 @@ public class AddressBkAction extends Action {
      *                                logic throws an exception
      */
     public ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        logger.debug("=== AddressBkAction.execute() begin ===");
+    	logger.debug("=== SaveMailingContactsAction.execute() begin ===");
         ActionsUtil.checkSession(request);
 
+        final MailingContactsForm contactsForm = (MailingContactsForm) form;
+        
         final HttpSession session = request.getSession();
-
-        // check that there won't be too many entries in the addressbook
-        final ConfigDAO configDAO = DAOFactory.getInstance().getConfigDAO();
-        final String maxsizeStr = configDAO.getProperty("maxsizeAddressbook");
-        final int maxsize = Integer.parseInt(maxsizeStr);
-        request.setAttribute(Constants.ADDRESSBK_LIMIT, String.valueOf(maxsize));
-
-        final AddressList addressList = Util.getAddressList(session);
         final MailingList mailingList = Util.getMailingList(session);
-        final int size = addressList.size();
-        request.setAttribute(Constants.ADDRESSBK_USAGE, String.valueOf(size));
+        MailingEntry entry = null;
+        
+        // find mailing list entry with request groupId, exit search loop when found
+        Iterator iterator = mailingList.iterator();
+        while(iterator.hasNext()) {
+        	entry = (MailingEntry)iterator.next();
+        	if(entry.getGroupId() == contactsForm.getToGroupId())
+        		break;
+        }
+        
+        // add mailing list contacts for all emails provided
+        for(String email : contactsForm.getEmail()) {
+        	entry.addContact(email);
+        }
+        logger.debug("saved contacts to mailing list");
 
-        logger.debug("=== AddressBkAction.execute() end ===");
+        // set success message for the upcoming view
+        final ResultBean result = new ResultBean(Util.getFromBundle("saveMailingContacts.result.success"));
+        request.setAttribute(Constants.RESULT, result);
+
+        logger.debug("=== SaveMailingContactsAction.execute() end ===");
         return mapping.findForward("success");
     }
 }

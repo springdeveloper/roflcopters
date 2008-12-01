@@ -33,6 +33,7 @@ import edu.ufl.osg.webmail.data.AddressList;
 import edu.ufl.osg.webmail.data.AttachDAOException;
 import edu.ufl.osg.webmail.data.AttachList;
 import edu.ufl.osg.webmail.data.DAOFactory;
+import edu.ufl.osg.webmail.data.MailingList;
 import org.apache.log4j.Logger;
 import org.apache.struts.tiles.ComponentDefinition;
 import org.apache.struts.tiles.DefinitionsFactory;
@@ -1002,6 +1003,24 @@ public class Util {
         }
         return addressList;
     }
+    
+    /**
+     * Retrieve the user's address book. If it isn't in the current
+     * session, then fetch it anew from the data source.
+     */
+    public static MailingList getMailingList(final HttpSession session) throws AddressBkDAOException {
+        MailingList mailingList = (MailingList)session.getAttribute(Constants.MAILING_LIST);
+        if (mailingList == null) {
+            // no address book in session - look it up
+            final User user = getUser(session);
+            final AddressBkDAO addressBkDAO = DAOFactory.getInstance().getAddressBkDAO();
+            mailingList = addressBkDAO.getMailingList(user.getPermId());
+            session.setAttribute(Constants.MAILING_LIST, mailingList);
+        }
+        return mailingList;
+    }
+    
+    
 
     /**
      * Retrieve current attachments from session. If the attachment list does not

@@ -36,7 +36,7 @@ import java.util.ArrayList;
  *
  * @author sandymac
  * @author drakee
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class Constants {
 
@@ -44,7 +44,7 @@ public final class Constants {
 	static {
 		languages.add(new LabelValueBean("English", "en"));
 		languages.add(new LabelValueBean("\u65e5\u672c\u8a9e", "ja"));
-		languages.add(new LabelValueBean("Español", "es"));
+		languages.add(new LabelValueBean("Espaol", "es"));
 		languages.add(new LabelValueBean("\uD55C\uAD6D\uC5B4", "ko"));
 		languages.add(new LabelValueBean("\u6F22\u8A9E", "zh"));
 	}
@@ -78,6 +78,9 @@ public final class Constants {
 
     /** session scoped key for addressbook list */
     public static final String ADDRESS_LIST = "addressList";
+    
+    /** session scoped key for mailing lists list */
+    public static final String MAILING_LIST = "mailingList";
 
     /** request/parameter scoped key indicating a message was deleted from trash */
     public static final String DELETE_FOREVER = "deleteForever";
