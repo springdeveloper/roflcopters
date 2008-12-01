@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>- University of Florida's Webmail v2.0 -</title>
+
+<link type="text/css" rel="stylesheet" href="login.css" />
+
+</head>
+
+<body>
+    <div id="backgroundAndHeader">
+    <!-- START BACKGROUND AND HEADER -->
+    <!-- START BACKGROUND -->
+    <div id="bg1"></div>
+    <div id="bg2"></div>
+    <!-- END BACKGROUND -->
+    <!-- START LOGO -->
+    <div id="webmailLogo"><a href="#"><img src="images/webmail-v2-logo_03.png" border="0" /></a></div>
+    <!-- END LOGO -->
+    <!-- END BACKGROUND AND HEADER -->
+    </div>
+    
+
+    <div id="loginUI"> <!-- THIS SHOULD BE THE NAME OF THE BOX.. all other names branch from this -->
+       <!-- BEGIN CONTENT BOX DEFAULT CENTER UI -->
+    	<div id="loginUIContentBoxTop"> <!-- RENAME THIS TO REFLECT THE BOX -->
+        	<div class="topLeft"></div>
+        	<div class="top"></div>
+        	<div class="topRight"></div>
+            <div class="errSpace">&nbsp;</div>
+            <div class="left"></div>
+            <div class="right"></div>               
+        </div>
+        <div id="loginUIContentBoxMiddle"> <!-- RENAME THIS TO REFLECT BOX -->
+            <div class="left"></div>
+            <div id="loginUIContent"> <!-- RENAME THIS TO REFLECT BOX AS WELL -->
+            <!-- DEFAULT FOLDER UI CONTENT START -->
+                <div id="webmailTan">
+       	 			<img src="images/webmail-tan.png" width="400" height="270" alt="Some Things Never Change..."/>                </div>
+                <div id="loginUIForm">
+                <!-- BEGIN LOGIN UI CONTENT -->
+                    <table align="center">
+                        <tr>
+                            <td><label for="username">Username</label></td>
+                            <td><input type="text" name="username" size="16" /></td>
+                            <td style="color:#FF0000">Error Shows up Here</td>
+                        </tr>
+                        <tr>
+                            <td><label for="password">Password</label></td>
+                            <td><input type="password" name="password" size="16" /></td>
+                            <td style="color:#FF0000">Error Shows up Here</td>
+                        </tr>
+                        <tr>
+                        <td><br /></td>
+                        </tr>
+                        <tr>
+                            <td><button type="submit">Submit</button></td>
+                            <td><button type="reset">Reset</button></td>
+                        </tr>
+                    </table>
+           		 <!-- END LOGIN CONTENT -->
+           		 </div>
+            <!-- START LOGIN UI FOOTER -->
+            <div id="loginUIFooter">
+                <p>For up to date information about scams that are targeted at UF email users, click <a href="http://infosec.ufl.edu/blog/category/advisories/">here</a>.</p>
+                <p>Check the <a href="http://open-systems.ufl.edu/status/">current status</a> of Gatorlink services, including Webmail.</p>
+                <p>To submit a bug report or request a feature, click <a href="http://gatormail.sf.net/bugs">here</a>.</p>
+            <!-- END LOGIN UI FOOTER -->
+            </div>  
+       
+      		<!-- DEFAULT FOLDER UI CONTENT STOP -->		
+            <!-- BEGIN FOR IE -->
+    		<div class="clear">&nbsp;</div> 
+    		<!-- END FOR IE -->
+            </div>
+            <div class="right"></div> 
+        </div>
+        <div class="loginUIContentBoxBottom"> <!-- RENAME THIS TO REFLECT BOX -->
+        	<div class="bottomLeft"></div>
+        	<div class="bottom"></div>
+        	<div class="bottomRight"></div>
+        </div>
+    <!-- END CONTENT BOX LOGIN UI -->
+    </div>
+
+
+<!-- BEGIN FOR IE -->
+<div class="clear">&nbsp;</div> 
+<!-- END FOR IE -->
+
+<div id="loginFooter">
+<!-- START LOGIN FOOTER -->
+	<p class="copyright">
+   		Copyright &copy; 2002-2005 <a href="http://Sandy.McArthur.org/" style="color:gray;text-decoration:none">William A. McArthur, Jr.</a> <br/>
+   		Copyright &copy; 2003-2007 <a href="http://open-systems.ufl.edu/">The Open Systems Group</a> <br/>
+  		Copyright &copy; 2008 <a href="http://www.cise.ufl.edu/~f63022bw/roflcopters/">CEN3031 ROFLCOPTERS</a> <br/>
+   		<a href="http://www.cns.ufl.edu/">Computing and Networking Services</a> /
+   		<a href="http://www.ufl.edu/">University of Florida</a> <br/>
+   		Site maintained by <a href="http://open-systems.ufl.edu/">The Open Systems Group</a>
+   		<br/> Last Modified: @DATE@
+	</p>
+<!-- END LOGIN FOOTER -->
+</div>
+
+
+</body>
+</html>

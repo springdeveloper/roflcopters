@@ -1,0 +1,54 @@
+/*
+ * This file is part of GatorMail, a servlet based webmail.
+ * Copyright (C) 2002, 2003 William A. McArthur, Jr.
+ * Copyright (C) 2003 The Open Systems Group / University of Florida
+ *
+ * GatorMail is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GatorMail is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GatorMail; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+package edu.ufl.osg.webmail.data;
+
+import edu.ufl.osg.webmail.data.AddressBkEntry;
+
+/**
+ * Interface for interacting with the addressbook store.
+ *
+ * @author drakee
+ * @version $Revision: 2.0 $
+ */
+public interface AddressBkDAO {
+
+    public AddressList getAddressList(String permId) throws AddressBkDAOException;
+    
+    public MailingList getMailingList(String permId) throws AddressBkDAOException;
+
+    public void addEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
+
+    public void editEntry(String permId, String oldEmail, AddressBkEntry entry) throws AddressBkDAOException;
+    
+    public void removeEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
+    
+    public int addMailing(String permId, MailingEntry mailing) throws AddressBkDAOException;
+
+    public void editMailingName(int groupId, String newName) throws AddressBkDAOException;
+    
+    public void removeMailing(int groupId) throws AddressBkDAOException;
+    
+    public void addMailingContact(int groupId, int contactId) throws AddressBkDAOException;
+    
+    public int addMailingContact(int groupId, String email) throws AddressBkDAOException;
+    
+    public void removeMailingContact(int groupId, int contactId) throws AddressBkDAOException;
+}
