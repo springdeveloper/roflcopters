@@ -13,13 +13,14 @@
   <bean:message key="site.title"/>
   <bean:message key="message.title"/>
  </title>
+<script>function printWindow(){ window.print() }</script>
  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
  <link rel="start" href="<html:rewrite forward="INBOX"/>" title="INBOX"/>
  <link rel="help" href="<html:rewrite forward="help"/>" title="GatorMail Help"/>
  <html:base/>
  <link rel="stylesheet" type="text/css" href="<html:rewrite forward="CSS"/>"/>
 </head>
-<body>
+<body onLoad="printWindow()">
  <div class="body">
   <tiles:get name="body"/>
  </div>
