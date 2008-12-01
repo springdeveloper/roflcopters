@@ -244,7 +244,12 @@ public class SendAction extends Action {
         messagePlainBodyPart.setText(bodyplain);
         messagePlainBodyPart.setHeader("Content-Type", "text/plain; charset=UTF-8");
         alternativeMultipart.addBodyPart(messagePlainBodyPart);
-
+        
+        // create the HTML message part
+        final BodyPart messageHTMLBodyPart = new MimeBodyPart();
+        messageHTMLBodyPart.setText(body);
+        messageHTMLBodyPart.setHeader("Content-Type", "text/html; charset=UTF-8");
+        alternativeMultipart.addBodyPart(messageHTMLBodyPart);
         
         // start filling the super multipart message
         final BodyPart messageAlternativeSubBodyPart = new MimeBodyPart();

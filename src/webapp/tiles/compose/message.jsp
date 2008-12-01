@@ -33,6 +33,7 @@
 <script type="text/javascript" src="yui/autocomplete/autocomplete-min.js"></script>
 <script language="JavaScript" type="text/javascript">
 <!--
+
     function populateAddress(field) {
         var contacts = document.composeForm.contacts;
         var length = contacts.length;
@@ -277,8 +278,8 @@ var preventSubmit = function (e) {
   <tr class="lightBlueRow">
     <td width="15%" align="right" class="composeHeaderTitle"><bean:message key="compose.attachment.upload"/>:</td>
     <td colspan="3">
-       <html:file property="attachment" accesskey="f"/>
-       <html:submit property="action" styleClass="button">
+       <html:file property="attachment" tabindex = "50" accesskey="f"/>
+       <html:submit property="action" styleClass="button" tabindex = "60">
        <% if (attachExist) { %>
          <bean:message key="button.attachment.upload.more"/>
        <% } else { %>
@@ -331,7 +332,7 @@ var preventSubmit = function (e) {
 -->
     <table>
      <tr>
-      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" accesskey="c"/></td>
+      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" tabindex = "70" accesskey="c"/></td>
       <td><label for="copyToSent"><bean:message key="compose.copyToSent"/></label></td>
      </tr>
     </table>
@@ -340,9 +341,30 @@ var preventSubmit = function (e) {
 
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
-  <td colspan="3">
-    <html:textarea property="body"
-          cols="<%= String.valueOf(Constants.COMPOSE_BODY_WIDTH) %>" rows="20" style="width : 99%" tabindex="50"/>
+  <td colspan="3">  
+  <!--
+	
+	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
+   // Patrick and Evan
+   
+  -->
+  
+   <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+	<script language="JavaScript" type="text/javascript">
+
+	<!--
+	
+	var oFCKeditor = new FCKeditor( 'body' ) ;
+	oFCKeditor.BasePath	= "fckeditor/";
+	oFCKeditor.Height	= 300 ;
+   
+   // FIXME the Value should be the empty if the page is new or the contents of
+   // the message previously if the page is reloaded.
+	oFCKeditor.Value	= '' ;
+   
+	oFCKeditor.Create() ;
+	//-->
+	</script>
   </td>
  </tr>
  <tr class="lightBlueRow">
@@ -351,7 +373,7 @@ var preventSubmit = function (e) {
     <table>
      <tr>
       <td class="darkBlueRow">
-       <html:submit property="action" styleClass="button">
+       <html:submit property="action" tabindex = "90" styleClass="button">
         <bean:message key="button.send"/>
        </html:submit>
       </td>
