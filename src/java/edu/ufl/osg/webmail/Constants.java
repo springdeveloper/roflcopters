@@ -21,19 +21,34 @@
 package edu.ufl.osg.webmail;
 
 import edu.ufl.osg.webmail.util.Util;
-
+	
+import org.apache.struts.util.LabelValueBean;
+	
 import javax.servlet.http.HttpSession;
 import javax.mail.Folder;
 import javax.mail.MessagingException;
+
+import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * Constants for the WebMail application.
  *
  * @author sandymac
  * @author drakee
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class Constants {
+
+	public final static Collection languages = new ArrayList();
+	static {
+		languages.add(new LabelValueBean("English", "en"));
+		languages.add(new LabelValueBean("\u65e5\u672c\u8a9e", "ja"));
+		languages.add(new LabelValueBean("Espaol", "es"));
+		languages.add(new LabelValueBean("\uD55C\uAD6D\uC5B4", "ko"));
+		languages.add(new LabelValueBean("\u6F22\u8A9E", "zh"));
+	}
+	
     /** The application scoped key for the JavaMail Session provider. */
     public static final String MAIL_SESSION_PROVIDER = "sessionProvider";
 
@@ -63,6 +78,9 @@ public final class Constants {
 
     /** session scoped key for addressbook list */
     public static final String ADDRESS_LIST = "addressList";
+    
+    /** session scoped key for mailing lists list */
+    public static final String MAILING_LIST = "mailingList";
 
     /** request/parameter scoped key indicating a message was deleted from trash */
     public static final String DELETE_FOREVER = "deleteForever";
@@ -78,7 +96,13 @@ public final class Constants {
 
     /** name for the IMAP box to put sent messages within */
     public static final String SENT_FOLDER = "Sent";
+	
+	/** name for the IMAP box to put drafted messages within */
+    public static final String DRAFT_FOLDER = "Drafts";
 
+	/** name for the IMAP box to put junk messages within */
+    public static final String JUNK_FOLDER = "Junk";
+	
     /** request scoped key for a list of messages */
     public static final String MESSAGE_LIST = "messageList";
 
@@ -128,5 +152,35 @@ public final class Constants {
             }
         }
         return sentFolderFullname;
+    }
+	
+	public static String getDraftFolderFullname(final HttpSession session) throws MessagingException {
+        String draftFolderFullname;
+        synchronized (session) {
+            draftFolderFullname = (String)session.getAttribute("draftFolderFullname");
+            if (draftFolderFullname == null) {
+                final Folder inbox = Util.getFolder(session, "INBOX");
+                Util.releaseFolder(inbox);
+
+                draftFolderFullname = inbox.getFolder(DRAFT_FOLDER).getFullName();
+                session.setAttribute("draftFolderFullname", draftFolderFullname);
+            }
+        }
+        return draftFolderFullname;
+    }
+	
+	public static String getJunkFolderFullname(final HttpSession session) throws MessagingException {
+        String junkFolderFullname;
+        synchronized (session) {
+            junkFolderFullname = (String)session.getAttribute("junkFolderFullname");
+            if (junkFolderFullname == null) {
+                final Folder inbox = Util.getFolder(session, "INBOX");
+                Util.releaseFolder(inbox);
+
+                junkFolderFullname = inbox.getFolder(JUNK_FOLDER).getFullName();
+                session.setAttribute("junkFolderFullname", junkFolderFullname);
+            }
+        }
+        return junkFolderFullname;
     }
 }

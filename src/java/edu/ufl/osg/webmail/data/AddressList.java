@@ -22,7 +22,7 @@ package edu.ufl.osg.webmail.data;
 
 import org.apache.log4j.Logger;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -60,7 +60,7 @@ public final class AddressList implements List, java.io.Serializable {
     public boolean containsEmail(final String email) {
         final int size = addressList.size();
         for (int i = 0; i < size; i++) {
-            final InternetAddress internetAddress = (InternetAddress)addressList.get(i);
+            final AddressBkEntry internetAddress = (AddressBkEntry)addressList.get(i);
             if (internetAddress.getAddress().equals(email))
                 return true;
         }
@@ -70,24 +70,47 @@ public final class AddressList implements List, java.io.Serializable {
     /**
      * Adds Email entry into both in-memory list and backend storage.
      */
-    public boolean addAddress(final InternetAddress internetAddress) throws AddressBkDAOException {
+    public boolean addAddress(final AddressBkEntry internetAddress) throws AddressBkDAOException {
         getAddressBkDAO().addEntry(permId, internetAddress);
         return add(internetAddress);
     }
-
+    
+    /**
+     * Writes updated contact info to DB without affecting in-mem list (assumed to already be updated)
+     * @param oldEmail email to identify contact in DB
+     * @param editedEntry data to update old data with
+     * @return true if successful, false otherwise
+     * @throws AddressBkDAOException
+     */
+    public boolean commitEditsForContact(final String oldEmail, final AddressBkEntry editedEntry) throws AddressBkDAOException {
+    	getAddressBkDAO().editEntry(permId, oldEmail, editedEntry);
+    	return true;
+    }
+    
     /**
      * Removes Email entry from both in-memory list and backend storage.
      */
-    public boolean removeAddress(final InternetAddress internetAddress) throws AddressBkDAOException {
+    public boolean removeAddress(final AddressBkEntry internetAddress) throws AddressBkDAOException {
         getAddressBkDAO().removeEntry(permId, internetAddress);
-        return remove(internetAddress);
+        
+        // search through the in-mem contacts list to find entry with same main email as one
+        // given, when found delete entry
+        AddressBkEntry entryToRemove = null;
+        Iterator iterator = this.iterator();
+        while(iterator.hasNext()) {
+        	entryToRemove = (AddressBkEntry)iterator.next();
+        	if(entryToRemove.getAddress().equals(internetAddress.getAddress()))
+        		return remove(entryToRemove);
+        }
+        logger.error("Contact to remove not found in in-mem list");
+        throw new AddressBkDAOException("Contact to remove not found in in-mem list");
     }
 
     public String toString() {
         final StringBuffer buff = new StringBuffer();
         final int size = addressList.size();
         for (int i = 0; i < size; i++) {
-            final InternetAddress internetAddress = (InternetAddress)addressList.get(i);
+            final AddressBkEntry internetAddress = (AddressBkEntry)addressList.get(i);
             buff.append(internetAddress.toString());
             if (i < size - 1)
                 buff.append(", ");
@@ -106,13 +129,13 @@ public final class AddressList implements List, java.io.Serializable {
     // satisfy the List interface:
     ////////////////////////////////////////////////////////////
     public void add(final int index, final Object element) {
-        if (!(element instanceof InternetAddress)) return;
+        if (!(element instanceof AddressBkEntry )) return;
         addressList.add(index, element);
         sort();
     }
 
     public boolean add(final Object o) {
-        if (!(o instanceof InternetAddress)) return false;
+        if (!(o instanceof AddressBkEntry )) return false;
         addressList.add(o);
         sort();
         return true;
@@ -122,7 +145,7 @@ public final class AddressList implements List, java.io.Serializable {
         final Iterator it = c.iterator();
         while (it.hasNext()) {
             final Object o = it.next();
-            if (!(o instanceof InternetAddress)) return false;
+            if (!(o instanceof AddressBkEntry )) return false;
         }
         addressList.addAll(c);
         sort();
@@ -133,7 +156,7 @@ public final class AddressList implements List, java.io.Serializable {
         final Iterator it = c.iterator();
         while (it.hasNext()) {
             final Object o = it.next();
-            if (!(o instanceof InternetAddress)) return false;
+            if (!(o instanceof AddressBkEntry )) return false;
         }
         addressList.addAll(index, c);
         sort();
@@ -205,7 +228,7 @@ public final class AddressList implements List, java.io.Serializable {
     }
 
     public Object set(final int index, final Object element) {
-        if (!(element instanceof InternetAddress)) return null;
+        if (!(element instanceof AddressBkEntry )) return null;
         return addressList.set(index, element);
     }
 

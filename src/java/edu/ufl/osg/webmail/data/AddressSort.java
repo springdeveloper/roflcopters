@@ -20,7 +20,7 @@
 
 package edu.ufl.osg.webmail.data;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import java.util.Comparator;
 
 /**
@@ -33,20 +33,9 @@ class AddressSort implements Comparator {
      * value, it will resort to comparing the email addresses.
      */
     public int compare(final Object o1, final Object o2) {
-        final InternetAddress a1 = (InternetAddress)o1;
-        final InternetAddress a2 = (InternetAddress)o2;
-        // entry comparisons get first priority
-        if (a1.getPersonal().compareTo(a2.getPersonal()) < 0) {
-            return -1;
-        } else if (a1.getPersonal().compareTo(a2.getPersonal()) > 0) {
-            return 1;
-        }
-        // entries are equal, so let's compare email addresses
-        if (a1.getAddress().compareTo(a2.getAddress()) < 0) {
-            return -1;
-        } else if (a1.getAddress().compareTo(a2.getAddress()) > 0) {
-            return 1;
-        }
-        return 0; // should never get here
+        final AddressBkEntry a1 = (AddressBkEntry)o1;
+        final AddressBkEntry a2 = (AddressBkEntry)o2;
+
+        return a1.compareTo(a2);
     }
 }

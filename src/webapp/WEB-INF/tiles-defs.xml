@@ -34,10 +34,11 @@
         <put name="title" value="" type="string"/>
         <put name="header" value="/tiles/common/header.jsp"/>
         <put name="footer" value="/tiles/common/footer.jsp"/>
-        <put name="navBar" value="/tiles/common/navBar.jsp"/>
+        
         <put name="results" value="/tiles/common/results.jsp"/>
         <put name="body" value=""/>
     </definition>
+	
 
     <!-- Definitions related to the folder view. -->
     <definition name="folderLayout" page="/layouts/folderLayout.jsp" extends="defaultLayout">

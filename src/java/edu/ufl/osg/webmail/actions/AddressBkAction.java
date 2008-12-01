@@ -22,6 +22,7 @@ package edu.ufl.osg.webmail.actions;
 
 import edu.ufl.osg.webmail.Constants;
 import edu.ufl.osg.webmail.data.AddressList;
+import edu.ufl.osg.webmail.data.MailingList;
 import edu.ufl.osg.webmail.data.ConfigDAO;
 import edu.ufl.osg.webmail.data.DAOFactory;
 import edu.ufl.osg.webmail.util.Util;
@@ -71,6 +72,7 @@ public class AddressBkAction extends Action {
         request.setAttribute(Constants.ADDRESSBK_LIMIT, String.valueOf(maxsize));
 
         final AddressList addressList = Util.getAddressList(session);
+        final MailingList mailingList = Util.getMailingList(session);
         final int size = addressList.size();
         request.setAttribute(Constants.ADDRESSBK_USAGE, String.valueOf(size));
 

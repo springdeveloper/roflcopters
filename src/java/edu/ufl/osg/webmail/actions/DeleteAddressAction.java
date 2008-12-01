@@ -33,7 +33,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -70,7 +70,7 @@ public class DeleteAddressAction extends Action {
 
         final HttpSession session = request.getSession();
         final AddressList addressList = Util.getAddressList(session);
-        final InternetAddress internetAddress = new InternetAddress(email, name);
+        final AddressBkEntry internetAddress = new AddressBkEntry(name, email);
 
         // search and destroy
         if (addressList.containsEmail(email)) {

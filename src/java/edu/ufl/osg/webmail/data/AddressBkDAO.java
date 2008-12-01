@@ -20,19 +20,35 @@
 
 package edu.ufl.osg.webmail.data;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 
 /**
  * Interface for interacting with the addressbook store.
  *
  * @author drakee
- * @version $Revision: 1.2 $
+ * @version $Revision: 2.0 $
  */
 public interface AddressBkDAO {
 
     public AddressList getAddressList(String permId) throws AddressBkDAOException;
+    
+    public MailingList getMailingList(String permId) throws AddressBkDAOException;
 
-    public void addEntry(String permId, InternetAddress internetAddress) throws AddressBkDAOException;
+    public void addEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
 
-    public void removeEntry(String permId, InternetAddress internetAddress) throws AddressBkDAOException;
+    public void editEntry(String permId, String oldEmail, AddressBkEntry entry) throws AddressBkDAOException;
+    
+    public void removeEntry(String permId, AddressBkEntry entry) throws AddressBkDAOException;
+    
+    public int addMailing(String permId, MailingEntry mailing) throws AddressBkDAOException;
+
+    public void editMailingName(int groupId, String newName) throws AddressBkDAOException;
+    
+    public void removeMailing(int groupId) throws AddressBkDAOException;
+    
+    public void addMailingContact(int groupId, int contactId) throws AddressBkDAOException;
+    
+    public int addMailingContact(int groupId, String email) throws AddressBkDAOException;
+    
+    public void removeMailingContact(int groupId, int contactId) throws AddressBkDAOException;
 }

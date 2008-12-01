@@ -33,7 +33,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
+import org.apache.struts.action.ActionServlet;
 import javax.mail.Folder;
 import javax.mail.Store;
 import javax.naming.Context;
@@ -49,6 +49,9 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.io.BufferedReader;
 import java.io.StringReader;
+import java.util.Locale;
+import javax.servlet.ServletContext;
+import com.opensymphony.oscache.web.ServletCacheAdministrator;
 
 /**
  * Loads and saves the peferences.
@@ -63,6 +66,12 @@ public final class PreferencesAction extends Action {
     public final ActionForward execute(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
         logger.debug("=== PreferencesAction.execute() begin ===");
         ActionsUtil.checkSession(request);
+		
+		ActionServlet actionServlet = getServlet(); 
+		ServletContext servletctx= actionServlet.getServletContext(); 
+		ServletCacheAdministrator admin = (ServletCacheAdministrator)servletctx.getAttribute("__oscache_admin"); 
+		
+		
         final HttpSession session = request.getSession();
         final PreferencesForm prefsForm = (PreferencesForm)form;
         final User user = Util.getUser(session);
@@ -83,7 +92,16 @@ public final class PreferencesAction extends Action {
             } else if (username != null && !username.equals(prefs.getProperty("user.name"))) {
                 prefs.setProperty("user.name", username);
             }
-
+			
+			final String language = prefsForm.getLanguage();
+			if (language == null && prefs.getProperty("pref.lang") != null) {
+				prefs.remove("pref.lang");
+			} else if (language != null && !language.equals(prefs.getProperty("pref.lang"))) {
+				prefs.setProperty("pref.lang", language);
+				admin.flushAll(); //Flush the cache to refresh the meesage beans for the folder.
+				session.setAttribute("org.apache.struts.action.LOCALE", new Locale(language)); //Set the new setting. _RoB_
+			}
+			
             final String replyTo = prefsForm.getReplyTo();
             if (replyTo == null && prefs.getProperty("compose.replyTo") != null) {
                 prefs.remove("compose.replyTo");
@@ -210,9 +228,6 @@ public final class PreferencesAction extends Action {
 
             final Boolean autocomplete = prefsForm.getAutocomplete();
             prefs.setProperty("compose.recipients.autocomplete", autocomplete == null ? "false" : autocomplete.toString());
-			
-			final Boolean attachmentReminder = prefsForm.getAttachmentReminder();
-			prefs.setProperty("compose.attachmentReminder", attachmentReminder == null ? "false" : attachmentReminder.toString());
 
             final Boolean threading = prefsForm.getThreading();
             if (threading == null && prefs.getProperty("folder.list.threading") != null) {
@@ -261,6 +276,7 @@ public final class PreferencesAction extends Action {
 
     private void populateFormBeanFromPreferences(final PreferencesForm prefsForm, final Properties prefs, final User user) throws Exception {
         // Populate form bean from perferences.
+		prefsForm.setLanguage(prefs.getProperty("pref.lang"));
         prefsForm.setUsername(prefs.getProperty("user.name"));
         prefsForm.setReplyTo(prefs.getProperty("compose.replyTo"));
         prefsForm.setSignature(prefs.getProperty("compose.signature"));
@@ -271,11 +287,6 @@ public final class PreferencesAction extends Action {
             prefsForm.setAutocomplete(Boolean.valueOf(prefs.getProperty("compose.recipients.autocomplete")));
         } else {
             prefsForm.setAutocomplete(Boolean.TRUE);
-        }
-		if (prefs.getProperty("compose.attachmentReminder") != null) {
-            prefsForm.setAttachmentReminder(Boolean.valueOf(prefs.getProperty("compose.attachmentReminder")));
-        } else {
-            prefsForm.setAttachmentReminder(Boolean.FALSE);  // unchecked by default
         }
         if (prefs.getProperty("folder.list.threading") != null) {
             prefsForm.setThreading(Boolean.valueOf(prefs.getProperty("folder.list.threading")));

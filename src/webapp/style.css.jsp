@@ -8,8 +8,12 @@ TODO: This is a mess. Could split this into a few files or just clean it all up.
 --%>
 
 body {
-    color: #333333;
-    background-color : #ffffff;
+    height:768px;
+	width:800px;
+	background-image:url(cssImg/webmail-v2-bg0_01.png);
+	background-repeat:repeat-x;
+	background-attachment:scroll;
+	overflow:auto;
     font-weight: normal;
     font-family: Arial, Helvetica, sans-serif;
 <%  // This is so IE doesn't get horizontal scroll bars in the compose view.
@@ -22,6 +26,134 @@ body {
     }
 %>
 }
+
+/* START MASTER CONTENT */
+#bg1{
+	position:fixed;
+	top:0px;
+	left:0px;
+	background-image:url(cssImg/webmail-v2-bg1_03.png);
+	width:100%;
+	height:141px;
+	z-index:1;
+	
+}
+#bg2{
+	position:fixed;
+	top:105px;
+	left:0px;
+	width:100%;
+	height:47px;
+	background-image:url(cssImg/webmail-v2-grayBar_06.png);
+	background-repeat:repeat-x;
+	z-index:3;
+	
+}
+#webmailLogo{
+	position:fixed;
+	top:50px;
+	left:5px;
+	width:290px;
+	height:57px;
+	z-index:1;
+}
+#nav{
+	position:fixed;
+	white-space: nowrap;
+	font-family: Arial;
+	top:110px;
+	left: 5px;
+	width:100%;
+	z-index:4;
+}
+a #nav {
+}
+
+#headerImg{
+	position: fixed;
+	margin-left: 85%;
+	top:50;
+	z-index:4;
+}
+
+#headerName{
+	position: fixed;
+	margin-left: 85%;
+	top:85;
+	z-index:4;
+}
+
+.clearBottom {
+	font-size:1px;
+	height:1px;
+}
+
+
+
+/* END MASTER CONTENT */
+
+/* START LOGIN CONTENT */
+
+
+#loginUI{
+	position:absolute;
+	top:120px;
+	left:20%;
+	right:35%;
+	width:600px;
+	z-index:0;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+#loginUIContentBoxMiddle{
+	position:relative;
+	margin-top:0px;
+	min-height:200px;
+	width:100%;
+	padding-top:10px;
+	float:left;
+}
+#loginUIContent{
+	width:580px;
+	margin-left:10px;
+	background-color:#FFFFFF;
+	text-align:center;
+}
+
+#webmailTan{
+	position:relative;
+	top:20px;
+	left:90px;
+	right:100px;
+	width:400px;
+	height:270px;
+}
+
+#loginUIForm{
+	position:relative;
+	padding:30px 10px 10px 10px;
+	font-size:14px;
+}
+
+#loginUIFooter{
+	position:relative;
+	font-size:10px;
+	text-align:center;
+	line-height:3px;
+}
+
+#loginFooter{
+	position:absolute;
+	top:750px;
+	left:34%;
+	right:40%;
+	text-align:center;
+	font-size:9px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	width:300px;
+}
+
+
+/* END LOGIN CONTENT */
 
 .topNavBar {
     margin : 0px;
@@ -56,6 +188,7 @@ a:visited {
 .header .loggedInAs {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
+	font-weight: bold;
     color: #CCCCCC;
 }
 
@@ -74,8 +207,8 @@ a:visited {
 
 /* Copyright text at bottom of pages */
 .copyright {
-    text-align : center;
-    font-size : smaller;
+   text-align:center;
+   color:#666666;
 }
 
 .footer {
@@ -83,6 +216,178 @@ a:visited {
     font-size: 11px;
     font-weight: normal;
 }
+/* START Content Box Necessary */
+.topLeft{
+	position:relative;
+	top:0px;
+	left:0px;
+	width:10px;
+	height:15px;
+	background-image:url(cssImg/webmail-v2-topLeftCorner_06.png);
+	z-index:1;
+}
+.top{
+	position:absolute;
+	top:0px;
+	left:10px;
+	right:15px;
+	height:10px;
+	background-image:url(cssImg/webmail-v2-topContent_08.png);
+	background-repeat:repeat-x;
+	z-index:1;
+}
+.topRight{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:15px;
+	height:15px;
+	background-image:url(cssImg/webmail-v2-topRightCorner_10.png);
+	z-index:1;
+}
+.bottomLeft{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	width:10px;
+	height:18px;
+	background-image:url(cssImg/webmail-v2-bottomLeftCorner_28.png);
+	z-index:1;
+}
+.bottom{
+	position:absolute;
+	bottom:0px;
+	left:10px;
+	right:15px;
+	height:18px;
+	background-image:url(cssImg/webmail-v2-bottom_29.png);
+	background-repeat:repeat-x;
+	z-index:1;
+}
+.bottomRight{
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	width:15px;
+	height:18px;
+	background-image:url(cssImg/webmail-v2-bottomRightCorner_28.png);
+	z-index:1;
+}
+.left{
+	position:absolute;
+	left:0px;
+	top:15px;
+	bottom:18px;
+	width:10px;
+	background-image:url(cssImg/webmail-v2-left_09.png);
+	background-repeat:repeat-y;
+	z-index:1;
+}
+.right{
+	position:absolute;
+	top:15px;
+	right:0px;
+	bottom:18px;
+	width:15px;
+	background-image:url(cssImg/webmail-v2-right_20.png);
+	background-repeat:repeat-y;
+	z-index:1;
+}
+.errSpace{
+	position:absolute;
+	top:5px;
+	background-color:#FFF;
+	left:10px;
+	right:12px;
+}
+/* END CONTENT BOX NECESSARY */
+
+/* START LOGIN CONTENT */
+#statusIconUI{
+	position:fixed;
+	top:50px;
+	left:750px;
+	width:260px;
+	height:83px;
+	background-image:url(cssImg/webmail-v2-loggedIn_06.png);
+	z-index:1;
+}
+
+#defaultContainer{
+	position:absolute;
+	top:0px;
+	left:200px;
+	right:30%;
+	width:600px;
+	height:100%;
+	z-index:0;
+}
+#defaultCenterUI{
+	position:absolute;
+	top:120px;
+	left:300px;
+	right:60px;
+	min-height:500px;
+	min-width:500px;
+	z-index:0;
+}
+#defaultCenterUIContentBoxMiddle{
+	position:relative;
+	margin-top:0px;
+	min-height:700px;
+	width:100%;
+	float:left;
+	z-index:0;
+}
+
+#defaultCenterUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	min-height:500px;
+	right:20px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
+#defaultSideBarUIContentBox{
+	position:absolute;
+	top:145px;
+	left:30px;
+	min-height:500px;
+	width:225px;
+	z-index:0;
+}
+
+#defaultFooterUI{
+	position:absolute;
+	top:900px;
+	left:400px;
+	right:30%;
+	text-align:center;
+	font-size:10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+#defaultSideBarUIContentBoxMiddle{
+	position:relative;
+	margin-top:0px;
+	min-height:500px;
+	width:100%;
+	float:left;
+	z-index:0;
+}
+
+#defaultSideBarUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	min-height:500px;
+	width:200px;
+	background-color:#FFFFFF;
+}
+/* END LOGIN CONTENT */
+
+
 
 .button {
     border : outset 2px;
@@ -351,6 +656,20 @@ td.submitButton, td.resetButton {
     text-align : right;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+table.abkLayout {
+	table-layout: fixed;
+	width: 90%;
+	margin: auto;
+}
+
+table.abkLayout table {
+	border: thin solid black;
+}
+
+table.abkLayout tr td.first {
+	width: 60%;
 }
 
 /* ========= Message view ========== */
