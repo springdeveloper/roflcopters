@@ -129,13 +129,16 @@ public class SendAction extends Action {
          * 2. hasn't already displayed attachment reminder
          * 3. no files attached
          * 4. string "attach" exists in body or subject
+         *
+         * FIXME: breaks for forwards, because the forwarded message is
+         * an attachment.
          */
         final String remindPref = prefs.getProperty("compose.attachmentReminder");
         if ((remindPref != null)
             && remindPref.equals("true")
             && (!compForm.isAttachRemindShown())
             && (attachList.size() == 0)
-            && ((subject.indexOf("attach") != -1) || (body.indexOf("attach") != -1))) {
+            && (subjMentionsAttach(subject) || bodyMentionsAttach(body))) {
             errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.attachment.reminder"));
             saveErrors(request, errors);
             compForm.setAttachment(null);
@@ -448,6 +451,57 @@ public class SendAction extends Action {
         for (depth = 0; depth < length && line.charAt(depth) == '>'; depth++) ;
 
         return depth;
+    }
+
+    /**
+     * Checks the body of the message for mention of attachments.
+     *
+     * @param body                a string
+     * @return                    boolean: if attachments mentioned
+     */
+    private static boolean bodyMentionsAttach(final String body) {
+        /* Either "attach" at beginning of a line, or in middle of a
+         * line that doesn't start with ">" (so it doesn't match
+         * quoted text). Need 2 for each case to take care of 1st line
+         * edge case.
+         *
+         * The (?i)(?s), \r\n horribleness is because the regex needs
+         * to match the *entire* string, not just a substring, and
+         * multiline mode (?m) doesn't appear to help.
+         */
+        boolean firstbegin = body.matches("(?i)(?s)^attach.*");
+        boolean otherbegin = body.matches("(?i)(?s).*?\r\nattach.*");
+        boolean firstmid = body.matches("(?i)(?s)^[^>][.[^\r\n]]*attach.*");
+        boolean othermid = body.matches("(?i)(?s).*?\r\n[^>][.[^\r\n]]*attach.*");
+
+        logger.debug("ATTACH body check.");
+        logger.debug("very beginning: " + firstbegin);
+        logger.debug("beginning ofline in middle: " + otherbegin);
+        logger.debug("middle ofline on 1st line: " + firstmid);
+        logger.debug("middle ofline in middle: " + othermid);
+
+        return (firstbegin || otherbegin || firstmid || othermid);
+    }
+
+    /**
+     * Checks the subject line for mention of attachments.
+     *
+     * @param subj                a string
+     * @return                    boolean: if attachments mentioned
+     */
+    private static boolean subjMentionsAttach(final String subj) {
+        /* subject has "attach" somewhere and does not start with
+         * "Re: " or "Fw: " or "Fwd: " (doesn't match replies or
+         * forwards). Not perfect.
+         */
+        final boolean b = subj.matches("(?i).*attach.*");
+        final boolean bre = subj.matches("(?i)^Re: .*");
+        final boolean bfwd = subj.matches("(?i)^Fw[d]: .*");
+        logger.debug("ATTACH subj check.");
+        logger.debug("in subj: " + b);
+        logger.debug("no Re: " + !bre);
+        logger.debug("no Fw[d]: " + !bfwd);
+        return (b && !bre && !bfwd);
     }
 
 }
