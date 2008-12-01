@@ -99,6 +99,7 @@ FCKConfig.TemplateReplaceCheckbox = true ;
 FCKConfig.ToolbarLocation = 'In' ;
 
 FCKConfig.ToolbarSets["Default"] = [
+	['SpellCheck'],
 	['Source'],
 	['Print'],
 	['Undo','Redo','-','Find','Replace'],	
@@ -160,7 +161,7 @@ FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
 FCKConfig.SpellChecker			= 'SpellerPages' ;	// 'ieSpell' | 'SpellerPages'
 FCKConfig.IeSpellDownloadUrl	= 'http://www.iespell.com/download.php' ;
-FCKConfig.SpellerPagesServerScript = 'server-scripts/spellchecker.php' ;	// Available extension: .php .cfm .pl
+FCKConfig.SpellerPagesServerScript = '/GatorMail/cgi-bin/spellchecker-fck.pl' ;	// Available extension: .php .cfm .pl
 FCKConfig.FirefoxSpellChecker	= false ;
 
 FCKConfig.MaxUndoLevels = 15 ;
