@@ -1,5 +1,6 @@
 <%@page contentType="text/html" import="java.util.List,
                                         edu.ufl.osg.webmail.util.Util,
+                                        edu.ufl.osg.webmail.forms.ComposeForm,
                                         edu.ufl.osg.webmail.Constants"%>
 <%@ page import="edu.ufl.osg.webmail.prefs.PreferencesProvider" %>
 <%@ page import="edu.ufl.osg.webmail.User" %>
@@ -140,6 +141,7 @@
 %>
 <html:form method="post" action="modifyCompose" enctype="multipart/form-data" focus="to">
 <html:hidden property="composeKey"/>
+<html:hidden property="attachRemindShown"/>
 <style type="text/css">
     #toAutoComplete, #ccAutoComplete, #bccAutoComplete {position:relative;width:100%;height:2em;}/* set width of widget here*/
     #toAutoComplete {z-index:9000} /* for IE z-index of absolute divs inside relative divs issue */
@@ -165,6 +167,14 @@ var preventSubmit = function (e) {
 }
 //-->
 </script>
+<bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
+<%
+    final List attachList = Util.getAttachList(composeKey, session);
+    final boolean attachExist = (attachList != null && attachList.size() > 0);
+    if (attachExist) {
+        pageContext.setAttribute("attachList", attachList);
+    }
+%>
 <table width="100%" cellpadding="2" cellspacing="0">
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
@@ -177,6 +187,9 @@ var preventSubmit = function (e) {
        </html:submit>
        <html:submit property="action" styleClass="button">
         <bean:message key="button.cancelMessage"/>
+       </html:submit>
+       <html:submit property="action" styleClass="button">
+        <bean:message key="button.saveDraft"/>
        </html:submit>
       </td>
       <td class="darkBlueRow" colspan="2">&nbsp;</td>
@@ -274,19 +287,21 @@ var preventSubmit = function (e) {
   <tr class="lightBlueRow">
     <td width="15%" align="right" class="composeHeaderTitle"><bean:message key="compose.attachment.upload"/>:</td>
     <td colspan="3">
-       <html:file property="attachment" accesskey="f"/>
-       <html:submit property="action" styleClass="button"><bean:message key="button.attachment.upload"/></html:submit>
+       <html:file property="attachment" tabindex = "50" accesskey="f"/>
+       <html:submit property="action" styleClass="button" tabindex = "60">
+       <% if (attachExist) { %>
+         <bean:message key="button.attachment.upload.more"/>
+       <% } else { %>
+         <bean:message key="button.attachment.upload"/>
+       <% } %>
+       </html:submit>
     </td>
   </tr>
  <!-- show attachments -->
- <bean:define id="composeKey" name="composeForm" property="composeKey" type="java.lang.String"/>
   <tr class="lightBlueRow">
    <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
    <td colspan="3">
-<%
-  final List attachList = Util.getAttachList(composeKey, session);
-  if (attachList != null && attachList.size() > 0) {
-     pageContext.setAttribute("attachList", attachList);
+<% if (attachExist) {
 %>
     <table width="575" class="messageHeader" cellpadding="3">
       <tr class="darkBlueRow">
@@ -326,18 +341,40 @@ var preventSubmit = function (e) {
 -->
     <table>
      <tr>
-      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" accesskey="c"/></td>
+      <td><html:checkbox property="copyToSent" styleId="copyToSent" titleKey="compose.copyToSent" tabindex = "70" accesskey="c"/></td>
       <td><label for="copyToSent"><bean:message key="compose.copyToSent"/></label></td>
      </tr>
     </table>
   </td>
  </tr>
 
+ <%
+    ComposeForm compForm = (ComposeForm) request.getAttribute("composeForm");
+    String bodyText = "Woot Woot!!";
+    if( compForm != null )
+        bodyText = compForm.getBody();
+    bodyText = bodyText.replaceAll("\\n|\\r|[\\n\\r]<br />|<br />[\\n\\r]", "<br />"); 
+    bodyText = bodyText.replaceAll("'", "&#039;");
+    pageContext.setAttribute("body", bodyText);
+ %>
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
-  <td colspan="3">
-    <html:textarea property="body"
-          cols="<%= String.valueOf(Constants.COMPOSE_BODY_WIDTH) %>" rows="20" style="width : 99%" tabindex="50"/>
+  <td colspan="3">  
+  <!--
+  // Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
+  // Patrick and Evan
+  -->
+  
+  <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+  <script language="JavaScript" type="text/javascript">
+  <!--
+  var oFCKeditor = new FCKeditor( 'body' ) ;
+  oFCKeditor.BasePath	= "fckeditor/";
+  oFCKeditor.Height	= 300 ;
+  oFCKeditor.Value	= '<c:out value="${body}" escapeXml="false" />';
+  oFCKeditor.Create() ;
+  //-->
+  </script>
   </td>
  </tr>
  <tr class="lightBlueRow">
@@ -346,7 +383,7 @@ var preventSubmit = function (e) {
     <table>
      <tr>
       <td class="darkBlueRow">
-       <html:submit property="action" styleClass="button">
+       <html:submit property="action" tabindex = "90" styleClass="button">
         <bean:message key="button.send"/>
        </html:submit>
       </td>

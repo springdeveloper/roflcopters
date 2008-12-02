@@ -228,6 +228,9 @@ public final class PreferencesAction extends Action {
 
             final Boolean autocomplete = prefsForm.getAutocomplete();
             prefs.setProperty("compose.recipients.autocomplete", autocomplete == null ? "false" : autocomplete.toString());
+			
+			final Boolean attachmentReminder = prefsForm.getAttachmentReminder();
+			prefs.setProperty("compose.attachmentReminder", attachmentReminder == null ? "false" : attachmentReminder.toString());
 
             final Boolean threading = prefsForm.getThreading();
             if (threading == null && prefs.getProperty("folder.list.threading") != null) {
@@ -287,6 +290,11 @@ public final class PreferencesAction extends Action {
             prefsForm.setAutocomplete(Boolean.valueOf(prefs.getProperty("compose.recipients.autocomplete")));
         } else {
             prefsForm.setAutocomplete(Boolean.TRUE);
+        }
+		if (prefs.getProperty("compose.attachmentReminder") != null) {
+            prefsForm.setAttachmentReminder(Boolean.valueOf(prefs.getProperty("compose.attachmentReminder")));
+        } else {
+            prefsForm.setAttachmentReminder(Boolean.FALSE);  // unchecked by default
         }
         if (prefs.getProperty("folder.list.threading") != null) {
             prefsForm.setThreading(Boolean.valueOf(prefs.getProperty("folder.list.threading")));

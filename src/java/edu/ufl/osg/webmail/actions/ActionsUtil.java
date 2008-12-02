@@ -180,7 +180,6 @@ final class ActionsUtil {
      */
     protected static Folder fetchFolder(final ActionForm form, final HttpServletRequest request) throws IllegalAccessException, MessagingException, InvocationTargetException, NoSuchMethodException, FolderNotFoundException {
         final String folderName = (String)PropertyUtils.getSimpleProperty(form, "folder");
-
         Folder folder = null;
         try {
             folder = Util.getFolder(request.getSession(), folderName);
@@ -188,7 +187,6 @@ final class ActionsUtil {
             logger.error("folder not found: " + folderName);
             throw new FolderNotFoundException(folder, fnfe.toString());
         }
-
         return folder;
     }
 

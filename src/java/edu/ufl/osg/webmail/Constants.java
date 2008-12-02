@@ -121,6 +121,9 @@ public final class Constants {
 
     public static final String MAILBEAN_KEY = "mailBean";
 
+    /**
+     * Cache trash folder full name in users session
+     */
     public static String getTrashFolderFullname(final HttpSession session) throws MessagingException {
         String trashFolderFullName;
         synchronized (session) {
@@ -136,6 +139,9 @@ public final class Constants {
         return trashFolderFullName;
     }
 
+    /**
+     * Cache sent folder full name in users session
+     */
     public static String getSentFolderFullname(final HttpSession session) throws MessagingException {
         String sentFolderFullname;
         synchronized (session) {
