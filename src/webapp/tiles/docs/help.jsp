@@ -52,6 +52,9 @@
 	      <html:link href="#open">None of these questions help with my GatorMail specific problem. How do I get
 	      a hold of you guys?</html:link>
 	  </li>
+	  <li>
+	    <html:link href="#hotkeys">Are there any hotkeys in GatorMail?</html:link>
+	  </li>
 	</ul>
 	</blockquote>
     </td>
@@ -361,7 +364,7 @@
 	<table class="headerTable" cellspacing="0" cellpadding="3" width="100%">
 	  <tr class="subheader">
 	    <td>
-		<a name="open">Keyboard Shortcuts</a>
+		<a name="hotkeys">Keyboard Shortcuts</a>
 	    </td>
 	  </tr>
 	  <tr><td>&nbsp;</td></tr>
@@ -439,7 +442,7 @@
 
 	</table>
     </font>
-
+	<html:link href="#top">[top]</html:link>
   <tr><td>&nbsp;</td></tr>
  </table>
 
