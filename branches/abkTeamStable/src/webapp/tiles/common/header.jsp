@@ -30,6 +30,18 @@
 	if (!hideHeader) {
 %>
 
+<%-- Andy --%>
+<%-- Dependencies --%>
+<script type="text/javascript" src="yui/utilities/shortcuts.js"></script>
+<script>
+shortcut("Ctrl+Shift+H",function(){self.location="/GatorMail/folder.do";});
+shortcut("Ctrl+Shift+C",function(){self.location="/GatorMail/compose.do";});
+shortcut("Ctrl+Shift+A",function(){self.location="/GatorMail/addressbook.do";});
+shortcut("Ctrl+Shift+M",function(){self.location="/GatorMail/folderManage.do";});
+shortcut("Ctrl+Shift+P",function(){self.location="/GatorMail/preferences.do";});
+shortcut("Ctrl+Shift+L",function(){self.location="/GatorMail/logout.do";});
+</script>
+
 	<div id="backgroundAndHeader">
     <!-- START BACKGROUND AND HEADER -->
     <!-- START BACKGROUND -->
