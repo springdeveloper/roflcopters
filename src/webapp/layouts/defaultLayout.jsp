@@ -66,7 +66,9 @@
     <!-- BEGIN FOR IE -->
     <div class="clear">&nbsp;</div> 
     <!-- END FOR IE -->
-    
+      <div id="Space">
+    &nbsp;
+    </div>
     
     <div id="defaultFooterUI">
     <!-- BEGIN DEFAULT FOOTER -->
