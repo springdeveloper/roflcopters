@@ -314,7 +314,7 @@ a:visited {
 }
 
 #defaultContainer{
-	position:absolute;
+	position:relative;
 	top:0px;
 	left:200px;
 	right:30%;
@@ -341,7 +341,7 @@ a:visited {
 	z-index:0;
 }
 #defaultCenterComposeUI{
-	position:absolute;
+	position:relative;
 	top:120px;
 	left:60px;
 	right:60px;
@@ -378,14 +378,18 @@ a:visited {
 }
 
 #defaultFooterUI{
-	position:absolute;
-	left:400px;
-	right:30%;
+	position:relative;
 	text-align:center;
 	font-size:10px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
+	clear:both;
 }
-
+#Space{
+	position:relative;
+	width:50px;
+	height:150px;
+	clear:both;
+}
 #defaultSideBarUIContentBoxMiddle{
 	position:relative;
 	margin-top:0px;
