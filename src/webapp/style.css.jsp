@@ -322,6 +322,15 @@ a:visited {
 	height:100%;
 	z-index:0;
 }
+#defaultComposeContainer{
+	position:absolute;
+	top:0px;
+	left:60px;
+	right:30%;
+	width:600px;
+	height:100%;
+	z-index:0;
+}
 #defaultCenterUI{
 	position:absolute;
 	top:120px;
@@ -331,7 +340,16 @@ a:visited {
 	min-width:500px;
 	z-index:0;
 }
-#defaultCenterUIContentBoxMiddle{
+#defaultCenterComposeUI{
+	position:absolute;
+	top:120px;
+	left:60px;
+	right:60px;
+	min-height:500px;
+	min-width:500px;
+	z-index:0;
+}
+#defaultCenterComposeUIContentBoxMiddle{
 	position:relative;
 	margin-top:0px;
 	min-height:700px;
@@ -340,7 +358,7 @@ a:visited {
 	z-index:0;
 }
 
-#defaultCenterUIContent{
+#defaultCenterComposeUIContent{
 	margin-left:10px;
 	margin-top:10px;
 	margin-right:10px;
@@ -361,7 +379,6 @@ a:visited {
 
 #defaultFooterUI{
 	position:absolute;
-	top:900px;
 	left:400px;
 	right:30%;
 	text-align:center;
