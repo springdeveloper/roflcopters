@@ -1,0 +1,495 @@
+about.title=アバウト
+addAddress.title=宛先の事頃の１つを参加
+addAddress.header=連絡先に参加
+addAddress.name=名前
+addAddress.email=Eメール
+addressbook.control.empty1=連絡先からっぽ。
+addressbook.control.empty2=新連絡は連絡先に参加
+addressbook.control.empty3=すると、ここにタイプし
+addressbook.control.empty4=易くするように載る。
+addressbook.control.message=選択した宛先の変更場所：
+addressbook.control.noscript=連絡先の常態のために、ジャバスクリプトを可能にしなければいけません。
+addressbook.title=アドレース本
+addressbook.email=Eメール
+addressbook.delete=削除
+addressbook.limit.message=この連絡先は{1}からの{0}連絡を入庫.
+addressbook.name=名前
+button.attachment.upload=他の添付書類を参加
+button.attachment.delete=選択した書類を削除
+button.filter=フィルター
+button.folderManage.deleteFolder=フォルダーを削除
+button.folderManageModify.newFolder=フォルダーを創作
+button.folderManageModify.renameFolder=フォルダーを改名
+button.folderManageModify.deleteFolder=フォルダーを削除
+button.subscribeFolder=フォルダーに(不)寄付
+button.unsubscribeFolder=フォルダーに不寄付
+button.cancel=キャンセル
+button.cancelMessage=キャンセルメッセージ
+button.compose=メッセージを作る
+button.copyToFolder=コピー
+button.delete=選択した事を削除
+button.deleteForever=不変削除
+button.confirmEmptyFolder=フォルダーが空っぽになる確認
+button.cancelEmptyFolder=フォルダーが空になるキャンセル
+button.emptyTrash=捨てる
+button.emptyTrash.title=ゴミメッセージを捨てる
+button.emptyFolder=このフォルダーが空になる
+button.emptyFolder.title=このフォルダーのメッセージをゴミに捨てます。
+button.login=ログイン
+button.logout=ログアウト
+button.mark=印を付ける
+button.move=変更
+button.moveToFolder=フォルダーに変更
+button.ok=OK
+button.sure=お考えを変化しなくてもいいんでしょうか？
+button.reset=リセット
+button.save=セーブ
+button.saveToAddressBk=連絡先にセーブ
+button.saveEntry=事頃をセーブ
+button.savePreferences=設定をセーブ
+button.send=送る
+button.submit=差し出す
+changeSubscription.result.subscribed.success=フォルダーに寄付しました。
+changeSubscription.result.unsubscribed.success=フォルダを不寄付しました。
+common.currentUser=<span class="username" title="{0}">{1}</span><br/><span class="loggedInAs">はログインしている</span>
+compose.title=メッセージを作る
+compose.name=名前
+compose.type=書類種
+compose.size=大きさ
+compose.delete=削除
+compose.attachment.upload=添付書類
+compose.copyToSent=メッセージを送りフォルダーにコピー
+confirmDeleteFolder.title=フォルダー削除を確認
+confirmDeleteFolder.header=フォルダー削除
+confirmDeleteFolder.listIntro=このフォルダーはこのようなアイテムが持っている
+confirmDeleteFolder.prompt=このフォルダーの全部を削除してみる。「OK」のボタンをクリックして下さい。
+confirmEmptyFolder.prompt=このフォルダーのメッセージの全部を削除してみる。「フォルダー削除を確認」ボタンをクリックして下さい。
+confirmEmptyFolder.delete.now=削除メッセージは:
+confirmEmptyFolder.perm.true=一瞬感に不変削除
+confirmEmptyFolder.perm.false=ゴミに捨てる
+confirmEmptyFolder.title=メッセージ削除を確認
+confirmEmptyFolder.header=メッセージを削除
+confirmEmptyFolder.listIntro=このフォルダーはこのようなアイテムが持つ：
+copyToFolder.result.multiple.success={0}つのメッセージは{1}にコピーしました。
+copyToFolder.result.single.success= メッセージは{0}にコピーしました。
+createFolder.result.success=首尾よくフォルダーを創作しました。
+delete.result.single.success=メッセージはゴミに捨てました.
+delete.result.multiple.success={0}つのメッセージはゴミに捨てました。
+deleteAddress.result.success=宛先を削除しました。
+deleteForever.result.single.success=メッセージは不変削除しました。
+deleteForever.result.multiple.success={0}つのメッセージは不変削除しました。
+emptyTrash.result.single.success=ゴミは空しいです。メッセージを１つ削除しました。
+emptyTrash.result.multiple.success= ゴミは空しいです。メッセージを{0}つ削除しました。
+emptyFolder.result.single.success=このフォルダーのメッセージを削除してみる。
+emptyFolder.result.multiple.success=このフォルダーのメッセージを削除してみます。
+error.action.required=アクションを全然選択しませんでした。
+error.attachment.empty=アップロードした書類は存在しないなんか空しいです： {0}。
+error.attachment.duplicate={0}の書類はもう添付書類です。
+error.attachment.toolarge=全部の添付書類の大きさの合計が大きすぎるんです。 大きさの限界: {0}。
+error.attachment.delete.fail=選択した添付書類を削除出来ませんでした。
+error.attachment.required=全然の添付書類を選択しませんでした。
+error.changeSubscription.unsubscribe.inbox=受信トレイから不寄付しては行けません。
+error.compose.to.required=宛先の事項が空しく出来ません。
+error.createFolder.newFolder=新フォルダーの「{0}」を作ったら、誤りがありました。
+error.createFolder.newFolder.required=新フォルダーの名前を入力しなさい。
+error.createFolder.newFolder.toolong=新しいフォルダーの名前は長過ぎました。　{0}個以下の名前を入力して下さい。
+error.createFolder.parentFolder.required=親フォルダーの名前を選択して下さい。
+error.createFolder.exists={0}」のフォルダはもう創作しました。
+error.createFolder.illegalChar=フォルダーの名前は違法な文字があります：「{0}」
+error.deleteAddress.notexist=連絡先の「{0}」の事項はありません。
+error.deleteFolder.notallowed=「{0}」のフォルダーはこの申請のように必要です。
+error.deleteFolder.notexist=「{0}」のフォルダーはありません。
+error.deleteFolder.notempty=フォルダーは空しくないです。
+error.general.value.required=必要な事項が忘れました。
+error.message.notexist=メッセージはありません。
+error.messages.notexist=あるメッセージを選択しませんでした。
+error.password.required=パスワードは必要
+error.password.invalid=パスワードが間違えました。
+error.renameFolder.reserved=このフォルダーは特別ですから、改名できません。
+error.session.invalid=このセッションは今から妥当じゃありません。
+error.connection.failed=IMAPサーバーで繋がってみて失敗しませんでした。後で繋がってみなさい。
+error.copyMessage.failed=メッセージをコピーするのは失敗しました: 「{0}」
+error.folder.notfound=フォルダーを見つけませんでした。 「{0}」
+error.folder.list.reading=メッセージフォルダーの目録を読み取る誤りがありました。
+error.folder.reserved.required=「{0}」のフォルダーを見つけ、創作出来ませんでした。
+error.message.notfound=頼んだメッセージを見つけませんでした。
+error.messageList.message.required=全然のメッセージは選択しませんでした。
+error.moveCopy.toFolder.required=全然のフォルダーは選択しませんでした。
+error.address.email.invalid=E-メールの事項は本物のE-メールじゃありません。
+error.address.email.required=E-メールは必要です。
+error.address.email.toolong=E-メールの長さは{0}個以上があるのは行けません。
+error.address.duplicate=宛先もうあります: {0}。
+error.address.invalid=このEメールの事項は誤りがありました：{0}。
+error.address.name.required=名前は必要です。
+error.address.name.toolong=名前の長さは{0}個以上があるのは行けません。
+error.address.overlimit=もしわけありません,この連絡先は{0}つの事項しか持ってません。
+error.addressbk.dao.exception=連絡先のデータを得ませんでした。
+error.saveAddresses.choice.required=全然の宛先は選択しませんでした。
+error.saveAddresses.overlimit=もしわけありません,　この連絡先は{0}つの事項しか持っていません。削除しないで、{1}つ以上の宛先を参加しては行けません。error.compose.saved=セッションは満了して、あのメッセージは臨時のセーブをしました。メッセージを入力して続くように、ログインします。
+error.userinfo.dao.exception=必要ユーザー情報を得ませんでした。
+error.username.required= ユーザ名は必要です。
+errorCopy.title.default=メッセージをコピーした誤りがあります。
+errorCopy.title.reserved=メッセージを{0}にコピーした誤りがあります。
+errorCopy.introduction=メッセージを{0}にコピーした誤りがあります:
+errorCopy.overQuota.message=受信トレイはたぶんメッセージの割り当てを届いてしまいましたから、変更したりコピーしたりする空き容量はあまりありません。
+errorCopy.overQuota.instructions=この場合だったら、受信トレイスペースのために空けるように、用済みメッセージを削除したり、{0}のフォルダーを空けたり出来ます。
+errorCopy.table.introduction=選択した稼働はこのメッセージに失敗しました：
+errorCopyToTrash.overQuota.instructions=この場合は、受信トレイスペースを空けるためにゴミを捨てたり、コピー出来なかったメッセージを不変削除したりするようにします：
+errors.header=<ul class="errors">
+errors.footer=</ul>
+errors.prefix=<li class="error">
+errors.suffix=</li>
+#{0} will be replaced with the exception message
+error.login.mailhost.unknownhostexception={0}のメールサーバに接続することない。 システムアドミンに知らせなさい。
+#{0} will be replaced with the exception message
+error.login.mailhost.connectexception= 関係はメールサーバに接続することを試みている間断った。 システムアドミンに知らせなさい。
+#{0} will be replaced with the exception message
+error.login.mailhost.noroutetohostexception={0}のメールサーバに接続することない。 システムアドミンに知らせなさい。
+error.session.expired=会議は再度切れたり、ログインして下さい。
+error.login.mailhost.default={0}のメールサーバに接続する間違い. システムアドミンに知らせなさい。
+#{0} will be replaced with the exception message
+error.login.mailhost.fetch.inbox=受信トレイを取り出す間違い。 メールサーバの後部の問題がある。 不足分の後で間、もう一度試す。 {0}
+# catch-all error
+error.default=誤りがありました。
+error.login.resource.failed=レソースファイルを届けません。
+errorBasic.title=誤り
+errorBasic.introduction=もしわけありませんが、 誤りがありました:
+errorBasic.returnTo=戻ります
+errorBasic.logout=ログアウト
+errorBasic.instructions=質問過文句かあったら、<a href="help.do">ここに</a>クリックして下さい。
+errorLogout.explanation=GatorMailを使用して続くように、もう一度ログインするようにします。
+errorLogout.login=ログイン
+errorUncaught.introduction=予想外の間違いは生じた:
+feedback.body1=GatorMailを使用して悩みを有すれば、答えの<html:link forward="help">助けのページ</html:link>を見つけるかもしれない。 \
+		それ以上の援助を必要とすれば、(352)392-HELPか<html:link forward="helpdeskFeedback">helpdesk@ufl.edu</html:link>　\
+                 でヘルプデスク・に連絡することができる。 \
+feedback.body2= かコメント私達にGatorMailの適用のフィードバックを、 \
+		、バグレポートのような、あなたのユーザーの経験の特徴の要求送ることを、 \
+		望んだら<html:link forward="composeFeedback">フィードバックの形態</html:link>に進みなさい。 \
+		GatorMailはユーザーフィードバックに主として基づいていた設計され、私達は完全にあなたの入力を歓迎する!
+feedback.title=GatorMailのフィードバック
+folder.title=フォルダー
+folder.view.email.format=<span title="{2}">{1}</span>
+#{0} is the folder name, {1} is the message count, {2} is the unread message count, {3} is the new message count
+folder.view.folder.info=<strong>Folder:</strong> {0} <span title="{3} new message(s) / {2} unread message(s) / {1} total message(s)">( {2} / {1} )</span>
+folder.listing.title=フォルダー
+folder.empty=このフォルダーにゼロメッセージがあるまたは現在のメッセージフィルターはメッセージを一致させなかった。
+folder.notfound={0}のフォルダーは見つかれませんでした。
+folder.quota.title=フォルダーの分担
+folder.quota.message={1}KBからの{0}KBを使用しています。
+folder.filter.action.title=現在のフォルダーに指定フィルターを加えなさい。
+folder.filter.filter.title= フィルターが入力を要求したら、それをここに書き入れなさい、さもなければこれは無視される。
+folder.filter.filterType.title=このフォルダーに適用するためにフィルターのタイプを選びなさい。
+folder.filter.addressBook=知られていた宛先から
+folder.filter.body=メッセージのボディー：
+folder.filter.hasAttachment=添付書類があるメッセージ
+folder.filter.noAttachment=添付書類無しメッセージ
+folder.filter.notAddressBook=知らない宛先から
+folder.filter.none=メッセージの目線をフィルター
+folder.filter.toRecipient=To: もらった宛先：
+folder.filter.allRecipients=もらった宛先のみんな：
+folder.filter.subjectAndSender=課題と送る宛先：
+folder.filter.subject=課題だけ：
+folder.filter.sender=送る宛先だけ：
+folder.filter.new=新しいメッセージ
+folder.filter.seen=読んだメッセージ
+folder.filter.replied=返事したメッセージ
+folder.filter.flaggedJunk=迷感を報告
+folder.filter.notFlaggedJunk=迷感を解除
+folder.label.inbox=受信トレイ
+folder.label.junk=迷惑メール
+folder.label.drafts=下書
+folder.label.sent=送信済みメール
+folder.label.trash=ゴミ箱
+folderManage.title=フォルダーを管理
+folderManage.table.folder=フォルダー
+folderManage.table.numMessages=メッセージ
+folderManage.table.unread= 読まなかったメッセージ
+folderManage.table.modify=変更
+folderManage.table.delete=削除
+folderManage.table.size=大きさ
+folderManage.table.subscribed=寄付しました
+folderManage.table.no=いいえ
+folderManage.table.yes=はい
+folderManage.deleteFolder.label=フォルダーを削除
+folderManageModify.title=フォルダーを変更
+folderManageModify.subFolder.header=サッブフォルダーを創作
+folderManageModify.subFolder.headerFolder= フォルダを創作
+folderManageModify.subFolder.desc=親フォルダー:
+folderManageModify.deleteFolder.header=フォルダーを削除
+folderManageModify.deleteFolder.delete=削除
+folderManageModify.renameFolder.header=フォルダーを改名
+folderManageModify.renameFolder.name=フォルダー名
+folderManageModify.renameFolder.renameTo=新名
+folderManageModify.subscription.header=寄付のステータス
+folderManageModify.subscription.desc=(不)寄付
+folderManageModify.subscription.status=Tこのフォルダーは今
+folderManageModify.subscription.subscribed=寄付です。
+folderManageModify.subscription.unsubscribed= 不寄付です。
+gatorlink.link.logout=ゲトーアリンク
+gatorlink.link.logout.title=GatorLinkの全部の接客事をログアウトします。
+general.size.format= gb, mb, kb, b, bytes
+general.size.formatter=edu.ufl.osg.webmail.formatters.SizeFormat
+#Labels and messages to be used in the Help page
+help.header=GatorMailのヘルプ
+help.intro=このヘルプページはまだ工事中です。 \
+		使用人の質問はもっと聞いて、Gatormailの得意ポイントについて書くほど、\
+		このページに答えがもっと参加してあげる。GatorMailを使用してみてどうもありがとうございます。
+help.answer.composeNewWindow=GatorMailはニュー・ウィンドウの特徴の開いたのによって既にこれを支える。\
+		 リンクへの構成か応答で「右クリック」するとき「ニュー・ウィンドウで開くべき類似した」\
+		　選択のメニューの上の破裂音は利用できるべきである。これを選ぶ場合1つの窓のメッセージ構成し、\
+		　読めるか別の窓の他の活動を。\
+help.answer.displayName=名前はフロリダ大学の登録簿サーバーから取り出される。 \
+		私達はあなたの署名およびあなたの名前両方のために電子メールの分野からので現われると同時に表示 \
+		ネームフィールドを使用する。 登録簿情報を変えるためには \
+		場所を編集するフロリダの登録簿の大学を訪問しなさい。 \
+		<html:link href="http://directory.ufl.edu/edit">ここにクリックして下さい</html:link>
+help.answer.foldersDisapeared=予約購読されるようにこれらのホールダーに印を付ける必要があることは可能性が高い。 \
+		 ここにこれをする方法をある:\
+		</p><p>\
+		<html:link forward="folderManage">フォルダーを管理リンク</html:link>をメニューバーでクリックして下さい。 \
+		ここにあなたからあなたのホールダーのそれぞれの予約購読の状態を見ることができる。\
+		予約購読されたコラムが印を付けられたメール、ホールダーの変更のホールダーリンクをかちりとクリックし、 \
+		次に次のページの予約購読のホールダーボタンを押しなさい。
+help.answer.gl=(352)392-HELPか<a href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</a>でヘルプデスク・に連絡しなさい
+help.answer.login=まず、 <html:link href="http://gatorlink.ufl.edu"> Gatorlinkの記述 </html:link>を持たなければならない。　\
+		gatorfanのような、ないあなたの記述をセットアップした時あなたが選んだあなたのユーザ登録名\
+		ではない何でもまたはgatorfan@ufl.eduのようなあなたのユーザ登録名を書き入れていることを確かめなさい。\
+		それはすべての小文字にあるべきであなたのユーザ登録名の前か後にスペースを含んでいないことを確かめる。\
+		パスワードは大文字/小文字の区別がある、従ってそれを正しく丁度タイプしていることを確かめなさい。\
+		パスワードを忘れているか、または392-HELPあなたの記述の接触との他のどの問題もヘルプデスク・有したり\
+		または<html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>を送れば。\
+help.answer.noINBOX= Gatorlinkのポストがないことは可能である。\
+		これは頻繁にGatorlinkあなたの郵便が他の記述に進められている、 \
+		あなたのポストはまだ作成されていないとき事実であり。 \
+	　　　　 また、ポストのために修飾しないGatorlinkのユーザーであるかもしれない。 \
+		Gatorlinkの記述の<html:link href="http://gatorlink.ufl.edu/">サイト</html:link>であなたのGatorlinkのアカウント情報を編集し、見ることができる \
+		Gatorlinkの記述の場所のGatorlinkのアカウント情報。 \
+		</p><p>\
+		メールサーバが内部エラーを経験していることはまた可能である。 \
+		(352)392-HELPでヘルプデスク・に連絡すればこれを考えれば \
+		<html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link> \
+		は事実であるかもしれない。
+help.answer.open=それでも質問を有する場合、または問題を報告することを望んだらほとんどのページの上で \
+		<html:link forward="feedback"> 発送フィードバックリンク</html:link> \
+		を使用すれば郵便でサポートを頼むことができる。 \
+        <html:link href="http://GatorMail.sf.net/support">http://GatorMail.sf.net/support</html:link>.
+help.answer.pagination=GatorMailは現在ホールダーを見るときメッセージのリストのページを付けを支えない。 \
+		 この特徴は実行するべき特徴の私達の候補者リストにある。
+help.answer.sentMail=発送ボタン送られたホールダーのチェック・ボックスにコピーメッセージを次にかちりと鳴らす必要がある。
+help.answer.subscribed=GatorMailはGatorlinkのメールサーバと相互に作用しているのに \
+		<html:link href="http://www-camis.stanford.edu/projects/imap/ml/imap.html">IMAP</html:link>\
+		の議定書を使用する。 IMAPでは、ホールダーは予約購読するか、または予約講読を解除した印が付き、 \
+		郵便顧客は各タイプのホールダーを別様に扱うかもしれない。\
+		GatorMailはあなたのホールダーの予約購読された状態を置くことを可能にし(ない表示) \
+		予約講読を解除した管理のホールダーのページのを除くホールダーの、無視する。
+help.answer.userInfoException=この間違いはGatorMailが<html:link href="http://phonebook.ufl.edu/"> UFの登録簿 </html:link>。　のあなたの記入項目を見つけることができなかったことを示す。 \
+		GatorMailはあなたの表示名前および内部的に使用する、あなたのUF IDを得るのに登録簿を使用する。 \
+		</p><p>\
+		人々は一般にGatorLinkシステムに非常に最近登録したらこの間違いを得る。 \
+		UFの登録簿は登録データベースからの情報を夜通し引っ張ったり、 \
+		従って1日の早い内に登録したら、GatorMailに翌朝記録することを試みる。 \
+		</p><p>\
+		またこの間違いが一時的な調べの故障を表すことは、可能である。 \
+		不足分を待っていた後首尾よくログオン間、できるかもしれない。 \
+		但しこの間違いを得続けたらそしてあなた知りなさいUFのディレクトリ・エントリを有するか、 \
+		ルプデスク・に(352)392-HELPで問題を報告するか、または<html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>。 \
+help.question.composeNewWindow=私がメッセージを構成するときニュー・ウィンドウで開くようにそれを作るでしようか。
+help.question.displayName=私の表示名前はどこで、署名はから来るか。 なぜ皆の大文字であるか。
+help.question.foldersDisapeared=なぜ私のホールダーのいくつかを見ることができないことあるか。 私はそれらがあるが、GatorMailがそれらを示さないことを知っている。
+help.question.gl=私は郵便促進または他のGatorlink大将の質問のようなWebmailシステムに特定、ではない質問を有する。
+help.question.login=ログイン出来ません。
+help.question.noINBOX=I get a "Couldn't find folder" error for INBOX when I log in.
+help.question.open=これらの質問のどれも私のGatorMailの細目問題と助けない。 私はいかに貴方達の把握を得るか。
+help.question.pagination=私はいかに何メッセージがメッセージのリストで示されているか限るか。
+help.question.sentMail=私のメッセージはなぜ私の送られたホールダーで貯えられていないか。
+help.question.subscribed=予約購読されたコラムは何を管理のホールダーのページで示すか。
+help.question.userInfoException=私がログオンすることを試みるとき私は必須のユーザー情報の間違いにアクセスできなかった得る。
+
+help.title=ヘルプ
+help.top=上へ
+#end of Help page
+label.deleteForever=不変削除
+label.addresses=宛先
+label.name=名前
+label.email=メール
+label.size=大きさ
+label.subject=課題
+label.title.checkAll=全部の宛先を選択
+link.about=アバウト
+link.about.title=GatorMailについて
+link.addAddress=新しい連絡先
+link.addToAddressBk=連絡先に参加
+link.addressBook=連絡先
+link.addressBook.title=連絡先を治める
+link.backToAddressBk=連絡先に戻る
+link.backToMessage=メッセージに戻る
+link.check.all=全部選択
+link.check.none=全部無し
+link.checkMail=メールを調べる
+link.checkMail.title=受信トレイ
+link.compose=メールを作成
+link.compose.title=メールを作成
+link.delete=削除
+link.delete.title=このメッセージはゴミ箱に変更します
+link.deleteForever=不変削除
+link.deleteForever.title=不変削除
+link.feedback=フィードバックを送る
+link.feedback.title= フィードバックを送って、GatorMailのお手伝いを頼みます。
+link.folderManage.back=フォルダーを管理
+link.forward=forward
+link.forward.title=メッセージがあたかも添付書類かのように送る。
+link.help=ヘルプ
+link.help.title=ゲトーアメールヘルプ
+link.logout=ログアウト
+link.logout.title=ログアウト
+link.manageFolder=フォルダーを編集
+link.manageFolder.title=フォルダーを作成し、削除し、そして予約購読するか、または予約講読を解除
+link.message.source=メッセージのもと
+link.message.source.title=ヘッダーとローメッセージを見ます。
+link.next=次
+link.next.title=次のメセッジ
+link.reply=返事
+link.reply.title=このメッセージの送った宛先に返事する
+link.reply-all=(全部)
+link.reply-all.title=このメッセージの受け取った宛先に返事する
+link.report.spam=スパッム
+link.report.ham=スパッムじゃない。
+link.preferences=設定
+link.preferences.title=設定を編集しなさい
+link.previous=先
+link.previous.title=先のメッセージ
+link.printerFriendly=プリンターフレンドリー
+link.printerFriendly.title=メッセージのプリンターフレンドリーの眺めです。
+link.up=上
+link.up.title=フォルダーに戻ります
+login.title=ログイン
+#{0} will be replaced with the exception message
+login.authentication.failed=ユーザ名かパスワードか誤りました。
+message.title=メッセージを見ます。 -\ 
+message.bcc=Bcc
+message.cc=Cc
+message.date= メッセージの日
+message.from=送る宛先
+message.listCommands=リストコマンド
+message.to=宛先
+# {0} is the output from Exception.getMessage()
+message.error.unsupported.encoding=このメッセージは{0}の字セットでタイプしたから、GatorMailは訳しません。あたかも添付書類かのようにメッセージをダウンロードしてみます。
+message.invalid.messageids=TODO: 私を書きなさい
+message.nosubject=（無題）
+message.invalid.folder= 無効なフォルダー。 受信トレイのフォルダーに方向を変えた。
+message.invalid.part=無効な分割通信文
+message.size=大きさ
+message.subject=課題
+#Remove this when html:img supports forwards
+message.attachment.url=/attachment.do
+message.delivery-status=Delivery Status Codes
+message.date.format='<span title="'EEEE MMMM d, yyyy hh:mm:ss aaa z'">'EEE'&nbsp;'MM/dd'</span>'
+#The abbreviations for Gig, Meg, Kilo, bytes and then the word bytes.
+message.size.format=g,m,k,b,bytes
+message.size.formatter=edu.ufl.osg.webmail.formatters.SizeFormat
+message.email.formatter=edu.ufl.osg.webmail.formatters.EmailFormat
+message.view.email.format={0}
+message.subject.formatter=edu.ufl.osg.webmail.formatters.SubjectFormat
+message.subject.format=65
+message.flags=印
+message.flags.answered.alt=返事した
+message.flags.answered.title=このメッセージに返事しました。
+message.flags.attachment.alt=添付書類
+message.flags.attachment.title=このメッセージは添付書類があります。
+message.flags.draft.alt=下書き
+message.flags.draft.title=このメッセージは下書きです
+message.flags.deleted.alt=削除しました。
+message.flags.deleted.title=このメッセージは削除の印を付けました。
+message.flags.flagged.alt=印を付けました。
+message.flags.flagged.title=このメッセージは旗の印を付けました。
+message.flags.junk.alt=迷感メール
+message.flags.junk.title=このメッセージは迷感メールかもしれません。
+message.flags.recent.alt=最近
+message.flags.recent.title=このメッセージは受信トレイを前回みたあとでトレイに送ってきました。
+message.flags.seen.alt=読んだ
+message.flags.seen.title=このメッセージを読みました。
+message.attachment.image=映像:
+message.attachment.binary=添付書類
+message.attachment.binary.dangerous=知らない宛先からの添付書類を気が付いて下さい。添付書類はパソコンやデータに注意出来ますから。
+message.attachment.message=添付メッセージ
+message.attachment.save=メッセージをダウンロード
+message.junk.threshold.0=0 使用禁止。全然のメッセージが印をつけません。
+message.junk.threshold.1=1 侵略的です。たくさんの正規のメッセージが印を付けます。
+message.junk.threshold.2=2
+message.junk.threshold.3=3 ちょっと侵略的です。
+message.junk.threshold.4=4
+message.junk.threshold.5=5 普通
+message.junk.threshold.6=6
+message.junk.threshold.7=7
+message.junk.threshold.8=8 保守的です。少し正規なメッセージが印を付けてかもしれません。
+message.junk.threshold.9=9
+message.junk.threshold.10=10 とても保守的です。たくさんスパッムが印を付けません。
+message.junk.threshold.11=11
+message.junk.threshold.12=12
+message.junk.threshold.13=13
+message.junk.threshold.14=14
+message.junk.threshold.15=15 明らかなスパッムしか印を付けません。
+messageList.unread=(Un)Read
+moveToFolder.result.multiple.success={0}つのメッセージは{1}に変更しました。
+moveToFolder.result.single.success=メッセージは{0}に変更しました。
+noInbox.title=受信トレイが見つかれませんでした。
+performDeleteFolder.result.success=首尾よくフォルダーを削除しました。
+performDeleteFolder.result.cancel=削除をキャンセルしました。
+#Preferences page
+preferences.compose.image=映像のURL：
+preferences.compose.image.help=電子メールクライアントがそれを支えたら電子メールのための相棒アイコンのように <br/>\
+        示されているべき小さいイメージに完全なURLを書き入れなさい。\
+        <p>イメージに相棒はアイコンよく働くことを意味する48x48のサイズがあるべきである。 <br/>\
+        置かれたとき下検分は権利で示される。</p>
+preferences.compose.RAC=感受性がある自動は完了する:
+preferences.compose.RAC.help=点検されたら、あなたの住所録の住所は自動的にそれらをタイプするように完了する。\
+		<p>働くこれのためのあなたの住所録の少なくとも1つの住所を持たなければならない。<br/>\
+		方法はこの特徴を不具にすることを好むためにあなたのブラウザが前の受け手およびあなたを覚えることができれば。</p>
+preferences.compose.signature=署名:
+preferences.compose.signature.help=メッセージを構成するとき付すべき注文の署名に入りなさい。 \
+		<p>次に切れ目、2つのダッシュおよびスペースを保つように励まされる。 <br/>\
+		多くの電子メールクライアントはあなたの署名の開始としてこれを確認する。</p>
+preferences.imageUrl.invalid=イメージURLは有効なURLなる: {0}
+preferences.junk.filter=自動的にフィルター不要郵便物:
+preferences.junk.filter.help=選ばれたら、がらくたが付いている移動メッセージはがらくたのホールダーに \
+		上記の境界より高く記録する。 <p>\
+        あなたのポストがいっぱいになることを防ぐためにがらくたのホールダーを時々空ける必要がある。<br/>\
+        がらくたのホールダーがなければあなたのために作成される。<br/>\
+        これを可能にすることはまた立場の電子メールクライアントだけのメッセージ配達に影響を与える。</p>
+preferences.junk.flag=不要郵便物の旗の境界:
+preferences.junk.flag.help= がらくたとしてメッセージに印を付けるためにがらくたのスコアの境界を置きなさい。<br/>\
+		より低い境界は本当らしいスパムとしてメッセージを示すために。 <p>\
+		この設定はまたメッセージのリストの眺めフィルター境界を制御する。</p>
+preferences.replyTo.invalid=住所への応答はブランクまたは有効な電子メールアドレスでなければならない: {0}
+preferences.title=設定
+preferences.imageUrl.invalid=妥当な映像のURLが必要です：{0}
+preferences.maxInactiveMultiplier.invalid=最高の不活性乗数は余りに高く余りに低いまたは。
+preferences.maxInactiveMultiplier.short=短く
+preferences.maxInactiveMultiplier.default=普通
+preferences.maxInactiveMultiplier.long=長く
+preferences.nameAndAddress.fromName=送った人の名前：
+preferences.nameAndAddress.fromName.help=あなたが構成するメッセージの分野からので表示される名前。
+preferences.nameAndAddress.reply=お返事する宛先：
+preferences.nameAndAddress.reply.help=住所人々にこの1よりもし違ったらに答えてほしい。
+preferences.nameAndAddress.title=名前と宛先
+preferences.junkThreahsold.invalid=がらくたの境界は含んだ0と15間の整数でなければならない。
+preferences.vacationMessage.invalid=休暇メッセージは休暇の自動応答機を可能にするためにメッセージを含まなければならない。
+preferences.view.hideHeader=ページヘッダーを隠れます：
+preferences.view.hideHeader.help=選択したら、ロゴやページヘッダーの内容なんか隠れてしまいます。
+preferences.view.showThread=スレッドを見せます：
+preferences.view.showThread.help=選択したら、メッセージの目線にマウスオバーするほど、その目線のスレッドが強調表示します。\
+       <p>使用可能な設定で、ちょっとウエッブブラウザーが遅刻します。</p>
+preferences.view.title=眺め
+#END of Preferences Page
+prompt.username=ユーザー名
+prompt.password=パスワード
+renameFolder.result.success=フォルダーを首尾よく改名しました。
+saveAddresses.result.success.multiple={0}つの宛先をセーブしました。
+saveAddresses.result.success.single=宛先をセーブしました。
+saveAddress.result.success=事項を参加しました。
+select.folder=フォルダーを選択:
+selectAddresses.title=宛先を選択
+selectAddresses.introduction=連絡先にセーブしたい事項を選択して下さい。
+send.result.success=メッセージを送りました。
+site.title= ゲータウェッブメール -\

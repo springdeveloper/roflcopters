@@ -1,0 +1,83 @@
+.topLeft{
+	position:relative;
+	top:0px;
+	left:0px;
+	width:10px;
+	height:15px;
+	background-image:url(images/webmail-v2-topLeftCorner_06.png);
+	z-index:1;
+}
+.top{
+	position:absolute;
+	top:0px;
+	left:10px;
+	right:15px;
+	height:10px;
+	background-image:url(images/webmail-v2-topContent_08.png);
+	background-repeat:repeat-x;
+	z-index:1;
+}
+.topRight{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:15px;
+	height:15px;
+	background-image:url(images/webmail-v2-topRightCorner_10.png);
+	z-index:1;
+}
+.bottomLeft{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	width:10px;
+	height:18px;
+	background-image:url(images/webmail-v2-bottomLeftCorner_28.png);
+	z-index:1;
+}
+.bottom{
+	position:absolute;
+	bottom:0px;
+	left:10px;
+	right:15px;
+	height:18px;
+	background-image:url(images/webmail-v2-bottom_29.png);
+	background-repeat:repeat-x;
+	z-index:1;
+}
+.bottomRight{
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	width:15px;
+	height:18px;
+	background-image:url(images/webmail-v2-bottomRightCorner_28.png);
+	z-index:1;
+}
+.left{
+	position:absolute;
+	left:0px;
+	top:15px;
+	bottom:18px;
+	width:10px;
+	background-image:url(images/webmail-v2-left_09.png);
+	background-repeat:repeat-y;
+	z-index:1;
+}
+.right{
+	position:absolute;
+	top:15px;
+	right:0px;
+	bottom:18px;
+	width:15px;
+	background-image:url(images/webmail-v2-right_20.png);
+	background-repeat:repeat-y;
+	z-index:1;
+}
+.errSpace{
+	position:absolute;
+	top:5px;
+	background-color:#FFF;
+	left:10px;
+	right:12px;
+}

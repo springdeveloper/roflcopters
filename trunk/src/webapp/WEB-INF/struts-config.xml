@@ -76,6 +76,7 @@
         <forward name="deleteAttachment" path="/deleteAttachment.do"/>
         <forward name="deleteAddress" path="/deleteAddress.do"/>
         <forward name="deleteFolder" path="/deleteFolder.do"/>
+        <forward name="editAddress" path="/editAddress.do"/>
         <forward name="folderManage" path="/folderManage.do"/>
         <forward name="folderManageModify" path="/folderManageModify.do"/>
         <forward name="errorBasic" path="/errorBasic.do"/>
@@ -92,6 +93,7 @@
         <forward name="help" path="/help.do"/>
         <forward name="inbox" path="/folder.do?folder=INBOX" redirect="true"/>
         <forward name="INBOX" path="/folder.do?folder=INBOX"/>
+        <forward name="drafts" path="/folder.do?folder=INBOX/Drafts" />
         <forward name="login" path="/login.do"/>
         <forward name="logout" path="/logout.do"/>
         <forward name="message" path="/message.do"/>
@@ -112,8 +114,10 @@
         <forward name="rawMessage" path="/rawMessage.do"/>
         <forward name="reply" path="/reply.do"/>
         <forward name="saveAddress" path="/saveAddress.do"/>
+        <forward name="saveEditedAddress" path="/saveEditedAddress.do"/>
         <forward name="saveAddresses" path="/saveAddresses.do"/>
         <forward name="selectAddresses" path="/selectAddresses.do"/>
+        <forward name="saveDraft" path="/saveDraft.do"/>
         <forward name="send" path="/send.do"/>
         <forward name="feedback" path="/feedback.do"/>
         <forward name="composeFeedback" path="/compose.do?to=consult@lists.ufl.edu&amp;subject=GatorMail+Webmail+Feedback+@VERSION@"/>
@@ -263,9 +267,19 @@
             <forward name="success" path="/addressbook.do"/>
             <forward name="fail" path="/addAddress.do"/>
         </action>
+        
+        <action path="/saveEditedAddress" name="addressForm" scope="request" input="editAddress" type="edu.ufl.osg.webmail.actions.SaveEditedAddressAction">
+            <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/editAddress.do"/>
+        </action>
 
         <action path="/deleteAddress" name="addressForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.DeleteAddressAction" validate="false">
             <forward name="success" path="/addressbook.do"/>
+            <forward name="fail" path="/addressbook.do"/>
+        </action>
+        
+        <action path="/editAddress" name="addressForm" scope="request" input="addressbook" type="edu.ufl.osg.webmail.actions.EditAddressAction" validate="false">
+            <forward name="success" path="/editAddress.jsp"/>
             <forward name="fail" path="/addressbook.do"/>
         </action>
 
@@ -314,6 +328,7 @@
 
         <action path="/send" name="composeForm" scope="request" validate="false" type="edu.ufl.osg.webmail.actions.SendAction" input="/compose.jsp">
             <forward name="success" path="/folder.do?folder=INBOX"/>
+            <forward name="draft" path="/folder.do?folder=INBOX/Drafts"/>
             <forward name="fail" path="/compose.jsp"/>
         </action>
 
@@ -349,7 +364,7 @@
 
 
     <!-- ================================ Message Resources Definitions -->
-    <message-resources parameter="Messages"/>
+    <message-resources parameter="lang.Messages"/>
 
 
     <!-- ======================================= Plug Ins Configuration -->

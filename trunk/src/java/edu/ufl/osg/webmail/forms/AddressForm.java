@@ -37,6 +37,15 @@ public final class AddressForm extends ActionForm {
     private static final Logger logger = Logger.getLogger(AddressForm.class.getName());
     private String name;
     private String email;
+	private String company;
+	private String position;
+	private String phoneHome;
+	private String phoneWork;
+	private String phoneCell;
+	private String address;
+	private String notes;
+	
+	private int index; // location of this address entry in in-mem list if already there
 
     /**
      * @param mapping The mapping used to select this instance
@@ -45,7 +54,15 @@ public final class AddressForm extends ActionForm {
     public void reset(final ActionMapping mapping, final HttpServletRequest request) {
         setName(null);
         setEmail(null);
-    }
+		setCompany(null);
+		setPosition(null);
+		setPhoneHome(null);
+		setPhoneWork(null);
+		setPhoneCell(null);
+		setAddress(null);
+		setNotes(null);
+		setIndex(-1);
+	}
 
     /**
      * Verifies the name and email form a valid RFC 822 email adddress as
@@ -98,4 +115,70 @@ public final class AddressForm extends ActionForm {
     public void setName(final String name) {
         this.name = name;
     }
+	
+		
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
+	public void setPhoneHome(String phoneHome) {
+		this.phoneHome = phoneHome;
+	}
+	
+	public void setPhoneWork(String phoneWork) {
+		this.phoneWork = phoneWork;
+	}
+	
+	public void setPhoneCell(String phoneCell) {
+		this.phoneCell = phoneCell;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
+	public String getCompany() {
+		return company;
+	}
+	
+	public String getPosition() {
+		return position;
+	}
+	
+	public String getPhoneHome() {
+		return phoneHome;
+	}
+	
+	public String getPhoneWork() {
+		return phoneWork;
+	}
+	
+	public String getPhoneCell() {
+		return phoneCell;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public String getNotes() {
+		return notes;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+
 }

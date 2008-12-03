@@ -52,7 +52,7 @@ import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Properties;
-
+import java.util.Locale;
 
 /**
  * Login controller.
@@ -207,6 +207,12 @@ public class LoginAction extends Action {
             session.setAttribute("vacationEnabled", Boolean.TRUE);
         }
         */
+		String language = prefs.getProperty("pref.lang");
+		
+		if(language == null)
+			language = "en";
+			
+		session.setAttribute("org.apache.struts.action.LOCALE", new Locale(language));
 
         // if user's session timed out while composing a message
         if (session.getAttribute(Constants.SAVED_COMPOSE_FORM) != null) {
@@ -226,7 +232,7 @@ public class LoginAction extends Action {
      * an ActionErrors object containing any errors caught in the process.
      */
     private static ActionErrors initializeObjects(final User user, final ActionErrors errors, final HttpSession session) {
-	System.out.println("HELLO TO THE WORLD!!!! FROM CHRISG");        
+
 	// if any of these fail, log user out & ask him to try again
         try {
             // initialize the user object

@@ -1159,7 +1159,7 @@ public class Util {
      * Is this a special, undeletable folder such as INBOX or Trash?
      */
     public static boolean isReservedFolder(final String folderName, final HttpSession session) throws MessagingException {
-        return ("INBOX".equals(folderName) || Constants.getTrashFolderFullname(session).equals(folderName) || Constants.getSentFolderFullname(session).equals(folderName));
+        return ("INBOX".equals(folderName) || Constants.getJunkFolderFullname(session).equals(folderName) || Constants.getTrashFolderFullname(session).equals(folderName) || Constants.getSentFolderFullname(session).equals(folderName) || Constants.getDraftFolderFullname(session).equals(folderName) );
     }
 
     // Two methods to help track usage stats. TODO: remove them

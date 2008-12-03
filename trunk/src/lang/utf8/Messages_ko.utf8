@@ -1,0 +1,506 @@
+about.title=에 관하여
+addAddress.title=주소 입장을 추가하십시오
+addAddress.header=주소록에 입장을 추가하십시오
+addAddress.name=이름
+addAddress.email=전자 우편
+addressbook.control.empty1=주소록은 비다
+addressbook.control.empty2=주소록에 새로운 주소를 추가하십시오
+addressbook.control.empty3=여기에서 유형
+addressbook.control.empty4=그것은 쉬운, 그것 만든다 기록된다.
+addressbook.control.message=선정한 주소를 추가하십시오:
+addressbook.control.noscript=JavaScript는 주소록 특징이 일하도록 가능하게 되어야 한다.
+addressbook.title=주소록
+addressbook.email=전자 우편
+addressbook.delete=감소
+addressbook.limit.message=이 {1}.에서 교통 스타킹 {0} 커뮤니케이션의 끝.
+addressbook.name=이름
+button.attachment.upload=다른 부착을 추가하십시오
+button.attachment.delete=감소는 파일을 검사했다
+button.filter=여과기
+button.folderManage.deleteFolder=감소 폴더
+button.folderManageModify.newFolder=폴더를 창조하십시오
+button.folderManageModify.renameFolder=폴더를 개명하십시오
+button.folderManageModify.deleteFolder=감소 폴더
+button.subscribeFolder=폴더를 구독하십시오
+button.unsubscribeFolder=폴더를 구독 취소하십시오
+button.cancel=취소
+button.cancelMessage=취소 메시지
+button.compose=구성하십시오
+button.copyToFolder=사본
+button.delete=감소는 검사했다
+button.deleteForever=영구히 감소
+button.confirmEmptyFolder=빈 폴더를 확인하십시오
+button.cancelEmptyFolder=취소 빈 폴더
+button.emptyTrash=쓰레기를 밖으로 던지십시오
+button.emptyTrash.title=쓰레기에 있는 던짐 메시지
+button.emptyFolder=현재 폴더를 비우십시오
+button.emptyFolder.title=쓰레기로 현재 폴더에 있는 메시지를 이동하십시오.
+button.login=로그인
+button.logout=로그아웃
+button.mark=표
+button.move=움직임
+button.moveToFolder=움직임
+button.ok=좋습니다
+button.sure=물론이지요
+button.reset=리셋
+button.save=를 제외하고
+button.saveToAddressBk=주소록에를 제외하고
+button.saveEntry=입장을 제외하고
+button.savePreferences=특혜를 제외하고
+button.send=보내십시오
+button.submit=복종시키십시오
+changeSubscription.result.subscribed.success=폴더는 구독했다.
+changeSubscription.result.unsubscribed.success=폴더는 구독 취소했다.
+common.currentUser=<span class="username" title="{0}">{1}</span><br/><span class="loggedInAs">로 로그인하는.</span>
+compose.title=구성하십시오
+compose.name=이름
+compose.type=파일 유형
+compose.size=크기
+compose.delete=감소
+compose.attachment.upload=붙어 있던 파일
+compose.copyToSent=보내진 폴더에 사본
+confirmDeleteFolder.title=폴더의 삭제를 확인하십시오
+confirmDeleteFolder.header=감소 폴더
+confirmDeleteFolder.listIntro=이 폴더에 관해서는 품목의 이 종류는 가지고 있다
+confirmDeleteFolder.prompt=그것은 이 폴더 전부를 삭제하는 시도한다. "OK"의 단추를 누르십시오.
+confirmEmptyFolder.prompt=그것은 이 폴더의 메시지 모두를 삭제하는 시도한다. 폴더 삭제 검증" 단추 누른다.
+confirmEmptyFolder.delete.now=삭제 메시지에 관해서는:
+confirmEmptyFolder.perm.true=영구히 즉시 감소
+confirmEmptyFolder.perm.false=쓰레기에서 밖으로 던지십시오
+confirmEmptyFolder.title=메시지의 삭제를 확인하십시오
+confirmEmptyFolder.header=감소 메시지
+confirmEmptyFolder.listIntro=이 폴더에는 이들이 품목의 유형 있다:
+copyToFolder.result.multiple.success={0} 메시지는 베꼈다 {1}.
+copyToFolder.result.single.success=메시지는 베꼈다 {0}.
+createFolder.result.success=성공적으로 창조되는 폴더.
+delete.result.single.success=메시지는 쓰레기에서 뒀다.
+delete.result.multiple.success={0} 메시지는 쓰레기에서 뒀다.
+deleteAddress.result.success=주소 입장은 삭제했다.
+deleteForever.result.single.success=영구히 삭제되는 메시지.
+deleteForever.result.multiple.success={0} 영구히 삭제되는 메시지.
+emptyTrash.result.single.success=비워지는 쓰레기. 삭제되는 1개의 메시지.
+emptyTrash.result.multiple.success=비워지는 쓰레기. {0} 삭제되는 메시지.
+emptyFolder.result.single.success=이 폴더에 있는 메시지는 삭제될 것이다.
+emptyFolder.result.multiple.success=이 폴더에 있는 메시지는 삭제될 것이다.
+error.action.required=아무 활동도 지정되지 않았다.
+error.attachment.empty=올려주기한 파일은 비다 존재하지 않는다: {0}.
+error.attachment.duplicate=이름 {0}를 가진 파일은 이미 붙어 있다.
+error.attachment.toolarge=붙어 있던 파일의 총계 크기는 너무 크다. 크기 한계: {0}.
+error.attachment.delete.fail=지정된 부착을 삭제할 수 없었다.
+error.attachment.required=아무 부착도 선정되지 않았다.
+error.changeSubscription.unsubscribe.inbox=당신은 당신의 INBOX를 구독 취소할 수 없다.
+error.compose.to.required=에: 분야는 공백 일 수 없다.
+error.createFolder.newFolder=이름으로 새로운 폴더를 창조하는 과실: {0}.
+error.createFolder.newFolder.required=새로운 폴더의 이름을 입력하십시오.
+error.createFolder.newFolder.toolong=새로운 폴더 이름은 너무 길다. 그것 {0} 또는 더 적은 특성을 지키십시오.
+error.createFolder.parentFolder.required=부모 폴더의 이름을 선정하십시오.
+error.createFolder.exists=폴더 {0} 이미 존재한다.
+error.createFolder.illegalChar=폴더 이름은 불법 특성을 포함한다: {0}.
+error.deleteAddress.notexist=주소록 엔트리 {0} 존재하지 않는다.
+error.deleteFolder.notallowed=폴더 {0} 이 신청을 위해 요구된다.
+error.deleteFolder.notexist=폴더 {0} 존재하지 않는다.
+error.deleteFolder.notempty=폴더는 비지 않다.
+error.general.value.required=필수 가치는 없다.
+error.message.notexist=메시지는 존재하지 않는다.
+error.messages.notexist=기존하는 메시지는 선정되지 않았다.
+error.password.required=요구되는 암호
+error.password.invalid=부당한 암호
+error.renameFolder.reserved=이 폴더는 특별하 개명될 수 없다.
+error.session.invalid=당신의 회의는 더 이상 유효하다 없다.
+error.connection.failed=IMAP 서버에 연결하지 못하는. 재시도 해주십시오 나중에.
+error.copyMessage.failed=메시지를 베끼지 못하는: {0}
+error.folder.notfound=폴더를 찾아낼 수 없었다. {0}
+error.folder.list.reading=과실 독서 우편물 폴더 명부.
+error.folder.reserved.required={0} 폴더를 찾아내거나 창조할 수 없었다.
+error.message.notfound=요구된 메시지는 찾아내지 않았다.
+error.messageList.message.required=아무 메시지도 선정되지 않았다.
+error.moveCopy.toFolder.required=아무 폴더도 선정되지 않았다.
+error.address.email.invalid=전자 우편 가치는 유효한 인터넷 이메일 주소가 아니다.
+error.address.email.required=이메일 주소는 공백 이다.
+error.address.email.toolong=이메일 주소는 {0} 길이의 특성을 초과하지 않을지도 모른다.
+error.address.duplicate=책에서 주소 이미: {0}.
+error.address.invalid=이 이메일 주소 선에 대한 문제가 있었다: {0}.
+error.address.name.required=이름은 공백 이다.
+error.address.name.toolong=이름은 {0} 길이의 특성을 초과하지 않을지도 모른다.
+error.address.overlimit= 유감스러운, 주소록은 단지 {0} 입장만 붙들 수 있다.
+error.addressbk.dao.exception=주소록 자료에 접근할 수 없었다.
+error.saveAddresses.choice.required=아무 주소도 선정되지 않았다.
+error.saveAddresses.overlimit=유감스러운, 주소록은 단지 {0} 입장만 붙들 수 있다. 당신은 기존하는 입장 삭제 없이 {1} 주소를 더 추가할 수 있다.
+error.compose.saved=당신의 회의는, 일시적으로 저장된 메시지 만료되었다. 그것에 일 계속되 위하여 지금 로그인하십시오.
+error.userinfo.dao.exception=필수 사용자 정보에 접근할 수 없었다.
+error.username.required=요구되는 사용자 이름
+errorCopy.title.default=과실 베끼는 메시지
+errorCopy.title.reserved=에 베끼는 과실 {0}
+errorCopy.introduction={0} 폴더에 메시지를 베끼는 과실이 있었다:
+errorCopy.overQuota.message=가능하 당신의 우체통 도달했다 그것의 할당량을, 메시지를 이동하거나 베끼는 부족한 방이 있다.errorCopy.overQuota.instructions=이것이 사실인 경우에, 당신은 당신이 더 이상 필요로 하지 않는 메시지를 삭제하고, {0} 폴더를 비워서 공간을 석방할 수 있다.
+errorCopy.table.introduction=가동은 뒤에 오는 메시지를 위해 실패했다:
+errorCopyToTrash.overQuota.instructions=이것이 사실인 경우에, 당신은 공간을 석방하기 위하여 쓰레기를 비울지도 모른다, 또는 영구히 베껴질 수 없던 어떤 메시지든지 삭제하십시오:
+errors.header=<ul class="errors">
+errors.footer=</ul>
+errors.prefix=<li class="error">
+errors.suffix=</li>
+#{0} will be replaced with the exception message
+error.login.mailhost.unknownhostexception=메일 서버에 연결할 수 없습니다 ({0}). 시스템 관리자를 알리십시오.
+#{0} will be replaced with the exception message
+error.login.mailhost.connectexception=연결은 메일 서버에 연결하는 것을 시도하고 있는 동안 사절했다. 시스템 관리자를 알리십시오.
+#{0} will be replaced with the exception message
+error.login.mailhost.noroutetohostexception=메일 서버에 연결할 수 없습니다 ({0}). 시스템 관리자를 알리십시오.
+error.session.expired=당신의 회의는 다시 만료되고, 로그인한다.
+error.login.mailhost.default=메일 서버에 연결하는 과실 ({0}). 시스템 관리자를 알리십시오.
+#{0} will be replaced with the exception message
+error.login.mailhost.fetch.inbox=당신의 INBOX를 만회하는 과실. 메일 서버 backend에 대한 문제가 있다. 재시도 해주십시오 간결 후에 동안에. ({0})
+# catch-all error
+error.default=과실은 발생했다.
+error.login.resource.failed=자원은 도달될 수 없었다.
+errorBasic.title=과실
+errorBasic.introduction=유감스러운, 과실이 있었다:
+errorBasic.returnTo=반환에
+errorBasic.logout=로그아웃
+errorBasic.instructions=당신은 질문이 있고 또는 문제를 보고하고 싶을 경우에는, 보기 위하여<a href="help.do">여기에서</a>.
+errorLogout.explanation=GatorMail를 사용하는 다시 시작하기 위하여는, 당신은 다시 로그인하는 것을 시도할지도 모른다.
+errorLogout.login=로그인
+errorUncaught.introduction=의외 과실은 발생했다:
+feedback.body1= 당신은 GatorMail를 사용하여 말썽이 있는 경우에, 당신은 응답을 찾아낼지도 모르다\
+		우리에 문제에 <html:link forward="help">도움 페이지</html:link>. \
+		당신이 더 원조를 필요로 하는 경우에는, 당신은 도움말 데스크를에 접촉할지도 모른다 \
+		(352)392-HELP 또는 <html:link forward="helpdeskFeedback">helpdesk@ufl.edu</html:link>.
+feedback.body2=당신이 저희에게 GatorMail 신청에 의견을 보내고 싶어을 경우에, \
+		당신 사용자 경험에 대하여 버그 리포트 특징 요구, 또는 코멘트와 같은, \
+		저 <html:link forward="composeFeedback">의견 모양에 진행하십시오</html:link>. \
+		GatorMail는 사용자 피드백에 크게 기초를 두었다 디자인되고, 우리는 확실히 당신의 입력을 환영한다!
+feedback.title=GatorMail 의견
+folder.title=폴더 -
+folder.view.email.format=<span title="{2}">{1}</span>
+#{0} is the folder name, {1} is the message count, {2} is the unread message count, {3} is the new message count
+folder.view.folder.info=<strong>Folder:</strong> {0} <span title="{3} new message(s) / {2} unread message(s) / {1} total message(s)">( {2} / {1} )</span>
+folder.listing.title=폴더
+folder.empty=이 폴더에는 영 메시지가 있다 또는 어떤 메시지도 현재 메시지 여과기에 의하여 일치하지 않았다.
+folder.notfound=폴더 {0} 찾아내지 않았다.
+folder.quota.title=폴더 할당량
+folder.quota.message=당신은 {1} 유효한 킬로바이트에서 {0} 킬로바이트를 사용하고 있다.
+folder.filter.action.title=현재 폴더에 선정한 여과기를 적용하십시오.
+folder.filter.filter.title=여과기가 입력을 요구하는 경우에, 그것에 여기에서 들어가십시오, 그렇지 않으면 이것은 묵살된다.
+folder.filter.filterType.title=이 폴더에 적용하기 위하여 여과기의 유형을 선정하십시오.
+folder.filter.addressBook=알려진 주소에서
+folder.filter.body=메시지 바디:
+folder.filter.hasAttachment=부착을 가진 메시지
+folder.filter.noAttachment=부착 없는 메시지
+folder.filter.notAddressBook=불명한 주소에서
+folder.filter.none=여과기 메시지 명부…
+folder.filter.toRecipient=에: 수령인:
+folder.filter.allRecipients=모든 수령인:
+folder.filter.subjectAndSender=주제와 발송인:
+folder.filter.subject=주제만:
+folder.filter.sender=발송인만:
+folder.filter.new=새로운 메시지
+folder.filter.seen=메시지를 읽으십시오
+folder.filter.replied=응답된 메시지
+folder.filter.flaggedJunk=쓰레기로 표시하는
+folder.filter.notFlaggedJunk=쓰레기로 표시하지 않아
+folder.label.inbox=Inbox
+folder.label.junk=쓰레기 우편물
+folder.label.drafts=초안
+folder.label.sent=보내는
+folder.label.trash=쓰레기
+folderManage.title=폴더를 처리하십시오
+folderManage.table.folder=폴더
+folderManage.table.numMessages=메시지
+folderManage.table.unread=무식한
+folderManage.table.modify=변경하십시오
+folderManage.table.delete=감소
+folderManage.table.size=크기
+folderManage.table.subscribed=구독하는
+folderManage.table.no=아니다
+folderManage.table.yes=그렇습니다
+folderManage.deleteFolder.label=감소 폴더
+folderManageModify.title=폴더를 변경하십시오
+folderManageModify.subFolder.header=이하 폴더를 창조하십시오
+folderManageModify.subFolder.headerFolder=폴더를 창조하십시오
+folderManageModify.subFolder.desc=이하 폴더로의:
+folderManageModify.deleteFolder.header=감소 폴더
+folderManageModify.deleteFolder.delete=감소
+folderManageModify.renameFolder.header=폴더를 개명하십시오
+folderManageModify.renameFolder.name=개명하십시오
+folderManageModify.renameFolder.renameTo=에
+folderManageModify.subscription.header=기부금 상태
+folderManageModify.subscription.desc=(유엔)구독하십시오
+folderManageModify.subscription.status=이 폴더는 지금 이다
+folderManageModify.subscription.subscribed=구독하는
+folderManageModify.subscription.unsubscribed=가입되지 않은
+gatorlink.link.logout=로그아웃
+gatorlink.link.logout.title=서비스에 GatorLink 모든 단 하나 표시의 로그아웃.
+general.size.format= gb, mb, kb, b, bytes
+general.size.formatter=edu.ufl.osg.webmail.formatters.SizeFormat
+#Labels and messages to be used in the Help page
+help.header=GatorMail 도움
+help.intro=이 도움 페이지는 미완성품이다. \
+		우리는 사람들이 저희에게 질문을 더 가져온 대로 응답을 더 추가할 것이다, \
+		그리고 우리가 GatorMail 특징을 문서화한 대로. GatorMail 시도를 위한 감사합니다.
+help.answer.composeNewWindow=GatorMail는 당신의 웹을 통해 이미 이것을 지원한다 \
+		새 창구 특징에서 열려있는 브라우저. 당신이 위에 오른쪽 버튼을 클릭할 때 \
+		연결에 구성 또는 대답 유사한 선택을 가진 메뉴 높은 쪽으로 대중 음악 \
+		새 창구에서 열리는 것이 유효해야 한다. 당신이 이것을 당신 선택할 때 \
+		1개의 창에 있는 메시지를 구성하고 읽을 수 있을 것이다 또는 \
+		다른 창에 있는 다른 활동.
+help.answer.displayName=당신의 이름은 UF'에서 만회된다 전화번호부 서버. \
+		우리는 당신의 서명 및 당신의 이름 둘 다를 위해 전시 이름 필드를 이용한다 \
+		그것이에서 나타난 대로 <code>에서:</code> 전자 우편의 분야. 당신을 바꾸기 위하여 \
+		전화번호부 정보는, UF를 방문한다 \
+		<html:link href="http://directory.ufl.edu/edit">위치를 편집하는 전화번호부</html:link>.
+help.answer.foldersDisapeared=당신이 것과 같이 이 폴더를 표를 할 필요가 있다 가능성이 높다 \
+		구독하는. 여기 이것을 하는 방법 있다:\
+		</p><p>\
+		클릭하십시오 <html:link forward="folderManage">폴더를 처리하십시오</html:link> \
+		메뉴 막대에 연결. 여기에서 당신에서 각각의 기부금 상태를 볼 수 있다 \
+		당신의 폴더의. 구독한 란이 표를 한 아니오인 경우에, 폴더를 누르십시오 \
+		폴더 연결을 변경하고, 그 후에 다음 페이지에 구독 폴더 단추를 누르십시오.
+help.answer.gl= 도움말 데스크를에 접촉하십시오 (352)392-HELP 또는 <a href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</a>.
+help.answer.login=첫째로, 당신은 a가 있어야 한다\
+		<html:link href="http://gatorlink.ufl.edu">Gatorlink 계정</html:link>.\
+		당신을 확인하십시오	gatorfan 같이 당신의 사용자 고유 번호에, 같이 아닙니다 들어가고 있다\
+		당신 당신의 사용자 고유 번호가 아닌 아무거나 또는 gatorfan@ufl.edu\
+		당신이 당신의 계정을 설치할 때 쑤시는. 그것은 전부 소문자에 있어야 한다\
+		편지는, 당신이 어떤 공간도 전이나 후에 포함하고 있지 않다는 것을 확인하고\
+		당신의 사용자 고유 번호. 자신의 암호는 대소문자에 민감하다, 그래서 당신이 다는 것을 확인하십시오\
+		그것을 정확하게 타자를 치기 정확하게. 당신은 자신의 암호를 잊거나 무엇이든이 있는 경우에\
+		당신의 계정에 대한 다른 문제는 도움말 데스크를에 접촉한다 392-HELP 또는\
+		<html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>.
+help.answer.noINBOX=당신은 Gatorlink 우체통이 없다 가능하다. \
+		이것은 Gatorlink 당신의 우편물이 일 때 수시로 사실이다 \
+		어떤 다른 사람 계정을 발송해, 및 당신의 우체통에 아직 없다 \
+		창조되는. 번갈아, 당신은 Gatorlink 사용자일지도 모른다 \
+		우체통을 위해 자격을 주지 않는다. 당신은 당신을 편집하고 전망할지도 모른다 \
+		에 Gatorlink 계정 정보 \
+		<html:link href="http://gatorlink.ufl.edu/">Gatorlink 계정 위치</html:link>. \
+		</p><p>\
+		메일 서버가 내부 오류를 경험하고 있다 또한 가능하다. \
+		도움말 데스크를에 접촉하십시오 (352)392-HELP \
+		또는 <html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link> \
+		당신이 생각하는 경우에 이것은 사실일지도 모른다.
+help.answer.open=당신은 아직도 질문이 있고, 또는 문제를 보고하고 싶을 경우에는, 사용하십시오 \
+		<html:link forward="feedback">의견을 보내십시오</html:link> 최대량의 정상에 \
+		페이지 또는 당신은 지원을에 요구할 수 있다 \
+        <html:link href="http://GatorMail.sf.net/support">http://GatorMail.sf.net/support</html:link>.
+help.answer.pagination=GatorMail는 지금 페이지를 매기를 지원하지 않는다 \
+		폴더를 전망할 경우의 메시지의 명부. 이 특징은 우리의 간결에 있다 \
+		방안에 특징의 명부.
+help.answer.sentMail=당신은 보내 단추 보내진 폴더 체크 박스에 사본 메시지를 다음 누를 필요가 있다.
+help.answer.subscribed=GatorMail는 사용한다 \
+		<html:link href="http://www-camis.stanford.edu/projects/imap/ml/imap.html">IMAP</html:link>\
+		Gatorlink 메일 서버와 상호 작용할 것이다 의정서. IMAP에서는, 폴더는 표를 할지도 모른다 \
+		구독하거나 구독 취소한, 및 우편물 클라이언트는 폴더의 각 유형을 다르게 대우할지도 모른다. \
+		GatorMail는 당신이 당신의 폴더의 구독한 상태를 놓는 것을 허용하고, 묵살할 것이다 (아닙니다 \
+		전시는) 처리 폴더 페이지에서를 제외하고 폴더를, 구독 취소했다.
+help.answer.userInfoException=이 과실은 GatorMail가 당신이라고 찾아낼 수 없었다는 것을 나타낸다 \
+		에 있는 입장 <html:link href="http://phonebook.ufl.edu/">UF 전화번호부</html:link>. \
+		GatorMail는 당신 전시 이름 및 당신의 UF ID를 얻기 위하여 전화번호부를 이용한다, \
+		그것이 내부에 사용하는지 어느 것을. \
+		</p><p>\
+		사람들은 일반적으로로 아주 최근에 등록하는 경우에 이 과실을 얻는다 \
+		GatorLink 체계. UF 전화번호부는 등록에서 정보를 당긴다 \
+		당신이 일찍 등록하는 경우에 밤새껏 데이타베이스, 그래서, \
+		GatorMail에 다음날 아침 벌채 시도하십시오. \
+		</p><p>\
+		이 과실이 일시적인 검사 고장을 대표한다 더구나, 가능하다. \
+		당신은 간결을 기다리기 후에 성공적으로 로그인할 수 동안 있을지도 모른다. \
+		그러나 당신이 이 과실을 얻는 것을 계속하면, 당신은 UF 전화번호부가 다는 것을 그리고 당신 아는 경우에는 \
+		입장은 도움말 데스크에, 문제를에 보고한다 (352)392-HELP \
+		또는 <html:link href="mailto:helpdesk@ufl.edu">helpdesk@ufl.edu</html:link>.
+
+help.question.composeNewWindow=나가 메시지를 구성할 때 새 창구에서 열린다 그래야 당신은 그것을 만들 수 있었는가?
+help.question.displayName=나 전시 이름은 어디에서 서명은에서 오는가? 그들은 왜 모든 대문자인가?
+help.question.foldersDisapeared=나는 왜 몇몇을의 나의 폴더 볼 수 없는가? 나는 그들이 존재한ㄴ다는 것을, 그러나 GatorMail가 그(것)들을 보여주지 않는다는 것을 알고 있다.
+help.question.gl=나는 우편물 운송 다른 Gatorlink 장군 질문 같이 Webmail 체계에, 특정적이지 않는 질문이 있다.
+help.question.login=나는 로그인할 수 없다.
+help.question.noINBOX=나는 나가 로그인할 때 INBOX를 위한 폴더 과실을 찾아낼 수 없었다 얻는다.
+help.question.open=이 질문의 아무도는 나의 GatorMail 특성 문제로 돕지 않는다. 나는 어떻게 너희들의 파악을 얻는가?help.question.pagination=나는 어떻게 얼마나 많은 메시지가 메시지 명부작성에서 보이는지 제한하는가?
+help.question.sentMail=나의 메시지는 왜 나의 보내진 폴더에서 저장되고 있지 않는가?
+help.question.subscribed=구독한 란은 무엇을 처리 폴더 페이지에 의미하는가?
+help.question.userInfoException=나는 나가 로그인할 것을 시도할 때 a를 필수 사용자 정보 과실에 접근할 수 없었다 얻는다.
+help.title=도움
+help.top=정상
+#end of Help page
+label.deleteForever=영원히 감소
+label.addresses=주소
+label.name=이름
+label.email=우편물
+label.size=크기
+label.subject=주제
+label.title.checkAll=모든 주소를 검사하십시오
+link.about=에 관하여
+link.about.title=GatorMail에 관하여
+link.addAddress=새로운 주소
+link.addToAddressBk=주소록에 추가하십시오
+link.addressBook=주소록
+link.addressBook.title=주소록을 처리하십시오
+link.backToAddressBk=주소록에 반환
+link.backToMessage=메시지에 반환
+link.check.all=모두를 선정하십시오
+link.check.none=아무도를 선정하지 말라
+link.checkMail=체크 우편물
+link.checkMail.title=INBOX
+link.compose=구성하십시오
+link.compose.title=구성하십시오
+link.delete=감소
+link.delete.title=쓰레기로 이 메시지를 이동하십시오
+link.deleteForever=영원히 감소
+link.deleteForever.title=영원히 감소
+link.feedback=의견을 보내십시오
+link.feedback.title=의견을 보내거나 GatorMail를 가진 도움을 요구하십시오
+link.folderManage.back=등을 맞댄 폴더를 처리하십시오
+link.forward=앞으로
+link.forward.title=부착으로 발송하십시오
+link.help=도움
+link.help.title=Gatormail 도움
+link.logout=로그아웃
+link.logout.title=로그아웃
+link.manageFolder=폴더를 편집하십시오
+link.manageFolder.title=창조하고십시오, 삭제하거든, (유엔) 폴더를 구독하십시오
+link.message.source=메시지 근원
+link.message.source.title=우두머리를 포함하여 익지않는 메시지를 전망하십시오.
+link.next=다음
+link.next.title=다음 메시지
+link.reply=대답
+link.reply.title=이 메시지의 발송인에 대답
+link.reply-all=(모두)
+link.reply-all.title=이 메시지의 모든 수령인에게 대답
+link.report.spam=보고 스팸
+link.report.ham=보고 스팸 아닙니다
+link.preferences=특혜
+link.preferences.title=당신의 특혜를 편집하십시오
+link.previous=이전
+link.previous.title=이전 메시지 (폴더 명부 높은 쪽으로)
+link.printerFriendly=인쇄 기계 친절한
+link.printerFriendly.title=이 메시지의 인쇄 기계 친절한 전망.
+link.up=높은 쪽으로
+link.up.title=폴더 등을 맞댄
+login.title=로그인
+#{0} will be replaced with the exception message
+login.authentication.failed=부당한 사용자 이름 및 또는 암호.
+message.title=전망 메시지 -\ 
+message.bcc=BCC
+message.cc=CC
+message.date=날짜
+message.from=발송인
+message.listCommands=명부는 명령한다
+message.to=에
+# {0} is the output from Exception.getMessage()
+message.error.unsupported.encoding=이 메시지는 문자집합으로 암호로 고쳐 쓴다 ({0}) 그 GatorMail가 이해하지 않는. 당신은 부착으로 그것을 다운로드하는 시도할 수 있다.
+message.invalid.messageids=TODO: 저를 쓰십시오
+message.nosubject= (주제 없음)
+message.invalid.folder=부당한 폴더. 당신은 당신의 INBOX 폴더에 방향이 바뀌었다.
+message.invalid.part=부당한 메시지 부속
+message.size=크기
+message.subject=주제
+#Remove this when html:img supports forwards
+message.attachment.url=/attachment.do
+message.delivery-status=Delivery Status Codes
+message.date.format='<span title="'EEEE MMMM d, yyyy hh:mm:ss aaa z'">'EEE'&nbsp;'MM/dd'</span>'
+#The abbreviations for Gig, Meg, Kilo, bytes and then the word bytes.
+message.size.format=g,m,k,b,bytes
+message.size.formatter=edu.ufl.osg.webmail.formatters.SizeFormat
+message.email.formatter=edu.ufl.osg.webmail.formatters.EmailFormat
+message.view.email.format={0}
+message.subject.formatter=edu.ufl.osg.webmail.formatters.SubjectFormat
+message.subject.format=65
+message.flags=깃발
+message.flags.answered.alt=응답하는
+message.flags.answered.title=이 메시지는에 응답되었다.
+message.flags.attachment.alt=부착
+message.flags.attachment.title=이 메시지에는 부착이 있다.
+message.flags.draft.alt=초안
+message.flags.draft.title=이 메시지는 초안이다.
+message.flags.deleted.alt=삭제하는
+message.flags.deleted.title=이 메시지는 삭제를 위해 표를 했다.
+message.flags.flagged.alt= 표시하는
+message.flags.flagged.title=이 메시지는 표시되었다.
+message.flags.junk.alt=정크 메일
+message.flags.junk.title=이 메시지는 아마 정크 메일이다.
+message.flags.recent.alt=최근
+message.flags.recent.title=이 메시지는 당신이 우편물을 검사한 최후부터 도착했다.
+message.flags.seen.alt=보는
+message.flags.seen.title=이 메시지는 읽혔다.
+message.attachment.image=심상:
+message.attachment.binary=부착
+message.attachment.binary.dangerous=불명한 근원에서 부착에 조심하십시오. 부착은 당신의 컴퓨터 및 자료에 잠재적으로 해로울 수 있다.
+message.attachment.message=붙어 있던 메시지
+message.attachment.save=다운로드 메시지
+message.junk.threshold.0=무능했던, 아무 메시지도 표시하지 않았다
+message.junk.threshold.1=1 공격, 많은 정당한 전자 우편은 표시될 것이다
+message.junk.threshold.2=2
+message.junk.threshold.3=3 약간 공격
+message.junk.threshold.4=4
+message.junk.threshold.5=5 평균
+message.junk.threshold.6=6
+message.junk.threshold.7=7
+message.junk.threshold.8=8 보수주의자는, 약간 정당한 전자 우편 표시될지도 모른다
+message.junk.threshold.9=9
+message.junk.threshold.10=10 아주 보수주의자는, 최대 스팸 표시되지 않을 것이다
+message.junk.threshold.11=11
+message.junk.threshold.12=12
+message.junk.threshold.13=13
+message.junk.threshold.14=14
+message.junk.threshold.15=15 가장 극악무도한 스팸만 표시될 것이다
+messageList.unread=(Un)Read
+moveToFolder.result.multiple.success={0} 메시지는 로 움직였다 {1}.
+moveToFolder.result.single.success=메시지는 로 움직였다 {0}.
+noInbox.title=찾아내지 않는 INBOX
+performDeleteFolder.result.success=성공적으로 삭제되는 폴더.
+performDeleteFolder.result.cancel=취소되는 감소.
+#Preferences page
+preferences.compose.image=심상 URL:
+preferences.compose.image.help=친구 아이콘 같이 를 위한 보일 작은 심상에 가득 차있는 URL에 들어가십시오 <br/>\
+        받는 전자 우편 클라이언트가 그것을 지원하는 경우에 전자 우편.\
+        <p>심상에는 친구는 아이콘 잘 일한ㄴ다는 것을 의미하는 48x48의 크기가 있어야 한다. <br/>\
+        놓을 때 시사는 오른쪽 보일 것이다.</p>
+preferences.compose.RAC=받는 자동은 완료한다:
+preferences.compose.RAC.help=검사하는 경우에, 당신의 주소록에 있는 주소는 자동적으로 당신이 그(것)들을 타자를 친 대로 완료될 것이다.\
+		<p>당신은 일할 것이다 이것을 위한 당신의 주소록에 있는 적어도 1개의 주소가 있어야 한다.<br/>\
+		방법은 이 특징을 무능하게 한ㄴ다는 것을 선호하기 위하여 당신의 브라우저가 이전 수령인 및 당신을 기억할 수 있는 경우에.</p>
+preferences.compose.signature=서명:
+preferences.compose.signature.help=당신이 메시지를 구성할 때 붙어 있을 주문 서명에 들어가십시오. \
+		<p>당신은 커트 라인, 2개의 돌진 및 그 후에 공간을 지키는 격려된다. <br/>\
+		많은 전자 우편 클라이언트는 당신의 서명의 시작으로 이것을 인식한다.</p>
+preferences.imageUrl.invalid=심상 URL는 유효한 URL이어야 한다: {0}
+preferences.junk.filter=자동 여과기 정크 메일:
+preferences.junk.filter.help=움직임 메시지는 쓰레기와 검사하는 경우에 보다는 높이 득점한다 \
+		상기의 문턱 쓰레기 폴더로. <p>\
+        당신은 당신의 우체통이 위로 채우는 것을 막기 위하여 쓰레기 폴더를 때때로 비울 필요가 있을 것이다.<br/>\
+        쓰레기 폴더가 존재하지 않는 경우에 당신을 위해 창조될 것이다.<br/>\
+        이것을 가능하게 하는 것은 또한 대 혼자서 전자 우편 클라이언트에 있는 메시지 납품에 영향을 미칠 것이다.</p>
+preferences.junk.flag=정크 메일 깃발 문턱:
+preferences.junk.flag.help=쓰레기로 메시지를 표시하기 위하여 쓰레기 점수 문턱을 놓으십시오. 문턱을 낮추십시오 <br/>\
+		스팸으로 메시지를 표를 하기 위하여 확률이 높으십시오. <p>\
+		이 조정은 또한 메시지 명부 전망 여과기 문턱을 통제한다.</p>
+preferences.replyTo.invalid=주소에 대답은 공백 또는 유효한 이메일 주소이어야 한다: {0}
+preferences.title=특혜
+preferences.imageUrl.invalid=심상 URL는 유효한 URL이어야 한다: {0}
+preferences.maxInactiveMultiplier.invalid=너무 높이 maxInactiveMultiplier 이다 너무 낮다 또는.
+preferences.maxInactiveMultiplier.short=간결
+preferences.maxInactiveMultiplier.default=과태
+preferences.maxInactiveMultiplier.long=오래
+preferences.nameAndAddress.fromName=이름에서:
+preferences.nameAndAddress.fromName.help=당신이 구성하는 메시지의 분야에서에서 표시되는 이름.
+preferences.nameAndAddress.reply=주소에 대답:
+preferences.nameAndAddress.reply.help=주소 당신은 사람들을 이 것 보다는 다른 경우에 응답하는 원한다.
+preferences.nameAndAddress.title=이름 및 주소
+preferences.junkThreahsold.invalid=쓰레기 문턱은 포함하는 0과 15 사이 정수이어야 한다.
+preferences.vacationMessage.invalid=휴가 메시지는 휴가 자동적인 응답기를 가능하게 하기 위하여 메시지를 포함해야 한다.
+preferences.view.hideHeader=은신처 페이지 우두머리:
+preferences.view.hideHeader.help=검사하는 경우에, 이것은 로고 및 다른 페이지 우두머리 내용을 숨긴다.
+preferences.view.showThread=쇼는 실을 꿴다:
+preferences.view.showThread.help=검사하는 경우에, 하이라이트는 메시지 명부에서 당신이 명부에 쥐를 이동하는 때 실을 꿴다.\
+       <p>약간 웹 브라우저는 가능하게 된 이것에 아주 게으르게 될 수 있다.</p>
+preferences.view.title=전망
+#END of Preferences Page
+prompt.username=사용자 이름
+prompt.password=암호
+renameFolder.result.success=성공적으로 개명되는 폴더.
+saveAddresses.result.success.multiple=저장된 {0} 주소.
+saveAddresses.result.success.single=저장된 주소.
+saveAddress.result.success=추가되는 입장.
+select.folder=폴더를 선정하십시오:
+selectAddresses.title=선정하십시오 주소를…
+selectAddresses.introduction=당신이 당신의 주소록에 저장해 원하는 주소를 검사하십시오.
+send.result.success=메시지는 보냈다.
+site.title= Gatormail -\

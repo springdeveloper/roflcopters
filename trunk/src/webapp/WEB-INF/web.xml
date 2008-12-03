@@ -7,7 +7,7 @@
     <!-- Point JSTL fmt:tags to the Messages resources. -->
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-        <param-value>Messages</param-value>
+        <param-value>lang.Messages</param-value>
     </context-param>
 
     <context-param>
@@ -54,7 +54,7 @@
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
     -->
-
+  
     <filter>
         <filter-name>RequestTimer</filter-name>
         <filter-class>edu.ufl.osg.webmail.util.RequestTimerFilter</filter-class>
@@ -103,6 +103,25 @@
 
         <load-on-startup>2</load-on-startup>
     </servlet>
+
+    <servlet>
+       <servlet-name>cgi</servlet-name>
+       <servlet-class>org.apache.catalina.servlets.CGIServlet</servlet-class>
+       <init-param>
+         <param-name>debug</param-name>
+         <param-value>6</param-value>
+       </init-param>
+       <init-param>
+         <param-name>cgiPathPrefix</param-name>
+         <param-value>WEB-INF/cgi</param-value>
+       </init-param>
+        <load-on-startup>5</load-on-startup>
+   </servlet>
+
+    <servlet-mapping>
+       <servlet-name>cgi</servlet-name>
+       <url-pattern>/cgi-bin/*</url-pattern>
+   </servlet-mapping>
 
     <!-- Standard Action Servlet Mapping -->
     <servlet-mapping>

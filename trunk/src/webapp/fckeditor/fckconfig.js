@@ -100,16 +100,14 @@ FCKConfig.ToolbarLocation = 'In' ;
 
 FCKConfig.ToolbarSets["Default"] = [
 	['SpellCheck'],
-	['Source'],
 	['Print'],
-	['Undo','Redo','-','Find','Replace'],	
-	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+	['Undo','Redo'],	
+	['Bold','Italic','Underline'],
 	['OrderedList','UnorderedList','-','Outdent','Indent'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-	['Link','Unlink'],	
+	['JustifyLeft','JustifyCenter','JustifyRight'],
 	['Table','Rule','Smiley','SpecialChar','PageBreak'],
 	'/',
-	['Style','FontFormat','FontName','FontSize'],
+	['FontName','FontSize'],
 	['TextColor','BGColor'],
 	['FitWindow','ShowBlocks']		// No comma for the last row.
 ] ;
@@ -161,7 +159,7 @@ FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
 
 FCKConfig.SpellChecker			= 'SpellerPages' ;	// 'ieSpell' | 'SpellerPages'
 FCKConfig.IeSpellDownloadUrl	= 'http://www.iespell.com/download.php' ;
-FCKConfig.SpellerPagesServerScript = '/GatorMail/cgi-bin/spellchecker-fck.pl' ;	// Available extension: .php .cfm .pl
+FCKConfig.SpellerPagesServerScript = '/GatorMail/cgi-bin/spellchecker-fck.pl' ; // Available extension: .php .cfm .pl
 FCKConfig.FirefoxSpellChecker	= false ;
 
 FCKConfig.MaxUndoLevels = 15 ;

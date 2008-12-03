@@ -109,7 +109,6 @@ public class AttachDAO_FILE implements AttachDAO {
                 // don't retrieve forwarded messages
                 if (attachObj.getIsForward())
                     continue;
-
                 final String fileName = attachObj.getTempName();
                 logger.debug(".. going to load: " + basePath + File.separator + fileName);
                 final FileDataSource fds = new FileDataSource(basePath + File.separator + fileName);

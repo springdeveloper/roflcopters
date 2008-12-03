@@ -1,5 +1,8 @@
 <%@page contentType="text/html"%>
 <%@taglib uri="/tags/struts-html" prefix="html"%>
+
+<div id="loginFooter">
+<!-- START LOGIN FOOTER -->
 <p>
   Check the <a href="http://open-systems.ufl.edu/status/">current status</a> of Gatorlink services, including Webmail.
 </p>
@@ -19,3 +22,5 @@
    Site maintained by <html:link href="http://open-systems.ufl.edu/">The Open Systems Group</html:link>
    <br/> Last Modified: @DATE@
 </p>
+<!-- END LOGIN FOOTER -->
+</div>

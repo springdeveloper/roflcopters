@@ -113,6 +113,12 @@ public class MessageWrapper {
     }
 
     /**
+     * Getter for property content.
+     *
+     * @return                  
+     */
+    
+    /**
      * Getter for property size.
      *
      * @return                     Value of property size.

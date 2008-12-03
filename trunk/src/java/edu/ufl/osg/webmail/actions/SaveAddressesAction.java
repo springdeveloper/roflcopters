@@ -35,7 +35,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -87,7 +87,7 @@ public class SaveAddressesAction extends Action {
             address = address != null ? address.trim() : null;
             String personal = name[value];
             personal = personal != null ? personal.trim() : null;
-            final InternetAddress iAddress = new InternetAddress(address, personal);
+            final AddressBkEntry iAddress = new AddressBkEntry(address, personal);
             if (addressList.contains(iAddress)) {
                 logger.error("addressList already contains " + iAddress);
                 errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.address.duplicate", iAddress.toString()));
@@ -112,7 +112,7 @@ public class SaveAddressesAction extends Action {
         }
 
         for (int i = 0; i < newSize; i++) {
-            final InternetAddress iAddress = (InternetAddress)newAddressList.get(i);
+            final AddressBkEntry iAddress = (AddressBkEntry)newAddressList.get(i);
             // add entry to both in-memory list and backend storage
             addressList.addAddress(iAddress);
             logger.debug("saved entry " + i + " to addressbook.");

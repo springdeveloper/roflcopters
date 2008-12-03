@@ -1,5 +1,6 @@
 <%@page contentType="text/html" import="java.util.List,
                                         edu.ufl.osg.webmail.util.Util,
+                                        edu.ufl.osg.webmail.forms.ComposeForm,
                                         edu.ufl.osg.webmail.Constants"%>
 <%@ page import="edu.ufl.osg.webmail.prefs.PreferencesProvider" %>
 <%@ page import="edu.ufl.osg.webmail.User" %>
@@ -190,6 +191,9 @@ var preventSubmit = function (e) {
        <html:submit property="action" styleClass="button">
         <bean:message key="button.cancelMessage"/>
        </html:submit>
+       <html:submit property="action" styleClass="button">
+        <bean:message key="button.saveDraft"/>
+       </html:submit>
       </td>
       <td class="darkBlueRow" colspan="2">&nbsp;</td>
      </tr>
@@ -216,9 +220,15 @@ var preventSubmit = function (e) {
         </tr>
         <tr>
           <td align="center">
-            <input type="button" class="button" value="To" onclick="populateAddress(this.form.to)" accesskey="t">
-            <input type="button" class="button" value="CC" onclick="populateAddress(this.form.cc)" accesskey="c">
-            <input type="button" class="button" value="BCC" onclick="populateAddress(this.form.bcc)" accesskey="b">
+			<html:button property="addToTo" styleClass="button" onclick="populateAddress(this.form.to)" accesskey="t">
+				<bean:message key="message.to"/>
+			</html:button>
+			<html:button property="addToCC" styleClass="button" onclick="populateAddress(this.form.cc)" accesskey="c">
+				<bean:message key="message.cc"/>
+			</html:button>
+			<html:button property="addToBCC" styleClass="button" onclick="populateAddress(this.form.bcc)" accesskey="b">
+				<bean:message key="message.bcc"/>
+			</html:button>
           </td>
         </tr>
         <tr>
@@ -341,32 +351,32 @@ var preventSubmit = function (e) {
   </td>
  </tr>
 
+ <%
+    ComposeForm compForm = (ComposeForm) request.getAttribute("composeForm");
+    String bodyText = "Woot Woot!!";
+    if( compForm != null )
+        bodyText = compForm.getBody();
+    bodyText = bodyText.replaceAll("\\n|\\r|[\\n\\r]<br />|<br />[\\n\\r]", "<br />"); 
+    bodyText = bodyText.replaceAll("'", "&#039;");
+    pageContext.setAttribute("body", bodyText);
+ %>
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
   <td colspan="3">  
-  <!--
-	
+  <!--	
 	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
-   // Patrick and Evan
-   
-  -->
-  
-   <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
-	<script language="JavaScript" type="text/javascript">
-
-	<!--
-	
-	var oFCKeditor = new FCKeditor( 'body' ) ;
-	oFCKeditor.BasePath	= "fckeditor/";
-	oFCKeditor.Height	= 300 ;
-   
-   // FIXME the Value should be the empty if the page is new or the contents of
-   // the message previously if the page is reloaded.
-	oFCKeditor.Value	= '' ;
-   
-	oFCKeditor.Create() ;
-	//-->
-	</script>
+	// Patrick and Evan
+  -->  
+  <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+  <script language="JavaScript" type="text/javascript">
+  <!--
+  var oFCKeditor = new FCKeditor( 'body' ) ;
+  oFCKeditor.BasePath	= "fckeditor/";
+  oFCKeditor.Height	= 300 ;
+  oFCKeditor.Value	= '<c:out value="${body}" escapeXml="false" />';
+  oFCKeditor.Create() ;
+  //-->
+  </script>
   </td>
  </tr>
  <tr class="lightBlueRow">

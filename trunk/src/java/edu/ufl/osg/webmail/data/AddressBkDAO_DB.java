@@ -22,7 +22,7 @@ package edu.ufl.osg.webmail.data;
 import org.apache.log4j.Logger;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
+import edu.ufl.osg.webmail.data.AddressBkEntry;
 import javax.mail.internet.MimeUtility;
 import javax.mail.internet.AddressException;
 import javax.naming.Context;
@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,14 +130,18 @@ public class AddressBkDAO_DB implements AddressBkDAO {
         try {
             con = getConnection();
             PreparedStatement ps = null;
+			
             try {
-                ps = con.prepareStatement("SELECT entry " + "FROM addressbook " + "WHERE userid = ?");
-                ps.setString(1, permId);
+				//Fetch only the address book entry name and primary email for the Address Book managmenet window. From there, the user can view/modify/delete the entry. -r0b
+                ps = con.prepareStatement("SELECT abkPerson.name, abkEmail.email, abkPerson.company, abkPerson.position, abkPerson.phoneHome, abkPerson.phoneWork, abkPerson.phoneCell, abkPerson.address,abkPerson.notes FROM abkPerson, abkEmail WHERE abkPerson.userId = ? AND abkEmail.contactId = abkPerson.contactId");
+                ps.setString(1, permId); 
+				
                 final ResultSet rs = ps.executeQuery();
+				
                 while (rs.next()) {
                     try {
-                        coll.add(new InternetAddress(rs.getString(1)));
-                    } catch (AddressException e) {
+                        coll.add(new AddressBkEntry(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+                    } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use Options | File Templates.
                     }
                 }
@@ -162,20 +167,51 @@ public class AddressBkDAO_DB implements AddressBkDAO {
         return lst;
     }
 
-    public void addEntry(final String permId, final InternetAddress internetAddress) throws AddressBkDAOException {
+    public void addEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
         Connection con = null;
         try {
             con = getConnection();
             PreparedStatement ps = null;
             try {
-                ps = con.prepareStatement("INSERT INTO addressbook " + "(userid, entry) " + "VALUES (?, ?)");
+				
+                ps = con.prepareStatement("INSERT INTO abkPerson " + "(userId, name,company,position,phoneHome,phoneWork,phoneCell,address,notes) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, permId);
-                ps.setString(2, internetAddress.toString());
-
-                final int count = ps.executeUpdate();
-                if (count == 0) {
-                    throw new AddressBkDAOException("Address book insert failed for entry: " + internetAddress.toString());
+                ps.setString(2, entry.getPersonal() );
+				ps.setString(3, entry.getCompany() );
+				ps.setString(4, entry.getPosition() );
+				ps.setString(5, entry.getPhoneHome() );
+				ps.setString(6, entry.getPhoneWork() );
+			    ps.setString(7, entry.getPhoneCell() );
+				ps.setString(8, entry.getMailingAddress() );
+				ps.setString(9, entry.getNotes() );
+				
+                int count = ps.executeUpdate();
+                
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book insert failed for entry: " + entry.toString());
                 }
+				
+				ResultSet keys = ps.getGeneratedKeys();
+			
+				int key = -1;
+				
+				while(keys.next())
+					key = keys.getInt(1);
+					
+				if(key <= 0)
+					throw new AddressBkDAOException("Error retrieving index from abkPerson entry!");
+					
+				ps = con.prepareStatement("INSERT INTO abkEmail(userId, contactId, email) VALUES (?, ?, ?)");
+                ps.setString(1, permId);
+				ps.setString(2, (new Integer(key)).toString() );
+                ps.setString(3, entry.getAddress());
+				
+				count = ps.executeUpdate();
+                
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book insert failed for entry: " + entry.toString());
+                }
+
             } finally {
                 if (ps != null) {
                     ps.close();
@@ -193,21 +229,86 @@ public class AddressBkDAO_DB implements AddressBkDAO {
             throw new AddressBkDAOException(e.getMessage());
         }
     }
-
-    public void removeEntry(final String permId, final InternetAddress internetAddress) throws AddressBkDAOException {
+    
+    public void editEntry(final String permId, final String oldEmail, final AddressBkEntry entry) throws AddressBkDAOException {
         Connection con = null;
         try {
             con = getConnection();
             PreparedStatement ps = null;
             try {
-                ps = con.prepareStatement("DELETE FROM addressbook " + "WHERE userid = ? " + "AND entry = ?");
-                ps.setString(1, permId);
-                ps.setString(2, internetAddress.toString());
+                ps = con.prepareStatement("UPDATE abkPerson SET name=?, company=?, position=?, phoneHome=?, phoneWork=?, phoneCell=?, address=?, notes=? WHERE contactId=(SELECT contactId FROM abkEmail WHERE userId=? AND email=? LIMIT 1)");
+                ps.setString(1, entry.getPersonal() );
+				ps.setString(2, entry.getCompany() );
+				ps.setString(3, entry.getPosition() );
+				ps.setString(4, entry.getPhoneHome() );
+				ps.setString(5, entry.getPhoneWork() );
+			    ps.setString(6, entry.getPhoneCell() );
+				ps.setString(7, entry.getMailingAddress() );
+				ps.setString(8, entry.getNotes() );
+				ps.setString(9, permId);
+				ps.setString(10, oldEmail);
+                int count = ps.executeUpdate();
+                
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book edit failed for entry: " + entry.toString());
+                }
+					
+				ps = con.prepareStatement("UPDATE abkEmail set email=? WHERE userId=? AND email=?");
+				ps.setString(1, entry.getAddress());
+                ps.setString(2, permId);
+				ps.setString(3, oldEmail);
+				
+				count = ps.executeUpdate();
+			
+				if (count == 0) {
+                    throw new AddressBkDAOException("Address book edit failed for entry: " + entry.toString());
+                }
 
-                final int count = ps.executeUpdate();
+            } finally {
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+            //con.close();
+        } catch (Exception e) {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) {
+                logger.error(se.getMessage(), se);
+            }
+            throw new AddressBkDAOException(e.getMessage());
+        }
+    }
+
+    public void removeEntry(final String permId, final AddressBkEntry entry) throws AddressBkDAOException {
+        Connection con = null;
+        try {
+            con = getConnection();
+            PreparedStatement ps = null;
+            try {
+                ps = con.prepareStatement("DELETE FROM abkPerson WHERE userId=? AND contactId = (SELECT contactId FROM abkEmail WHERE userId=? AND email = ? LIMIT 1)");
+                ps.setString(1, permId);
+                ps.setString(2, permId);
+                ps.setString(3, entry.getAddress());
+
+                int count = ps.executeUpdate();
                 if (count == 0) {
-                    logger.error("address book delete failed. permId: " + permId + ", entry: " + internetAddress.toString());
-                    throw new AddressBkDAOException("Address book delete failed for entry: " + internetAddress.toString());
+                    logger.error("address book delete failed. permId: " + permId + ", entry: " + entry.toString());
+                    throw new AddressBkDAOException("Address book delete failed for entry: " + entry.toString());
+                }
+                
+                // delete email entries where email and session id matches
+                ps = con.prepareStatement("DELETE FROM abkEmail WHERE userId=? AND email=?");
+                ps.setString(1, permId);
+                ps.setString(2, entry.getAddress());
+
+                count = 0;
+                count = ps.executeUpdate();
+                if (count == 0) {
+                    logger.error("address book delete failed. permId: " + permId + ", entry: " + entry.toString());
+                    throw new AddressBkDAOException("Address book delete failed for entry: " + entry.toString());
                 }
             } finally {
                 if (ps != null) {
