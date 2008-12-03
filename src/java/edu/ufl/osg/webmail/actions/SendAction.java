@@ -97,8 +97,8 @@ public class SendAction extends Action {
         final ActionErrors errors = new ActionErrors();
         final ComposeForm compForm = (ComposeForm)form;
 
-        // "to" field validation
-        if (compForm.getTo() == null || compForm.getTo().trim().equals("")) {
+        // "to" field validation. only perform if messaage is not a draft
+        if (!compForm.getIsDraft() && (compForm.getTo() == null || compForm.getTo().trim().equals(""))) {
             errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.compose.to.required"));
             saveErrors(request, errors);
             compForm.setAttachment(null);
@@ -117,6 +117,7 @@ public class SendAction extends Action {
         final User user = Util.getUser(httpSession);
         final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
         final Properties prefs = pp.getPreferences(user, httpSession);
+        final boolean draft = compForm.getIsDraft();
 
         final InternetAddress[] to = parseAddresses(compForm.getTo(), errors);
         final InternetAddress[] cc = parseAddresses(compForm.getCc(), errors);
@@ -208,25 +209,50 @@ public class SendAction extends Action {
             message.saveChanges();
    //     }
 
-        // do the sending
-        Transport.send(message);
-        logger.debug("successfully sent message");
+        logger.debug("message is " + (compForm.getIsDraft() ? "" : " not ") + "a draft");
 
-        // is "copy to sent" checked?
-        logger.debug("copyToSent value: " + compForm.isCopyToSent());
-        if (compForm.isCopyToSent()) {
-            logger.debug("copy message to Sent folder - start");
-            final Folder sentFolder = Util.getFolder(httpSession, Constants.getSentFolderFullname(httpSession));
-            message.setFlag(Flags.Flag.SEEN, true);
-            ActionsUtil.flushMailStoreGroupCache(httpSession);
-            if (!ActionsUtil.appendMessage(message, sentFolder, errors)) {
-                // error - go to special error page
-                saveErrors(request, errors);
+        // check if message is a draft
+        if( !compForm.getIsDraft() )
+        {
+            // if not a draft, do the sending
+            Transport.send(message);
+            logger.debug("successfully sent message");
+
+            // is "copy to sent" checked?
+            logger.debug("copyToSent value: " + compForm.isCopyToSent());
+            if (compForm.isCopyToSent()) {
+                logger.debug("copy message to Sent folder - start");
+                final Folder sentFolder = Util.getFolder(httpSession, Constants.getSentFolderFullname(httpSession));
+                message.setFlag(Flags.Flag.SEEN, true);
+                ActionsUtil.flushMailStoreGroupCache(httpSession);
+                if (!ActionsUtil.appendMessage(message, sentFolder, errors)) {
+                    // error - go to special error page
+                    saveErrors(request, errors);
+                    Util.releaseFolder(sentFolder); // clean up
+                    return mapping.findForward("errorCopyToSent");
+                }
                 Util.releaseFolder(sentFolder); // clean up
-                return mapping.findForward("errorCopyToSent");
+                logger.debug("copy message to Sent folder - end");
             }
-            Util.releaseFolder(sentFolder); // clean up
-            logger.debug("copy message to Sent folder - end");
+            // success message for next page
+            final ResultBean result = new ResultBean(Util.getFromBundle("send.result.success"));
+            request.setAttribute(Constants.RESULT, result);
+        } else {
+            // othewise, copy to drafts folder
+            final Folder draftFolder = Util.getFolder( httpSession, Constants.getDraftFolderFullname(httpSession) );
+            message.setFlag( Flags.Flag.DRAFT, true );
+            if( !ActionsUtil.appendMessage( message, draftFolder, errors )) {
+                // error - go to draft error page
+                saveErrors( request, errors );
+                Util.releaseFolder( draftFolder );
+                return mapping.findForward("fail");
+            }
+            Util.releaseFolder( draftFolder );
+            final ResultBean result = new ResultBean( Util.getFromBundle("draft.result.success") );
+            logger.debug("save draft success");
+            Util.removeAttachList(compForm.getComposeKey(), httpSession);
+            return mapping.findForward("draft");
+
         }
 
         // success message for next page

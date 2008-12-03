@@ -81,7 +81,7 @@ public class DeleteFolderAction extends Action {
                 logger.error("illegal delete: " + folder.getFullName());
                 saveErrors(request, errors);
                 return mapping.findForward("fail");
-            }
+            }                                                                                              
             request.setAttribute("folder", folder);
         } finally {
             Util.releaseFolder(folder); // clean up

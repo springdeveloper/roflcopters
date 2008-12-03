@@ -19,6 +19,8 @@
 
 package edu.ufl.osg.webmail.forms;
 
+import edu.ufl.osg.webmail.Constants;
+
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 /**
  * Form bean for the user's preferences.
  *
@@ -39,7 +42,7 @@ import java.net.URL;
  * @version $Revision: 1.8 $
  */
 public class PreferencesForm extends ActionForm {
-    private static final Logger logger = Logger.getLogger(PreferencesForm.class.getName());
+    private static final Logger logger = Logger.getLogger(PreferencesForm.class.getName());	
 
     private String action;
 
@@ -55,6 +58,7 @@ public class PreferencesForm extends ActionForm {
     private Boolean junkSieveEnabled;
     private String vacationMessage;
     private Boolean vacationSieveEnabled;
+	private String language;
 
     public void reset(final ActionMapping actionMapping, final HttpServletRequest request) {
         super.reset(actionMapping, request);
@@ -67,8 +71,12 @@ public class PreferencesForm extends ActionForm {
         setHideHeader(Boolean.FALSE);
         setJunkThreshold(null);
         setJunkSieveEnabled(null);
+		setLanguage(null);
         setVacationSieveEnabled(null);
         setVacationMessage(null);
+		
+		request.setAttribute("languages", Constants.languages); //Map the language collection to the language bean name.
+
     }
 
     public ActionErrors validate(final ActionMapping actionMapping, final HttpServletRequest request) {
@@ -95,7 +103,13 @@ public class PreferencesForm extends ActionForm {
                 errors.add("imageUrl", new ActionError("preferences.imageUrl.invalid", mue.getMessage()));
             }
         }
-
+		
+		final String language = getLanguage();
+		if(language == null) //need to check to make sure this is a valid language.
+		{
+		
+		}
+		
         if (getJunkThreshold() != null) {
             try {
                 final int junkThreahsold = Integer.parseInt(getJunkThreshold());
@@ -127,11 +141,19 @@ public class PreferencesForm extends ActionForm {
     public String getAction() {
         return action;
     }
-
+	
     public void setAction(final String action) {
         this.action = action;
     }
 
+	public String getLanguage() {
+		return language;
+	}
+	
+	public void setLanguage(final String language) {
+		this.language = language;
+	}
+	
     public Boolean getAutocomplete() {
         return autocomplete;
     }

@@ -57,6 +57,9 @@ public final class ComposeForm extends MessageForm {
     /** Copy the message to Sent folder when sending it? */
     private boolean copyToSent = false;
 
+    /** The mesage is a draft */
+    private boolean isDraft = false;
+
     /** Holds value of composeKey. It is the unique key for this compose session for a user. */
     private String composeKey;
 
@@ -81,6 +84,13 @@ public final class ComposeForm extends MessageForm {
         // XXX Does this need to be flushed out?
         // TODO Yes it should be BUT we make assumptions that prevent this from happening.
         // ModifyComposeAction and SentAction need to know how to correctly communicate
+        
+        // Set the request's encoding to UTF-8 when this form is loaded
+        try {
+         request.setCharacterEncoding("UTF-8");
+        } catch (Exception e) {
+          //cry
+        }
     }
 
     /**
@@ -221,6 +231,24 @@ public final class ComposeForm extends MessageForm {
      */
     public void setCopyToSent(final boolean copyToSent) {
         this.copyToSent = copyToSent;
+    }
+
+    /**
+     * Getter for property isDraft.
+     *
+     * @return Value of property isDraft.
+     */
+    public boolean getIsDraft() {
+        return isDraft;
+    }
+
+    /** 
+     * Setter for property isDraft.
+     *
+     * @param isDraft New value for property isDraft.
+     */
+    public void setIsDraft(final boolean isDraft) {
+        this.isDraft = isDraft;
     }
 
     /**

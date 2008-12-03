@@ -25,15 +25,30 @@ import edu.ufl.osg.webmail.Constants;
 import edu.ufl.osg.webmail.prefs.PreferencesProvider;
 import edu.ufl.osg.webmail.forms.ComposeForm;
 import edu.ufl.osg.webmail.util.Util;
+import edu.ufl.osg.webmail.data.AttachList;
+import edu.ufl.osg.webmail.data.AttachObj;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.commons.beanutils.PropertyUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import javax.mail.Message;
+import javax.mail.Folder;
+import javax.mail.Address;
+import javax.mail.Part;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.Flags;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Set up the view for the compose page.
@@ -64,21 +79,93 @@ public class ComposeAction extends Action {
         logger.debug("=== ComposeAction.execute() begin ===");
         ActionsUtil.checkSession(request);
 
+        final Long uid = (Long)PropertyUtils.getSimpleProperty(form, "uid");
         final HttpSession session = request.getSession();
         final ComposeForm compForm = (ComposeForm)form;
         final User user = Util.getUser(session);
+        final String composeKey = Util.generateComposeKey( session );
+        logger.info("compose key = " + composeKey);
 
-        // add signature to blank message body
-        final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
-        compForm.setBody("\r\n\r\n\r\n" + pp.getPreferences(user, session).getProperty("compose.signature"));
+        // If form has UID, we are editing a draft message
+        if( uid != null ) {
+            Folder folder = ActionsUtil.fetchFolder( form, request );
+            try {
+                // get message from draft folder
+                Message message = ActionsUtil.fetchMessage( form, folder );
+                
+                // populate form fields from draft message
+                compForm.setSubject( message.getSubject() );
 
-        // generate unique compose key for this view
-        compForm.setComposeKey(Util.generateComposeKey(session));
+                Address[] to = message.getRecipients( Message.RecipientType.TO );
+                Address[] cc = message.getRecipients( Message.RecipientType.CC );
+                Address[] bcc = message.getRecipients( Message.RecipientType.BCC );
 
-        // Default CopyToSent to true.
-        compForm.setCopyToSent(true);
+                String toStr = "";
+                if( to != null )
+                    for( Address adr : to ) toStr += adr.toString() + ",";
+
+                String ccStr = "";
+                if( cc != null )
+                    for( Address adr : cc ) ccStr += adr.toString() + ",";
+
+                String bccStr = "";
+                if( cc != null )
+                    for( Address adr : bcc ) bccStr += adr.toString() + ",";
+
+                compForm.setTo( toStr );
+                compForm.setCc( ccStr );
+                compForm.setBcc( bccStr );
+
+                // messages have the following topology
+                //              multipart (content)
+                //                  |
+                //      -----------------------------
+                //      |                           |
+                //  alternativeMultipart         attachments (if any)
+                //  |                  |
+                // text               html
+                MimeMultipart content = (MimeMultipart)message.getContent();
+                MimeMultipart alternative = (MimeMultipart)content.getBodyPart(0).getContent();
+                // html message part
+                compForm.setBody( (String)alternative.getBodyPart(1).getContent() );
+                compForm.setComposeKey( Util.generateComposeKey(session) );
+
+                // deal with attachments if any
+                if( content != null && content.getCount() > 1 ) {
+                    final Integer messageNumber = compForm.getMessageNumber();
+                    AttachList attachList = Util.getAttachList(composeKey, session);
+                    for( int i = 1; i < content.getCount(); ++i ) 
+                    {
+                        MimeBodyPart part = ((MimeBodyPart)content.getBodyPart( i ));
+                        AttachObj attachObj = new AttachObj( part, true );
+                        attachList.addAttachment( attachObj, attachObj.getObjData() );
+                        logger.info( "added " + part.getContentType() + " attachment to attachlist");
+                    }
+                }
+                
+                // delete message from draft folder
+                message.setFlag( Flags.Flag.DELETED, true );
+                folder.expunge();
+                ActionsUtil.flushMailStoreGroupCache( session );
+            } finally {
+                Util.releaseFolder( folder );
+            }
+        } 
+        // otherwise, set up blank message
+        else {
+            // add signature to blank message body
+            final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
+            compForm.setBody("<br /><br />" + pp.getPreferences(user, session).getProperty("compose.signature"));
+
+            // generate unique compose key for this view
+            compForm.setComposeKey(Util.generateComposeKey(session));
+
+            // Default CopyToSent to true.
+            compForm.setCopyToSent(true);
+        }
 
         logger.debug("=== ComposeAction.execute() end ===");
         return mapping.findForward("success");
     }
+
 }

@@ -64,7 +64,7 @@ window.location = "folder.do?folder=<%=folderName%>&sort=${folderSort}&page=" + 
      <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=<c:out value="${folderListPage-1}"/>">&lt;&nbsp;prev</a>
    </c:when>
    <c:otherwise>
-     <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=0">show&nbsp;all</a>
+     <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=0"><bean:message key="label.showAll"/></a>
    </c:otherwise>
   </c:choose>
 <select onchange="jumpToPage(this)">
@@ -80,7 +80,9 @@ window.location = "folder.do?folder=<%=folderName%>&sort=${folderSort}&page=" + 
 </c:forEach>
 </select> of <b><c:out value="${folderListPages}"/></b>
 <c:if test="${folderListPage < folderListPages}">
-   <a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=<c:out value="${folderListPage+1}"/>">next&nbsp;&gt;</a>
+	<a href="folder.do?folder=<%=folderName%>&amp;sort=<c:out value="${folderSort}"/>&amp;page=<c:out value="${folderListPage+1}"/>">
+		<bean:message key="link.next"/>
+	</a>
 </c:if>
 </form>
 </c:if>
