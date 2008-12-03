@@ -62,9 +62,20 @@
     <th width="20%" align="right" valign="top"><bean:message key="preferences.compose.RAC"/></th>
     <td>
       <html:checkbox property="autocomplete"/>
-		<div class="tip">
-			<bean:message key="preferences.compose.RAC.help"/>
-		</div>
+      <div class="tip">
+      <bean:message key="preferences.compose.RAC.help"/>
+      </div>
+    </td>
+  </tr>
+   <tr >
+    <th width="20%" align="right" valign="top">Attachment Reminder:</th>
+    <td>
+      <html:checkbox property="attachmentReminder"/>
+      <div class="tip">
+        <p>
+        If checked, the system will attempt to detect when you forget to attach a file.
+        </p>
+        </div>
     </td>
   </tr>
 
