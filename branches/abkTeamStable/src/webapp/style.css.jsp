@@ -72,14 +72,14 @@ a #nav {
 #headerImg{
 	position: fixed;
 	margin-left: 85%;
-	top:50;
+	top:35;
 	z-index:4;
 }
 
 #headerName{
 	position: fixed;
 	margin-left: 85%;
-	top:85;
+	top:70;
 	z-index:4;
 }
 
