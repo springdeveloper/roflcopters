@@ -323,7 +323,7 @@ a:visited {
 	z-index:0;
 }
 #defaultComposeContainer{
-	position:absolute;
+	position:relative;
 	top:0px;
 	left:60px;
 	right:30%;
@@ -358,6 +358,26 @@ a:visited {
 	z-index:0;
 }
 
+#defaultCenterUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	min-height:500px;
+	right:20px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
+#defaultCenterComposeUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	min-height:500px;
+	right:20px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
 #defaultCenterComposeUIContent{
 	margin-left:10px;
 	margin-top:10px;
@@ -378,11 +398,14 @@ a:visited {
 }
 
 #defaultFooterUI{
-	position:relative;
+	position:absolute;
+	left:30%;
+	top:103%;
 	text-align:center;
 	font-size:10px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
-	clear:both;
+	float:left;
+	z-index:5;
 }
 #Space{
 	position:relative;
