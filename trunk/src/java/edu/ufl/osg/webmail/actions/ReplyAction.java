@@ -146,10 +146,12 @@ public class ReplyAction extends MessageAction {
     }
 
     private static String wrapInlineQuote(final Message message, final String content) throws MessagingException, IOException {
-        final String QUOTE_STRING = ">";
+        final String QUOTE_STRING = "&gt;";
         final Address[] fromAddresses = message.getFrom();
         // TODO: This needs to be I18N-ized
-        final StringBuffer buff = new StringBuffer("On " + message.getSentDate() + ", " + ActionsUtil.getAddressString(fromAddresses) + " wrote:\n\n");
+        final StringBuffer buff = new StringBuffer("On " + message.getSentDate() + ", " + 
+                                                   ActionsUtil.getAddressString(fromAddresses).replaceAll(">", "&gt;").replaceAll("<", "&lt;") + 
+                                                   " wrote:\n\n");
 
         final BufferedReader br = new BufferedReader(new StringReader(content));
         String line = null;

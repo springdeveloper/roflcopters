@@ -58,6 +58,19 @@
         	<div class="bottomLeft"></div>
         	<div class="bottom"></div>
         	<div class="bottomRight"></div>
+        	<div id="defaultFooterUI">
+		    <!-- BEGIN DEFAULT FOOTER -->
+		        <p class="copyright">
+		            Copyright &copy; 2002-2005 <a href="http://Sandy.McArthur.org/" style="color:gray;text-decoration:none">William A. McArthur, Jr.</a> <br/>
+		            Copyright &copy; 2003-2007 <a href="http://open-systems.ufl.edu/">The Open Systems Group</a> <br/>
+		            Copyright &copy; 2008 <a href="http://www.cise.ufl.edu/~f63022bw/roflcopters/">CEN3031 ROFLCOPTERS</a> <br/>
+		            <a href="http://www.cns.ufl.edu/">Computing and Networking Services</a> /
+		            <a href="http://www.ufl.edu/">University of Florida</a> <br/>
+		            Site maintained by <a href="http://open-systems.ufl.edu/">The Open Systems Group</a>
+		            <br/> Last Modified: @DATE@
+		        </p>
+		    </div>
+		    <!-- END DEFAULT FOOTER -->
         </div>
     <!-- END CONTENT BOX LOGIN UI -->
     
@@ -66,21 +79,12 @@
     <!-- BEGIN FOR IE -->
     <div class="clear">&nbsp;</div> 
     <!-- END FOR IE -->
-    
-    
-    <div id="defaultFooterUI">
-    <!-- BEGIN DEFAULT FOOTER -->
-        <p class="copyright">
-            Copyright &copy; 2002-2005 <a href="http://Sandy.McArthur.org/" style="color:gray;text-decoration:none">William A. McArthur, Jr.</a> <br/>
-            Copyright &copy; 2003-2007 <a href="http://open-systems.ufl.edu/">The Open Systems Group</a> <br/>
-            Copyright &copy; 2008 <a href="http://www.cise.ufl.edu/~f63022bw/roflcopters/">CEN3031 ROFLCOPTERS</a> <br/>
-            <a href="http://www.cns.ufl.edu/">Computing and Networking Services</a> /
-            <a href="http://www.ufl.edu/">University of Florida</a> <br/>
-            Site maintained by <a href="http://open-systems.ufl.edu/">The Open Systems Group</a>
-            <br/> Last Modified: @DATE@
-        </p>
-    <!-- END DEFAULT FOOTER -->
+      <div id="Space">
+    &nbsp;
     </div>
+    
+    
+    
 <!-- END CONTENT CONTAINER -->
 </div> 
  	
