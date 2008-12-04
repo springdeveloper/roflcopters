@@ -69,6 +69,7 @@
 		            Site maintained by <a href="http://open-systems.ufl.edu/">The Open Systems Group</a>
 		            <br/> Last Modified: @DATE@
 		        </p>
+		    </div>
 		    <!-- END DEFAULT FOOTER -->
         </div>
     <!-- END CONTENT BOX LOGIN UI -->
@@ -83,7 +84,7 @@
     </div>
     
     
-    </div>
+    
 <!-- END CONTENT CONTAINER -->
 </div> 
  	
