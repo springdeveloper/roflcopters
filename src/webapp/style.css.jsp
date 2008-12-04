@@ -72,14 +72,14 @@ a #nav {
 #headerImg{
 	position: fixed;
 	margin-left: 85%;
-	top:50;
+	top:35;
 	z-index:4;
 }
 
 #headerName{
 	position: fixed;
 	margin-left: 85%;
-	top:85;
+	top:70;
 	z-index:4;
 }
 
@@ -314,9 +314,18 @@ a:visited {
 }
 
 #defaultContainer{
-	position:absolute;
+	position:relative;
 	top:0px;
 	left:200px;
+	right:30%;
+	width:600px;
+	height:100%;
+	z-index:0;
+}
+#defaultComposeContainer{
+	position:relative;
+	top:0px;
+	left:60px;
 	right:30%;
 	width:600px;
 	height:100%;
@@ -331,7 +340,16 @@ a:visited {
 	min-width:500px;
 	z-index:0;
 }
-#defaultCenterUIContentBoxMiddle{
+#defaultCenterComposeUI{
+	position:relative;
+	top:120px;
+	left:60px;
+	right:60px;
+	min-height:500px;
+	min-width:500px;
+	z-index:0;
+}
+#defaultCenterComposeUIContentBoxMiddle{
 	position:relative;
 	margin-top:0px;
 	min-height:700px;
@@ -341,6 +359,26 @@ a:visited {
 }
 
 #defaultCenterUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	min-height:500px;
+	right:20px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
+#defaultCenterComposeUIContent{
+	margin-left:10px;
+	margin-top:10px;
+	margin-right:10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	min-height:500px;
+	right:20px; /*  This needs to be 20 less than the original width */
+	background-color:#FFFFFF;
+}
+#defaultCenterComposeUIContent{
 	margin-left:10px;
 	margin-top:10px;
 	margin-right:10px;
@@ -361,14 +399,20 @@ a:visited {
 
 #defaultFooterUI{
 	position:absolute;
-	top:900px;
-	left:400px;
-	right:30%;
+	left:30%;
+	top:103%;
 	text-align:center;
 	font-size:10px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
+	float:left;
+	z-index:5;
 }
-
+#Space{
+	position:relative;
+	width:50px;
+	height:150px;
+	clear:both;
+}
 #defaultSideBarUIContentBoxMiddle{
 	position:relative;
 	margin-top:0px;

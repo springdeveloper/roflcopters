@@ -37,6 +37,7 @@
         <property name="javadoc.footer" value=""/>
 
         <property name="ver.javamail" value="1.3.3"/>
+        <property name="ver.roflmail" value="1.0" />
         <property name="ver.servlet-api" value="2.4"/>
         <property name="ver.jstl" value="1.1"/>
         <property name="ver.struts" value="1.1"/>
@@ -57,6 +58,7 @@
         <property name="lib.servlet-api.dir" value="${lib.dir}/servlet-${ver.servlet-api}"/>
         <property name="lib.jstl.dir" value="${lib.dir}/jstl-${ver.jstl}"/>
         <property name="lib.javamail.dir" value="${lib.dir}/javamail-${ver.javamail}"/>
+        <property name="lib.roflmail.dir" value="${lib.dir}/roflmail" />
         <property name="lib.struts.dir" value="${lib.dir}/struts-${ver.struts}"/>
         <property name="lib.db.dir" value="${lib.dir}/db"/>
         <property name="lib.nekohtml.dir" value="${lib.dir}/nekohtml-${ver.nekohtml}"/>
@@ -95,6 +97,10 @@
         </fileset>
 
         <fileset dir="${lib.javamail.dir}" id="fileset.javamail">
+            <include name="*.jar"/>
+        </fileset>
+
+        <fileset dir="${lib.roflmail.dir}" id="fileset.roflmail">
             <include name="*.jar"/>
         </fileset>
 
@@ -156,6 +162,10 @@
             <fileset refid="fileset.javamail"/>
         </path>
 
+        <path id="classpath.roflmail">
+            <fileset refid="fileset.roflmail"/>
+        </path>
+
         <path id="classpath.struts">
             <fileset refid="fileset.struts.lib"/>
         </path>
@@ -194,6 +204,7 @@
         <javac debug="${javac.debug}" destdir="${build.classes.dir}" optimize="${javac.optimize}" srcdir="${src.java.dir}" deprecation="true">
             <classpath refid="classpath.servlet-api"/>
             <classpath refid="classpath.javamail"/>
+            <classpath refid="classpath.roflmail"/>
             <classpath refid="classpath.struts"/>
             <classpath refid="classpath.log4j"/>
             <classpath refid="classpath.j2ee"/>
@@ -337,6 +348,7 @@
                 <include name="GatorMail.jar"/>
             </lib>
             <lib refid="fileset.javamail"/>
+            <lib refid="fileset.roflmail"/>
             <lib refid="fileset.struts.lib"/>
             <lib refid="fileset.jstl.lib"/>
             <lib file="${lib.dir}/log4j-${ver.log4j}.jar"/>
@@ -368,6 +380,7 @@
 
             <classpath refid="classpath.servlet-api"/>
             <classpath refid="classpath.javamail"/>
+            <classpath refid="classpath.roflmail"/>
             <classpath refid="classpath.struts"/>
             <classpath refid="classpath.log4j"/>
             <classpath refid="classpath.j2ee"/>
