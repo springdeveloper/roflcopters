@@ -153,6 +153,34 @@ public class ComposeAction extends Action {
         } 
         // otherwise, set up blank message
         else {
+            // requirement 6: web protocol handler. requires the url
+            // to be .../compose.do?extsrc=mailto&url=%s
+            if ((request.getParameter("extsrc") != null)
+                && (request.getParameter("extsrc").equals("mailto")))
+            {
+                logger.debug("handling mailto protocol handler");
+                String protocolurl =  request.getParameter("url");
+                if (protocolurl != null) {
+                    // HACKFIXME. for some reason, mailto's with
+                    // spaces get encoded as "%2520" instead of "%20",
+                    // so after translation, there's a "%20" in our
+                    // string. This turns them into spaces.
+                    logger.debug("url: " + protocolurl);
+                    protocolurl = protocolurl.replaceAll("%20", " ");
+                    logger.debug("url AFTER HACK: " + protocolurl);
+                    String address = protocolurl.replaceAll("^mailto:([\\.\\w]+@[\\.\\w]*).*$", "$1");
+                    String subject = protocolurl.replaceAll("^mailto:.*\\?subject=(.*)$", "$1");
+                    logger.warn("address, subject: " + address + " " + subject);
+                    compForm.setTo(address);
+                    // only set subject if was able to parse one out
+                    // of protocolurl
+                    if (!protocolurl.equals(subject))
+                        compForm.setSubject(subject);
+                } else {
+                    logger.warn("extscr set to mailto, but no url!");
+                }
+            }
+
             // add signature to blank message body
             final PreferencesProvider pp = (PreferencesProvider)getServlet().getServletContext().getAttribute(Constants.PREFERENCES_PROVIDER);
             compForm.setBody("<br /><br />" + pp.getPreferences(user, session).getProperty("compose.signature"));
