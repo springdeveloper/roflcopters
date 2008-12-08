@@ -64,6 +64,7 @@
     imageName += ".png";
 
 %>
+
 <div class="folderListFolder">
 <%
     if (currentRootFolder.isSubscribed()) {

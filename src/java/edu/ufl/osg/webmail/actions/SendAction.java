@@ -106,10 +106,8 @@ public class SendAction extends Action {
         }
 
         final HttpSession httpSession = request.getSession();
-        //         Session session = (Session)httpSession.getAttribute(Constants.MAIL_SESSION_KEY);
         final Session session = Util.getMailSession(httpSession);
         final String subject = compForm.getSubject();
-        //String body = wrapLines(compForm.getBody());
         final String body = formatRfc2646(compForm.getBody());
         final String bodyplain = body.replaceAll("\\<.*?\\>", "");
         final String replyMessageID = compForm.getReplyMessageID();
@@ -255,9 +253,6 @@ public class SendAction extends Action {
 
         }
 
-        // success message for next page
-        final ResultBean result = new ResultBean(Util.getFromBundle("send.result.success"));
-        request.setAttribute(Constants.RESULT, result);
 
         // now that the message was sent successfully, get rid of attachments
         Util.removeAttachList(compForm.getComposeKey(), httpSession);
@@ -287,7 +282,7 @@ public class SendAction extends Action {
     
         // create the alternative subpart
         final Multipart alternativeMultipart = new MimeMultipart("alternative");
-      
+
         // create the plain message part
         final BodyPart messagePlainBodyPart = new MimeBodyPart();
         messagePlainBodyPart.setText(bodyplain);
@@ -335,7 +330,7 @@ public class SendAction extends Action {
         for (int i = 0; i < size; i++) {
             final MimeBodyPart attachBodyPart = (MimeBodyPart)bodyPartList.get(i);
             multipart.addBodyPart(attachBodyPart);
-            logger.debug("attached file: " + attachBodyPart.getFileName() + ", contentType: " + attachBodyPart.getContentType());
+            logger.info("attached file: " + attachBodyPart.getFileName() + ", contentType: " + attachBodyPart.getContentType());
         }
 
         return multipart;
