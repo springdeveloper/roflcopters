@@ -363,10 +363,11 @@ var preventSubmit = function (e) {
  <tr class="lightBlueRow">
   <td width="15%" align="right" class="composeHeaderTitle">&nbsp;</td>
   <td colspan="3">  
-  <!--	
-	// Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
-	// Patrick and Evan
-  -->  
+  <!--
+  // Replaced simple HTML textarea with the fckeditor WYSIWYG jscript object.
+  // Patrick and Evan
+  -->
+  
   <script type="text/javascript" src="fckeditor/fckeditor.js"></script>
   <script language="JavaScript" type="text/javascript">
   <!--

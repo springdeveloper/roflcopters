@@ -41,6 +41,7 @@ shortcut("Ctrl+Shift+M",function(){self.location="/GatorMail/folderManage.do";})
 shortcut("Ctrl+Shift+P",function(){self.location="/GatorMail/preferences.do";});
 shortcut("Ctrl+Shift+L",function(){self.location="/GatorMail/logout.do";});
 </script>
+
 	<div id="backgroundAndHeader">
     <!-- START BACKGROUND AND HEADER -->
     <!-- START BACKGROUND -->

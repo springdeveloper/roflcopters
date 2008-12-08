@@ -44,7 +44,7 @@ public final class Constants {
 	static {
 		languages.add(new LabelValueBean("English", "en"));
 		languages.add(new LabelValueBean("\u65e5\u672c\u8a9e", "ja"));
-		languages.add(new LabelValueBean("Espa\u00f1ol", "es"));
+		languages.add(new LabelValueBean("Español", "es"));
 		languages.add(new LabelValueBean("\uD55C\uAD6D\uC5B4", "ko"));
 		languages.add(new LabelValueBean("\u6F22\u8A9E", "zh"));
 	}

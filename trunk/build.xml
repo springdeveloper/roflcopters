@@ -247,7 +247,7 @@
 		</copy>
 		
     </target>
-
+	
     <target name="build.jar" depends="init,build.classes,build.properties">
         <mkdir dir="${build.jar.dir}"/>
         <jar compress="true" destfile="${build.jar.dir}/GatorMail.jar">
