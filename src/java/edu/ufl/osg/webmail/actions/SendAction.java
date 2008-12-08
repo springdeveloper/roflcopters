@@ -137,6 +137,7 @@ public class SendAction extends Action {
         final String remindPref = prefs.getProperty("compose.attachmentReminder");
         if ((remindPref != null)
             && remindPref.equals("true")
+            && (!compForm.getIsDraft())
             && (!compForm.isAttachRemindShown())
             && (attachList.size() == 0)
             && (subjMentionsAttach(subject) || bodyMentionsAttach(body))) {
