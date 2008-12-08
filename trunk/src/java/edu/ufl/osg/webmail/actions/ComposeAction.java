@@ -109,7 +109,7 @@ public class ComposeAction extends Action {
                     for( Address adr : cc ) ccStr += adr.toString() + ",";
 
                 String bccStr = "";
-                if( cc != null )
+                if( bcc != null )
                     for( Address adr : bcc ) bccStr += adr.toString() + ",";
 
                 compForm.setTo( toStr );
