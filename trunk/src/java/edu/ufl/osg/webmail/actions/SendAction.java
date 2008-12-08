@@ -509,11 +509,16 @@ public class SendAction extends Action {
          * The (?i)(?s), \r\n horribleness is because the regex needs
          * to match the *entire* string, not just a substring, and
          * multiline mode (?m) doesn't appear to help.
+         *
+         * With FCK, don't think "otherbegin" is ever true ("attach"
+         * at the beginning of a line is preceded by "<p>". Still
+         * caught by "othermid", and otherwise harmless, so leaving it
+         * in.
          */
         boolean firstbegin = body.matches("(?i)(?s)^attach.*");
         boolean otherbegin = body.matches("(?i)(?s).*?\r\nattach.*");
-        boolean firstmid = body.matches("(?i)(?s)^[^>][.[^\r\n]]*attach.*");
-        boolean othermid = body.matches("(?i)(?s).*?\r\n[^>][.[^\r\n]]*attach.*");
+        boolean firstmid = body.matches("(?i)(?s)^[^&gt;][.[^\r\n]]*attach.*");
+        boolean othermid = body.matches("(?i)(?s).*?\r\n[^&gt;][.[^\r\n]]*attach.*");
 
         logger.debug("ATTACH body check.");
         logger.debug("very beginning: " + firstbegin);
